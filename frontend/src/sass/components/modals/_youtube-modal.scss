@@ -1,0 +1,33 @@
+.modal {
+  position: absolute;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+div.modal-container {
+  z-index: 9992;
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  &.modal-youtube{
+    width: 100%;
+    max-width: 964px;
+  }
+  & div.modal-content{
+    width: 100%;
+    -ms-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: -webkit-transform .3s ease;
+    transition: -webkit-transform .3s ease;
+    transition: transform .3s ease;
+    border: 0.2rem solid var(--clr-secondary-300);
+    border-radius: 0.2rem;
+    box-shadow: 0 0.35rem 0 var(--clr-secondary-300);
+    & div.youtube-embed{
+      max-height: 919px;
+    }
+  }
+}

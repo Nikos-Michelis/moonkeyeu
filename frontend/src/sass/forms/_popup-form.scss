@@ -1,0 +1,107 @@
+@use "../abstracts" as *;
+
+div.blur-bg-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  opacity: 0;
+  &.active {
+    pointer-events: auto;
+    opacity: 1;
+  }
+}
+
+div.modal-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(0, -20%);
+  transition: transform 0.3s ease-in-out, opacity 0.2s ease;
+  &.active {
+    opacity: 1;
+    transform: translate(0%, 0%);
+    pointer-events: auto;
+  }
+}
+
+div.form-popup-container{
+  position: absolute;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 0;
+  background: #f0f1f2;
+  box-sizing: inherit;
+  border-radius: 0.3rem;
+  max-height: calc(100% - 100px);
+  overflow-y: auto;
+  height: auto;
+  & div.form-box{
+    & .form-details{
+      width: 100%;
+      text-align: center;
+      box-sizing: inherit;
+      border-bottom: 2px solid var(--clr-dark-cosmos-300);
+      padding: 0 2rem 2rem 2rem;
+      color: var(--clr-dark-cosmos-300);
+    }
+    & input[type="checkbox"] {
+      height: 20px;
+      width: 20px;
+      cursor: pointer;
+    }
+    & button:not(button[type="submit"]):not(.btn-resend), a {
+      font-weight: 600;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+@media screen and (min-width: 761px) {
+  div.form-popup-container {
+    max-width: 920px;
+    padding: 5rem 0;
+    overflow-y: auto;
+    div.form-box div.form-details{
+      width: 45%;
+      border-right: 2px solid var(--clr-dark-cosmos-300);
+      border-bottom: none;
+      padding: 2rem;
+    }
+    div.form-box div.form-content.__login{
+      width: 40%;
+    }
+  }
+  div.form-popup-container.show-signup{
+    width: 100%;
+    max-width: 500px;
+    & div.form-box.small-form{
+      width: 100%;
+      .form-content{
+        width: 80%;
+      }
+    }
+    & div.form-box.register .form-content{
+      width: 80%;
+    }
+  }
+}

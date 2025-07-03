@@ -1,0 +1,56 @@
+@use "colors" as *;
+@use "mixins" as *;
+@use "variables" as *;
+
+@mixin button {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: $button-padding-y $button-padding-x;
+  line-height: $button-line-height;
+  white-space: nowrap;
+  text-align: center;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  background-color: $button-default-bg-color;
+  border: $button-border-width solid $button-default-border-color;
+  border-radius: $button-border-radius;
+  cursor: pointer;
+  transition: $button-transition;
+  user-select: none;
+  @include font($font-size: $button-font-size,
+                $font-weight: $button-font-weight,
+                $color: var(--clr-main-300));
+  @include cursive_border(2px, 5px, var(--clr-star-300));
+}
+
+@mixin button-color-variation(
+  $color: var(--clr-star-300),
+  $background-color: var(--clr-main-300),
+  $border-color: var(--clr-main-300)
+) {
+  color: $color;
+  border-color: $border-color;
+  &:not([class*="bg-"]) {
+    background-color: $background-color;
+  }
+}
+
+@mixin button-hover($color: var(--clr-star-300), $background-color: transparent, $border-color: var(--clr-star-300)) {
+  &:hover,
+  &:focus {
+    color: $color;
+    background-color: $background-color;
+    border-color: $border-color;
+    outline: 0;
+  }
+}
+
+@mixin button-size(
+  $padding-y: $button-padding-y,
+  $padding-x: $button-padding-x,
+  $font-size: $button-font-size) {
+  padding: $padding-y $padding-x;
+  font-size: $font-size;
+}
+

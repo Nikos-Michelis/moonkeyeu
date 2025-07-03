@@ -1,0 +1,13 @@
+@use "../abstracts/typography" as *;
+
+.fw-regular {
+  font-weight: $font-weight-default;
+}
+
+.fw-semi-bold {
+  font-weight: $font-weight-semi-bold;
+}
+
+.fw-bold {
+  font-weight: $font-weight-bold;
+}

@@ -1,0 +1,146 @@
+@use "../../abstracts/index" as abs;
+@use "../../abstracts/sizes" as *;
+
+div.container.__article {
+  position: relative;
+  overflow: unset;
+  & div.container.__article {
+    min-height: 40rem;
+    & .container.__overview {
+      max-width: 950px;
+      border: 0.2rem solid var(--clr-dark-cosmos-300);
+      border-radius: 0.2rem;
+      & .image-box {
+        width: 100%;
+        & img {
+          display: block;
+          width: 100%;
+          height: 27rem;
+          object-fit: cover;
+          pointer-events: none;
+          -webkit-user-drag: none;
+          user-select: none;
+          &.scale-down-img{
+            object-fit: contain;
+            background-color: var(--clr-secondary-300);
+            padding: 0.5rem;
+          }
+          &.nasa-apod-img{
+            height: 100%;
+          }
+        }
+      }
+
+      & div.overview-info-wrapper {
+        @include abs.font($font-size: var(--fs-400), $color: var(--clr-star-300));
+        & div.article-detail-box {
+          display: flex;
+          align-items: baseline;
+          padding: 0.5rem 0;
+          @include abs.font($font-size: var(--fs-400), $color: var(--clr-star-300));
+          & p.article-description{
+            @include abs.font($font-size: var(--fs-300), $color: var(--clr-star-300));
+          }
+          & svg {
+            font-size: var(--fs-500);
+            padding: 0 0.5rem;
+          }
+        }
+        & span {
+          @include abs.font($font-size: var(--fs-300), $font-weight: bold, $color: var(--clr-star-300));
+          margin: 0 0.5rem;
+        }
+      }
+    }
+    & div.article-info-container {
+      max-width: 950px;
+      line-height: 1.5;
+      @include abs.font($font-size: inherit, $color: var(--clr-star-300));
+      section {
+        padding: 1rem;
+        &:first-child{
+          margin-top: 2rem;
+        }
+        & .heading-box{
+          display: flex;
+          align-items: center;
+          & h2, h3 {
+              margin: 0;
+          }
+          & svg {
+            font-size: var(--fs-700);
+            padding-right: 0.7rem;
+          }
+        }
+        & ul {
+          list-style: none;
+          padding: 0;
+        }
+        & span{
+          font-weight: bold;
+        }
+        & .info-box {
+          max-width: 100%;
+          position: relative;
+          padding: 0.2rem 1rem;
+          & span {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            @include abs.font($font-size: var(--fs-300), $font-weight: bold, $color: var(--clr-star-300));
+            margin: 0 0.5rem;
+          }
+          & p{
+            padding: 0.5rem 0;
+          }
+        }
+        & div.container {
+          & .img-box {
+            height: auto;
+            & img {
+              width: 100%;
+              border-radius: 0.79rem;
+              padding: 0.5rem 0.5rem;
+              &.mission-patch-img{
+                max-width: 15rem;
+                max-height: 15rem;
+              }
+            }
+          }
+          & .container.__rocket-info {
+            line-height: 2.5;
+          }
+        }
+      }
+    }
+  }
+}
+@include abs.mq(medium) {
+  div.container div.container.__article {
+    & .container.__overview {
+      flex-direction: row;
+    }
+    & div.article-info-container section div.container {
+      & .info-box {
+        flex: 0 0 55%;
+        max-width: 60.666667%;
+        position: relative;
+      }
+      & .img-box {
+        flex: 0 0 66.666667%;
+        max-width: 45%;
+        position: relative;
+        height: auto;
+        & img {
+          width: 100%;
+        }
+      }
+      & .container.__rocket-info {
+        flex-flow: row;
+        width: 100%;
+      }
+    }
+  }
+}
+
+
+

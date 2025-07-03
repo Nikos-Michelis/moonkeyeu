@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: prod
+  servlet:
+    multipart:
+      max-file-size: 10MB
+  application:
+    name: moonkeyeu-core-api
+  jackson:
+    time-zone: UTC

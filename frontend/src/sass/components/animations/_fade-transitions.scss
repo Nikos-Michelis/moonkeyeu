@@ -1,0 +1,49 @@
+.height-fade {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  pointer-events: none;
+
+  &.show {
+    opacity: 1;
+    pointer-events: auto;
+
+    &.small {
+      max-height: 200px;
+    }
+
+    &.md {
+      max-height: 600px;
+    }
+
+    &.large {
+      max-height: 1000px;
+    }
+  }
+}
+
+.width-fade {
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-width 0.4s ease, opacity 0.4s ease;
+  pointer-events: none;
+
+  &.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &.small {
+    max-width: 200px;
+  }
+
+  &.md {
+    max-width: 600px;
+  }
+
+  &.large {
+    max-width: 1000px;
+  }
+}

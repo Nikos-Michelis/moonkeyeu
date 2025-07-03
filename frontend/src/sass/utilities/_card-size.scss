@@ -1,0 +1,32 @@
+@use "../abstracts" as abs;
+
+.xs-wrapper {
+  height: 8rem;
+}
+
+@include abs.mq(medium) {
+  .small-wrapper {
+    height: 16rem;
+  }
+  .medium-wrapper {
+    height: 24rem;
+  }
+  .large-wrapper {
+    height: 26.6rem;
+  }
+}
+
+@include abs.mq(xl) {
+  .medium-wrapper {
+    height: 18.5rem;
+  }
+  .large-wrapper {
+    height: 22rem;
+  }
+}
+
+@include abs.mq(xxl) {
+  .large-wrapper {
+    height: 20.5rem;
+  }
+}

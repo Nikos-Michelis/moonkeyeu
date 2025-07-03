@@ -1,0 +1,60 @@
+@use "../abstracts/index" as abs;
+
+/* Multiline ellipsis */
+.ellipsis-2-lines {
+  @include abs.multiline-ellipsis(2);
+}
+
+.ellipsis-3-lines {
+  @include abs.multiline-ellipsis(3);
+}
+
+.ellipsis-4-lines {
+  @include abs.multiline-ellipsis(4);
+}
+
+/* Single-line ellipsis */
+.ellipsis-single {
+  @include abs.singleLine-ellipsis(10rem); // default
+
+  @media (min-width: 480px) { // xl
+    @include abs.singleLine-ellipsis(22rem);
+  }
+}
+
+.ellipsis-single-sm {
+  @include abs.singleLine-ellipsis(3rem);
+
+  @media (min-width: 480px) {
+    @include abs.singleLine-ellipsis(16rem);
+  }
+}
+
+.ellipsis-single-md {
+  @include abs.singleLine-ellipsis(5rem);
+
+  @media (min-width: 480px) {
+    @include abs.singleLine-ellipsis(18rem);
+  }
+}
+
+.ellipsis-single-lg {
+  @include abs.singleLine-ellipsis(15rem);
+
+  @media (min-width: 768px) {
+    @include abs.singleLine-ellipsis(18rem);
+  }
+}
+
+.ellipsis-single-xl {
+  @include abs.singleLine-ellipsis(20rem);
+
+  @media (min-width: 768px) {
+    @include abs.singleLine-ellipsis(24rem);
+  }
+}
+
+
+
+
+

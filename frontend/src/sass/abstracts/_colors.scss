@@ -1,0 +1,102 @@
+$color-carbon-black: #232828;
+$color-white: #ffffff;
+$color-text-grey: #65676bff;
+$color-hover-blue: #00FFF74C;
+$color-red: #F44336;
+$color-darker-red: #AD291FFF;
+$color-yellow: #ffbe00;
+$color-darker-yellow: #C59201FF;
+$color-background:#f0f1f2;
+$color-light-font: #beb6b6;
+$color-border: #ccc;
+$color-promo-box: #e1e1e1;
+$color-input: #717171;
+$color-silver-white: #DADBDD;
+
+
+$color-secondary: hsl(265, 38%, 89%);
+$color-main: hsl(25, 43%, 79%);
+$star-color: hsl(272, 57%, 95%);
+$color-warning: #bd4646;
+$color-success: #5fdb9b;
+$color-btn-hover: #93a1b0;
+
+$clr-dark-cosmos-100: var(--crl-dark-cosmos-100);
+$clr-dark-cosmos-200: var(--crl-dark-cosmos-200);
+$clr-dark-cosmos-300: var(--crl-dark-cosmos-300);
+$clr-dark-cosmos-400: var(--crl-dark-cosmos-400);
+
+$clr-star-100: var(--clr-star-300);
+$clr-star-200: var(--clr-star-200);
+$clr-star-300: var(--clr-star-300);
+$clr-star-400: var(--clr-star-400);
+$clr-star-500: var(--clr-star-500);
+
+
+
+
+$colors: (
+        secondary: (
+                100: hsl(265, 38%, 100%),
+                200: hsl(265, 38%, 94%),
+                300: hsl(265, 38%, 89%),  // Base color
+                400: hsl(265, 38%, 79%),
+                500: hsl(265, 38%, 69%)
+        ),
+        main: (
+                100: hsl(25, 43%, 94%),
+                200: hsl(25, 43%, 84%),
+                300: hsl(25, 43%, 79%), // base color
+                400: hsl(25, 43%, 69%),
+                500: hsl(25, 43%, 59%)
+        ),
+        dark-cosmos: (
+                100: hsl(290, 34%, 20%),
+                200: hsl(290, 34%, 15%),
+                300: hsl(290, 34%, 10%), // base color
+                400: hsl(290, 34%, 0%),
+        ),
+        star: (
+                100: hsl(272, 57%, 110%),
+                200: hsl(272, 57%, 100%),
+                300: hsl(272, 57%, 95%), // base color
+                400: hsl(272, 57%, 85%),
+                500: hsl(272, 57%, 75%)
+        ),
+        warning: (
+                100: hsl(0, 53.1%, 63.1%),
+                200: hsl(0, 53.1%, 58.1%),
+                300: hsl(0, 53.1%, 53.1%),// base color
+                400: hsl(0, 53.1%, 43.1%),
+                500: hsl(0, 53.1%, 33.1%)
+        ),
+        success: (
+                100: hsl(149, 63.3%, 76.6%),
+                200: hsl(149, 63.3%, 66.6%),
+                300: hsl(149, 63.3%, 61.6%),// base color
+                400: hsl(149, 63.3%, 56.6%),
+                500: hsl(149, 63.3%, 46.6%)
+        ),
+        btn-hover: (
+                100: hsl(211,15.5%,73.3%),
+                200: hsl(211,15.5%,68.3%),
+                300: hsl(211, 15.5%, 63.3%), // base color
+                400: hsl(211,15.5%,53.3%),
+                500: hsl(211,15.5%,43.3%)
+        ),
+        hr: (
+                200: rgba(28, 17, 38, 0.2),
+                400: rgba(28, 17, 38, 0.4),
+                600: rgba(28, 17, 38, 0.6),
+                800: rgba(28, 17, 38, 0.8),
+                100: rgba(28, 17, 38, 1)
+        ),
+        sky: (
+                100: hsl(196, 100%, 95%),
+                200: hsl(196, 100%, 85%),
+                300: hsl(196, 100%, 70%),
+                400: hsl(196, 100%, 60%),
+                500: hsl(196, 100%, 50%)
+        ),
+
+);

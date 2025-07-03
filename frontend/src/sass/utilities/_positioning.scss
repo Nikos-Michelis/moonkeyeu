@@ -1,0 +1,31 @@
+
+$positions: absolute, relative, fixed, sticky;
+$inset-values: 0, 1, 2, 4, 5, 8, 10, 15, 25, 50, 75, 85, 100;
+
+@each $pos in $positions {
+  .pos-#{$pos} {
+    position: $pos;
+  }
+}
+
+@each $val in $inset-values {
+  @each $sign, $multiplier in ("" : 1, "-" : -1) {
+    .#{$sign}top-#{$val} {
+      top: $val * $multiplier * 1%;
+    }
+    .#{$sign}right-#{$val} {
+      right: $val * $multiplier * 1%;
+    }
+    .#{$sign}bottom-#{$val} {
+      bottom: $val * $multiplier * 1%;
+    }
+    .#{$sign}left-#{$val} {
+      left: $val * $multiplier * 1%;
+    }
+  }
+}
+
+
+.translate-center {
+  transform: translate(-50%, -50%);
+}

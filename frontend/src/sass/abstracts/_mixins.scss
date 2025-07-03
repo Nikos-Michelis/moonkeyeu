@@ -1,0 +1,77 @@
+@use "colors" as *;
+@use "variables" as *;
+@mixin font($font-size: var(--fs-300),
+          $font-weight: normal,
+          $color: var(--clr-dark-cosmos-300),
+          $font-family: inherit,
+          $font-variant: none) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+  font-family: $font-family;
+  font-variant: $font-variant;
+  color: $color;
+}
+
+@mixin heading($fs, $color: $heading-color-default) {
+  font-size: $fs;
+  color: $color;
+
+  font-family: $heading-font-family;
+  text-transform: $heading-text-transform;
+  letter-spacing: $heading-letter-spacing;
+  font-weight: $heading-font-weight;
+  line-height: $heading-line-height;
+}
+
+@mixin cursive_border($border-width: 1px, $border-radius: 10px, $color: var(--clr-dark-cosmos-300)) {
+  border-radius: $border-radius;
+  border: $border-width $color solid;
+}
+
+// Base HR style
+@mixin hr-base(
+  $color: #ccc,
+  $height: 1px,
+  $margin-block: 0,
+  $width: 100%
+) {
+  border: none;
+  height: $height;
+  &:not([class*="bg-"]) {
+    background-color: $color;
+  }
+  margin-block: $margin-block;
+  width: $width;
+}
+
+// Dotted variant
+@mixin hr-dotted($color: #999, $width: 100%) {
+  border: none;
+  border-top: 1px dotted $color;
+  background: none;
+  width: $width;
+  margin: 1rem 0;
+}
+
+// Dashed variant
+@mixin hr-dashed($color: #aaa, $width: 100%) {
+  border: none;
+  border-top: 1px dashed $color;
+  background: none;
+  width: $width;
+  margin: 1rem 0;
+}
+
+/* Ellipsis */
+@mixin multiline-ellipsis($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+@mixin singleLine-ellipsis($max-width: 15rem) {
+  max-width: $max-width;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

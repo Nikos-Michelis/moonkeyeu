@@ -1,0 +1,10 @@
+@use "../abstracts" as *;
+@use "../abstracts/typography" as *;
+
+@each $size-name, $property in $font-sizes {
+  @each $prop, $value in $property {
+    .fs-#{$size-name}-#{$prop} {
+      font-size: $value;
+    }
+  }
+}

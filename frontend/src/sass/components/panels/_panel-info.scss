@@ -1,0 +1,52 @@
+@use "../../abstracts/index" as abs;
+
+div.panel-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  & hr{
+    width: 100%;
+    margin: 0.1rem 0;
+  }
+  & div.panel-info-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    & div.panel-info-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      & div.detail-wrapper {
+        display: flex;
+        flex-flow: row wrap;
+        width: 100%;
+        justify-content: space-between;
+        &.scrolling {
+          max-height: 5rem;
+          overflow-y: scroll;
+        }
+      }
+    }
+  }
+  & div.media-links-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    padding: 1rem 0;
+    & a {
+      @include abs.font($font-size: var(--fs-500), $color:var(--clr-dark-cosmos-300));
+    }
+  }
+}
+@include abs.mq(medium){
+  div.panel-body{
+    &.small {
+      width: 50%;
+    }
+    & div.panel-info-wrapper div.panel-info-container {
+      flex-direction: row;
+    }
+  }
+}

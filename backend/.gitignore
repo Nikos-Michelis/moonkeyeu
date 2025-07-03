@@ -1,0 +1,11 @@
+.env
+.my.cnf
+.idea
+db
+backup-data
+moonkeyeu-etl-api/target
+moonkeyeu-core-api/target
+appmap.yml
+jwt-keys/access-token/*
+jwt-keys/refresh-token/*
+!jwt-keys/.gitkeep

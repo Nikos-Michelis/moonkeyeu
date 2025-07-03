@@ -1,0 +1,44 @@
+$-ff-sans: 'Roboto', sans-serif;
+$-ff-sans-serif: sans-serif;
+$font-family-base: $-ff-sans;
+$font-family-accent: $-ff-sans-serif;
+
+$font-sizes: (
+        small:( // Minor third
+            100: 0.825rem,
+            200: 0.925rem,
+            300: 1rem,
+            400: 1.125rem,
+            500: 1.250rem,
+            600: 1.425rem,
+            700: 1.563rem,
+            800: 1.953rem,
+            900: 2.441rem,
+            1000: 3.052rem
+        ),
+        big:( // Augmented fourth
+             300: 1rem,
+             400: 1.25rem,
+             500: 2rem,
+             600: 2.827rem,
+             700: 4rem,
+             800: 5.653rem
+        )
+);
+
+$font-size-300: var(--fs-300);
+$font-size-400: var(--fs-400);
+$font-size-500: var(--fs-500);
+$font-size-600: var(--fs-600);
+$font-size-700: var(--fs-700);
+$font-size-800: var(--fs-800);
+$font-size-900: var(--fs-900);
+
+
+$-fw-400: 400;
+$-fw-500: 500;
+$-fw-700: 700;
+
+$font-weight-default: $-fw-400;
+$font-weight-semi-bold: $-fw-500;
+$font-weight-bold: $-fw-700;

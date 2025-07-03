@@ -1,0 +1,28 @@
+@use "../../abstracts/index" as abs;
+
+div.container.__error {
+  color: var(--clr-secondary-300);
+  & h1{
+    @include abs.font($font-size: calc(var(--fs-1000) * 2.5), $font-weight: bold, $color: inherit);
+  }
+  & h2 {
+    @include abs.font($font-size: calc(var(--fs-500) * 1), $font-weight: bold, $color: inherit);
+  }
+  & svg {
+    font-size: calc(var(--fs-1000) * 2)
+  }
+  & h1.heading-message {
+    @include abs.font($font-size: calc(var(--fs-1000) * 1), $font-weight: bold, $color: inherit);
+  }
+}
+
+@include abs.mq(medium){
+  div.container.__error {
+    h1 {
+      @include abs.font($font-size: calc(var(--fs-1000) * 4), $font-weight: bold, $color: inherit);
+    }
+    & h2 {
+      @include abs.font($font-size: calc(var(--fs-800)), $font-weight: bold, $color: inherit);
+    }
+  }
+}

@@ -1,0 +1,29 @@
+.dropdown {
+  position: absolute;
+  top: 12.7rem;
+  right: 1rem;
+  width: fit-content;
+  transform: translateX(5%);
+  overflow: hidden;
+  transition: height 500ms ease;
+  box-sizing: content-box;
+  z-index: 2;
+  & .menu-item {
+    height: 40px;
+    transition: background 500ms;
+    text-decoration: none;
+    color: var(--clr-dark-cosmos-300);
+    width: 100%;
+    & .icon-button {
+      margin-right: 0.5rem;
+      &:hover {
+        filter: none;
+      }
+    }
+    &:hover {
+      background-color: var(--clr-btn-hover-300);
+      color: var(--clr-star-100);
+      width: 100%;
+    }
+  }
+}

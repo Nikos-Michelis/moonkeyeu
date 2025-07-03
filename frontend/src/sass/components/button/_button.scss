@@ -1,0 +1,91 @@
+@use "../../abstracts" as abs;
+
+.btn {
+  @include abs.button;
+  &.btn-primary {
+    @include abs.button-color-variation($color: var(--clr-dark-cosmos-300), $background-color: var(--clr-secondary-300), $border-color: var(--clr-dark-cosmos-300));
+    @include abs.button-size($padding-y: 5px, $padding-x: 10px, $font-size: var(--fs-100));
+    @include abs.button-hover($color: var(--clr-dark-cosmos-300), $background-color: var(--clr-btn-hover-300), $border-color: var(--clr-dark-cosmos-300));
+    box-shadow: 0 0.2rem 0 var(--clr-dark-cosmos-300);
+    padding: 5px 10px;
+    &:not([class*="margin-"]) {
+      margin: 0.2rem;
+    }
+    &.no-ellipsis{
+      text-overflow: unset;
+    }
+    &.btn-small {
+        @include abs.button-color-variation($color: var(--clr-dark-cosmos-300), $background-color: var(--clr-main-300), $border-color: var(--clr-dark-cosmos-300));
+        @include abs.button-size($padding-y: 10px, $padding-x: 10px, $font-size:var(--fs-200));
+    }
+    &.btn-big {
+      @include abs.button-size(
+              $padding-y: 0.6rem,
+              $padding-x: 0.6rem,
+              $font-size: 0.9rem);
+      width: 100%;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+    &.btn-big-hg {
+      @include abs.button-size(
+              $padding-y: 1.5rem,
+              $padding-x: 0.6rem,
+              $font-size: 0.9rem);
+      width: 100%;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+    &:active {
+      transform: translateY(2px);
+      box-shadow: 0 0 0;
+    }
+    &.disabled {
+      pointer-events: none;
+      background-color: var(--clr-btn-hover-200);
+      cursor: not-allowed;
+    }
+  }
+  &.btn-overlay {
+    @include abs.button-color-variation($color: var(--clr-dark-cosmos-300));
+    @include abs.button-hover($color: var(--clr-main-300), $background-color: transparent, $border-color: var(--clr-main-300));
+    margin: 0.5rem;
+    &:active {
+      transform: scale(1.1);
+    }
+  }
+}
+.btn-transparent {
+  cursor: pointer;
+  text-decoration: none;
+  @include abs.button-color-variation($color: var(--clr-star-300), $background-color: transparent, $border-color: transparent);
+  &.btn-big{
+    font-size: 2rem;
+  }
+  &.dark-cosmos{
+    @include abs.button-color-variation($color: var(--clr-dark-cosmos-300), $background-color: transparent, $border-color: transparent);
+  }
+  &.close-btn, .back-btn{
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    cursor: pointer;
+  }
+  & .btn-donation {
+    border: 0.2rem solid var(--clr-dark-cosmos-300);
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 0 var(--clr-dark-cosmos-300);
+    width: 20rem;
+    &:active {
+      transform: translateY(2px);
+      box-shadow: 0 0 0;
+    }
+  }
+}
+@include abs.mq(medium){
+  a.btn-transparent img.btn-donation {
+    width: 14.5rem;
+  }
+}

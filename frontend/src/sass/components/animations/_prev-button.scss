@@ -1,0 +1,15 @@
+button.btn-previous {
+  transition: transform ease 0.5s;
+  svg {
+    transform: rotateZ(0deg);
+    transition: transform ease 0.5s;
+  }
+  &:hover, :focus {
+    transform: scale(1.1);
+    svg {
+      transform: rotateZ(-360deg);
+    }
+  }
+}
+
+

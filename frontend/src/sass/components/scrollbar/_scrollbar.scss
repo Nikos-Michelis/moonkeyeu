@@ -1,0 +1,55 @@
+@use "../../abstracts";
+
+/* Chrome, Opera etc */
+*::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--clr-main-300);
+  border: 0.2rem solid var(--clr-dark-cosmos-300);
+  border-radius: 0.5rem;
+}
+
+*::-webkit-scrollbar-track {
+  display: block !important;
+  background: var(--clr-dark-cosmos-300);
+}
+
+*::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Firefox */
+@-moz-document url-prefix() {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--clr-main-300) var(--clr-dark-cosmos-300);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--clr-dark-cosmos-300);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--clr-main-300);
+    border: 0.2rem solid var(--clr-dark-cosmos-300);
+    border-radius: 0.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--clr-main-300);
+  }
+
+  *::-webkit-scrollbar-track {
+    background: var(--clr-dark-cosmos-300);
+  }
+}

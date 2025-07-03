@@ -1,0 +1,29 @@
+@use "../abstracts/index" as abs;
+@use "../abstracts/typography" as *;
+
+body {
+  font-family: $font-family-base;
+  font-size: 100%;
+}
+
+@include abs.mq(small) {
+  body {
+    line-height: 1.5;
+    font-size: 100%;
+  }
+}
+@include abs.mq(medium){
+  body {
+    font-size: 105%;
+  }
+}
+@include abs.mq(xl){
+  body {
+    font-size: 110%;
+  }
+}
+@include abs.mq(xxl){
+  body {
+    font-size: 115%;
+  }
+}

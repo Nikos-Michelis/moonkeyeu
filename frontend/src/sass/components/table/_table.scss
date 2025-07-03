@@ -1,0 +1,52 @@
+@use "../../abstracts/index" as abs;
+
+div.table-wrapper {
+  padding: 5px 5px;
+  margin: 30px 0;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  overflow-x: scroll;
+  background-color: var(--clr-main-100);
+  & table.table {
+    border-collapse: collapse;
+    border: 0.2rem solid var(--clr-dark-cosmos-300);
+    & tr {
+      border: 0.2rem solid var(--clr-dark-cosmos-300);
+      & th, td {
+        border-color: var(--clr-dark-cosmos-300);
+        padding: 12px 10px;
+        vertical-align: middle;
+        text-align: center;
+        font-size: var(--fs-200);
+      }
+      th:first-child {
+        width: 60px;
+      }
+      th:last-child {
+        width: 100px;
+      }
+    }
+
+    &.table-striped.table-hover {
+      tbody {
+        tr:hover {
+          background: var(--clr-star-100);
+        }
+      }
+    }
+  }
+}
+@include abs.mq(medium){
+  div.table-wrapper {
+    overflow-x: unset;
+    padding: 20px 20px;
+    & table.table {
+      & tr {
+        & th, td {
+          padding: 12px 15px;
+          font-size: var(--fs-300);
+        }
+      }
+    }
+  }
+}

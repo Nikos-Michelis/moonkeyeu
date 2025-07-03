@@ -1,0 +1,20 @@
+@use "../abstracts/sizes" as *;
+@use "../abstracts/mixins" as *;
+@use "../abstracts/colors" as *;
+
+@each $percentage-name, $percentage-value in $percentages {
+  @each $height-name, $height-value in $hr-heights {
+    .hr-#{$percentage-name}-#{$height-name} {
+      @include hr-base(var(--clr-star-300), $height-value, 0.5rem, $percentage-value);
+    }
+  }
+}
+
+
+@each $color, $shade-map in $colors {
+  @each $shade, $value in $shade-map {
+    .hr-#{$color}-#{$shade} {
+      background-color: var(--bg-#{$color}-#{$shade});
+    }
+  }
+}

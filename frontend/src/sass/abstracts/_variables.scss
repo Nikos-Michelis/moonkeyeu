@@ -1,0 +1,49 @@
+@use "../abstracts/colors" as *;
+@use "../abstracts/sizes" as *;
+@use "../abstracts/typography" as *;
+
+$section-padding-block: clamp(5rem, 10vh, 6rem);
+$letter-spacing-loose: 0;
+
+/* box shadows */
+$box-shadow-1: 0px 6px 5px rgb(0, 0, 0, 0.012),
+0px 22px 18px rgb(0, 0, 0, 0.018), 0px 100px 80px rgb(0, 0, 0, 0.03);
+
+$box-shadow-2: 0px 6px 5px rgb(0, 0, 0, 0.016),
+0px 22px 18px rgb(0, 0, 0, 0.024), 0px 100px 80px rgb(0, 0, 0, 0.04);
+
+$box-shadow-3: 0 0.3rem var(--clr-dark-cosmos-300);
+
+/* container variables */
+$container-min-margin-inline: $size-4;
+$container-max-width: 64rem;
+$container-max-width-narrow: 40rem;
+$container-max-width-medium: 55rem;
+$container-max-width-wide: 75rem;
+$container-fit-content: fit-content;
+/* default button variables */
+$button-padding-y:10px;
+$button-padding-x:10px;
+$button-default-font-color:var(--clr-dark-cosmos-300);
+$button-font-weight:normal;
+$button-font-size:var(--fs-300);
+$button-line-height:1.2;
+$button-default-bg-color:var(--clr-star-300);
+$button-border-width:2px;
+$button-default-border-color:var(--clr-dark-cosmos-300);
+$button-border-radius:5px;
+$button-transition:all 0.1s ease;
+/* heading */
+$heading-font-family: $font-family-base;
+$heading-color-default: $clr-star-300;
+$heading-font-weight: $font-weight-bold;
+$heading-letter-spacing: $letter-spacing-loose;
+$heading-line-height: 1.1;
+$heading-text-transform: capitalize;
+
+$heading-1-font-size: $font-size-900;
+$heading-1-color: $heading-color-default;
+$heading-2-font-size: $font-size-800;
+$heading-2-color: $heading-color-default;
+$heading-3-font-size: $font-size-700;
+$heading-3-color: $heading-color-default;
