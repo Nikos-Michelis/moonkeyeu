@@ -1,0 +1,11 @@
+@use "../../abstracts" as abs;
+div.article.counter-container{
+  position: absolute;
+  display: flex;
+  border: 2px solid var(--clr-dark-cosmos-300);
+  top: 26.9rem;
+  background-color: var(--clr-secondary-300);
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 0.3rem 0 var(--clr-dark-cosmos-300);
+}

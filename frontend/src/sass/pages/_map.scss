@@ -1,0 +1,32 @@
+@use "../abstracts/index" as abs;
+
+.map-container {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  & div.leaflet-popup-content{
+    min-width: fit-content;
+    max-width: 10rem;
+  }
+  & div.leaflet-popup-container{
+    div.card-img-box img{
+      width: 10rem;
+      max-height: 10rem;
+      object-fit: contain;
+    }
+  }
+  & div.location-dot-wrapper{
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    z-index: 1000;
+    & span{
+      margin: 0 0.2rem;
+    }
+  }
+}

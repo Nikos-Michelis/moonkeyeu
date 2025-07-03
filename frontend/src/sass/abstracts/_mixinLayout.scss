@@ -1,0 +1,51 @@
+@mixin flexbox(
+  $display: null,
+  $direction: null,
+  $placeContent: null,
+  $placeItems: null,
+  $wrap: null,
+  $shrink: null,
+  $grow: null,
+  $alignContent: null,
+  $justifyContent: null,
+  $alignItems: null,
+  $justifyItems: null
+) {
+
+  display: $display;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  @if $placeContent == null {
+    @if $alignContent   { align-content: $alignContent; }
+    @if $justifyContent { justify-content: $justifyContent; }
+  } @else {
+    place-content: $placeContent;
+  }
+
+  @if $placeItems == null {
+    @if $alignItems   { align-items: $alignItems; }
+    @if $justifyItems { justify-items: $justifyItems; }
+  } @else {
+    place-items: $placeItems;
+  }
+  flex-shrink: $shrink;
+  flex-grow: $grow;
+}
+
+@mixin grid($rows: null, $columns: null, $gap: null, $row-gap: null, $column-gap: null) {
+  display: grid;
+  gap: $gap;
+  row-gap: $row-gap;
+  column-gap: $column-gap;
+  grid-template-rows: $rows;
+  grid-template-columns: $columns;
+}
+
+@mixin repeat-grid($col: 1, $row: auto-fill, $min-col: 200px, $min-row: 200px, $gap: 1rem) {
+  @include grid(
+          $columns: repeat($col, minmax(#{$min-col}, 1fr)),
+          $rows: repeat($row, minmax(#{$min-row}, 1fr)),
+          $gap: $gap
+  );
+}
+

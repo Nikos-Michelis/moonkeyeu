@@ -1,0 +1,44 @@
+@use "../abstracts" as abs;
+
+.flex {
+  @include abs.flexbox($display: flex, $shrink: 1, $grow: 0);
+}
+.flex-column {
+  @include abs.flexbox($direction: column);
+}
+.flex-wrap {
+  @include abs.flexbox($wrap: wrap);
+}
+// justify content
+.justify-start {
+  @include abs.flexbox($placeContent: flex-start);
+}
+.justify-center {
+  @include abs.flexbox($placeContent: center);
+}
+.justify-end {
+  @include abs.flexbox($placeContent: flex-end);
+}
+.justify-space-between {
+  @include abs.flexbox($placeContent: space-between);
+}
+.justify-space-around {
+  @include abs.flexbox($placeContent: space-around);
+}
+.justify-space-evenly {
+  @include abs.flexbox( $placeContent: space-evenly);
+}
+// Align Items
+.align-start {
+  @include abs.flexbox($placeItems: flex-start);
+}
+.align-center {
+  @include abs.flexbox($placeItems: center);
+}
+.align-end {
+  @include abs.flexbox($placeItems: flex-end);
+}
+.align-stretch {
+  @include abs.flexbox($placeItems: stretch);
+}
+

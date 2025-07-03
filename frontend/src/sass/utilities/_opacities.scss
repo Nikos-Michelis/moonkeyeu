@@ -1,0 +1,8 @@
+@use "../abstracts" as *;
+@use "../abstracts/opacities" as *;
+
+@each $opacity-name, $opacity-value in $opacities {
+    .opacity-#{$opacity-name} {
+      opacity: $opacity-value;
+    }
+}

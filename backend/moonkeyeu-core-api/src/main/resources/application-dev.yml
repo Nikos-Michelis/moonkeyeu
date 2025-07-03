@@ -1,0 +1,118 @@
+jwt:
+  issuer: 'https://backend.moonkeyeu.com'
+  audience: 'https://www.moonkeyeu.com'
+  public:
+    access:
+      key: ./jwt-keys/access-token/access-token-public.pem
+    refresh:
+      key: ./jwt-keys/refresh-token/refresh-token-public.pem
+  private:
+    access:
+      key: ./jwt-keys/access-token/access-token-private.pem
+    refresh:
+      key: ./jwt-keys/refresh-token/refresh-token-private.pem
+spring:
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:${LOCAL_MYSQL_PORT}}/${MYSQL_DATABASE:${LOCAL_MYSQL_DATABASE}}
+    username: ${MYSQL_USER:${LOCAL_MYSQL_USER}}
+    password: ${MYSQL_PASSWORD:${LOCAL_MYSQL_PASSWORD}}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 50
+      jdbc:
+        batch_size: 50
+        time_zone: UTC
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            client-name: Google
+
+  mail:
+    sender: ${MAIL_SENDER}
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+application:
+  frontend:
+    url: http://localhost:3001
+  backend:
+    url: http://localhost:8080/api/v1/
+  limiter:
+    threshold: 300000
+    scheduled-time: 300000
+  otp:
+    max-resend-attempts: 3
+    max-validation-attempts: 3
+    cooldown-seconds: 60
+    expiration: 300
+    length: 6
+management:
+  endpoints:
+    web:
+      exposure:
+        include: [ "health", "prometheus", "metrics" ]
+  endpoint:
+    health:
+      show-details: always
+      group:
+        core-api:
+          include: db, mail
+  health:
+    mail:
+      enabled: true
+    db:
+      enabled: true
+    diskspace:
+      enabled: false
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1/
+  cors:
+    origins: http://localhost:3001
+
+logging:
+  level:
+    security:
+      web: TRACE
+    org:
+      springframework:
+        jdbc:
+          datasource:
+            DriverManagerDataSource: DEBUG
+      hibernate:
+        SQL: off
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE

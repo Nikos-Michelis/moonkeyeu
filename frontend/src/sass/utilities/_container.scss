@@ -1,0 +1,96 @@
+@use "../abstracts" as abs;
+@use "../abstracts/variables" as *;
+@use "../abstracts/sizes" as *;
+
+.container {
+  --padding: #{$container-min-margin-inline};
+  --max-width: #{$container-max-width};
+
+  width: min(100% - var(--padding), var(--max-width));
+  margin-inline: auto;
+  overflow: hidden;
+  &.overlay{
+    background-color: rgba(224, 218, 239, 0.2980392157);
+    z-index: 0;
+    box-shadow: 0 0 30px #387dff2b;
+  }
+  &.scrolling {
+    max-height: 35rem;
+    overflow-y: auto;
+  }
+  &.bottom-gap{
+    margin-bottom: 10rem;
+  }
+  &.map{
+    background-color: rgba(0, 0, 0, 0.398039);;
+    z-index: 1000;
+    & .container .spinner-container{
+      z-index: 1;
+    }
+  }
+}
+.container[data-type="fixed"] {
+  --max-width: 64rem;
+  width: var(--max-width);
+  height: 100%;
+  margin-inline: auto;
+}
+.container[data-type="fixed-inherit"] {
+  --max-width: inherit;
+  width: var(--max-width);
+  margin-inline: auto;
+}
+.container[data-type="full-width"] {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  margin-inline: 0;
+}
+.container[data-type="narrow"] {
+  --max-width: #{$container-max-width-narrow};
+}
+.container[data-type="medium"] {
+  --max-width: #{$container-max-width-medium};
+}
+.container[data-type="wide"] {
+  --max-width: #{$container-max-width-wide};
+}
+.container[data-type="full-bleed"] {
+  --max-width: 100%;
+}
+.container[data-width="fit-content"] {
+  width: fit-content;
+}
+.container[data-width="min-width"] {
+  min-width: 100%;
+}
+.container[data-spacing="none"] {
+  --padding: 0;
+  margin-inline: 0;
+}
+.container[data-overflow="visible"] {
+  overflow: visible;
+}
+
+@include abs.mq(small) {
+  div.container.scrolling{
+    max-height: 50rem;
+  }
+}
+
+@each $name, $value in $container-heights {
+  .container[data-height="#{$name}"] {
+    height: $value;
+  }
+}
+
+@each $name, $value in $container-heights {
+  .container[data-height="#{$name}"]:not(.map, .__error) {
+    height: auto;
+    @media (min-width: 768px) {
+      height: $value;
+    }
+  }
+}
+
+

@@ -1,0 +1,8 @@
+# START BLOCK
+# ---------------------------
+User-agent: *
+Disallow: /media/images
+
+Sitemap: https://www.moonkeyeu.com/sitemap.xml
+# ---------------------------
+# END BLOCK

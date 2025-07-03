@@ -1,0 +1,33 @@
+@use "../abstracts/index" as abs;
+
+div.search-container {
+  height: auto;
+  width: 100%;
+  @include abs.font($font-size: var(--fs-100));
+  & input.searchbar {
+    box-sizing: inherit;
+    width: 800px;
+    padding: 13px;
+    border: 1px solid transparent;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background: var(--clr-star-200);
+    &.search-small{
+      width: 250px;
+    }
+    &:focus {
+      outline: none;
+      border: 1px solid var(--clr-dark-cosmos-300);
+      & ~ div.search-button {
+        border: 1px solid var(--clr-dark-cosmos-300);
+      }
+    }
+  }
+  & div.search-button {
+    border: 1px solid transparent;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 1rem;
+    background-color: var(--clr-star-200);
+  }
+}

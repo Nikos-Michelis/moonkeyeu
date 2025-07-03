@@ -1,0 +1,7 @@
+@use "../abstracts/sizes" as *;
+
+@each $name, $value in $z-indexes {
+  .z-#{$name} {
+    z-index: $value;
+  }
+}

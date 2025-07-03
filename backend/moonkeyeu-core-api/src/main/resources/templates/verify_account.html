@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Activation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 10px auto;
+            background:#fff;
+            border:1px solid rgba(0,0,0,0.1);
+            border-radius:5px;
+            overflow: hidden;
+        }
+        .img-container{
+            position: relative;
+            background: hsl(290, 34%, 10%) url("https://cdn.moonkeyeu.com/media/assets/background/starry-background.png") no-repeat center center;
+            background-size: cover;
+            overflow: hidden;
+        }
+        .img-container img {
+            margin: 2rem 0 0 0;
+        }
+        .details-container{
+            padding: 20px;
+        }
+        .heading {
+            color: hsl(272, 57%, 95%);
+            margin: 1.2rem 0;
+            text-align: center;
+        }
+        .activation-code {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .fn-bold{
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="img-container" align="center">
+        <a href="https://www.moonkeyeu.com/">
+            <img src="https://cdn.moonkeyeu.com/media/assets/logo/moonkeyeu-logo-transparent.png" alt="MoonkeyEU" width="100" height="100">
+        </a>
+        <h2 class="heading">MoonkeyEU</h2>
+    </div>
+    <div class="details-container">
+        <h2>Account Verification</h2>
+        <p th:text="'Hello ' + ${username} + ','"></p>
+        <p>Please enter this temporary verification code to continue:</p>
+        <div class="activation-code fn-bold"><span th:text="${code}"></span></div>
+        <p>This code is valid for <span class="fn-bold">5 minutes</span></p>
+        <p>If you have not requested this code, someone else may be trying to access your MoonkeyEU account.We recommend that you change your code immediately. Do not forward or give this code to anyone.</p>
+        <p>You are receiving this message because this email address is linked to MoonkeyEU.</p>
+        <p>Yours sincerely, MoonkeyEU</p>
+    </div>
+</div>
+</body>
+</html>

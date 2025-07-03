@@ -1,0 +1,20 @@
+@use "../../abstracts/index" as abs;
+
+div.container.__aside {
+  width: 100%;
+  max-width: 25rem;
+  box-shadow: 0 0.3rem 0 var(--clr-dark-cosmos-300);
+  @include abs.cursive_border($border-width: 0.2rem, $border-radius: 0.2rem, $color: var(--clr-dark-cosmos-300));
+  & div.sidebar-heading{
+    font-variant: all-small-caps
+  }
+}
+
+@include abs.mq(medium) {
+  aside.container {
+    width: fit-content;
+  }
+    div.container.__aside {
+      width: 15rem;
+    }
+}

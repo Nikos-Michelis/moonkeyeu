@@ -1,0 +1,59 @@
+name: Deploy react frontend to AWS S3
+on:
+  push:
+    paths:
+      - frontend/**
+      - .github/workflows/deploy-frontend.yml
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: NodeJs Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ secrets.NODE_VERSION }}
+
+      - name: Clean install dependencies
+        run: |
+            rm -rf node_modules package-lock.json
+            npm install
+
+      - name: Build the React app
+        env:
+          VITE_BACKEND_BASE_URL: ${{ secrets.VITE_BACKEND_BASE_URL }}
+          VITE_NEWS_API_URL: ${{ vars.VITE_NEWS_API_URL }}
+          VITE_NASA_APOD_API_URL: ${{ vars.VITE_NASA_APOD_API_URL }}
+          VITE_CLOUDFRONT_URL: ${{ vars.VITE_CLOUDFRONT_URL }}
+          VITE_GRAFANA_URL: ${{ secrets.VITE_GRAFANA_URL }}
+          VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID }}
+        run: npm run build
+
+      - name: Copy robots.txt to dist folder
+        run: cp ./robots.txt ./dist/
+
+      - name: Copy sitemap.xml to dist folder
+        run: cp ./sitemap.xml ./dist/
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+
+      - name: Deploy to AWS S3
+        run: aws s3 sync dist s3://fs-moonkeyeu-bucket-test/moonkeyeu-prod-frontend/dist --delete
+
+      - name: Invalidate CloudFront Cache
+        run: aws cloudfront create-invalidation --distribution-id E10L9D15E7Z1MB --paths "/*"
+

@@ -1,0 +1,23 @@
+@use "../abstracts/colors" as *;
+@use "../abstracts/typography" as *;
+@use "../abstracts/breakpoints" as *;
+
+:root{
+  @each $color, $shades in $colors {
+    @each $shade, $value in $shades{
+      --clr-#{$color}-#{$shade}:#{$value};
+    }
+  }
+
+  @each $screen-size, $property in $font-sizes {
+    @if $screen-size == small {
+      @each $prop, $value in $property {
+        --fs-#{$prop}: #{$value};
+      }
+    }
+  }
+
+  @each $breakpoint, $value in $breakpoints {
+    --breakpoint-#{$breakpoint}: #{$value};
+  }
+}
