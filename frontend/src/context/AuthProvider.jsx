@@ -193,7 +193,7 @@ export const AuthProvider = ({ children }) => {
             status: combinedStatus,
             error: logoutMutation.error,
         }),
-        [ userQuery?.data, combinedStatus.isSuccess, combinedStatus.isError, logoutMutation.error]
+        [ userQuery?.data, combinedStatus.isSuccess, combinedStatus.isError, logoutMutation.error ]
     );
 
     return (

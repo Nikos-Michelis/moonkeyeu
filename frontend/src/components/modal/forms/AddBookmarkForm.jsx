@@ -17,7 +17,6 @@ import {
     faEye,
     faSpinner,
     faArrowRight,
-    faBookmark, faSquareCheck, faList
 } from '@fortawesome/free-solid-svg-icons';
 
 export function AddBookmarkForm() {
@@ -145,7 +144,7 @@ export function AddBookmarkForm() {
         <div className="form-popup-container bookmark-form-container">
             <Button
                 onClick={handleClose}
-                className="btn-transparent close-btn clr-dark-cosmos-300"
+                className="btn--transparent btn--close clr-dark-cosmos-300"
             >
                 <FontAwesomeIcon icon={faXmark} className="fs-small-500"/>
             </Button>
@@ -153,7 +152,11 @@ export function AddBookmarkForm() {
                 <div className="padding-block-end-6">
                     <h3 className="margin-inline-2">Bookmark to...</h3>
                 </div>
-                <div className={`container ${queryData.data && queryData.data.length > 5 ? 'scrolling small-list' : ""} padding-8`} data-type="full-width">
+                <div className="container container--small-list padding-8"
+                     data-type="full-width"
+                     data-scroll={queryData.data && queryData.data.length > 5 ? "vertical" : undefined}
+                     data-height="small"
+                >
                     <div className="padding-inline-2">
                         { queryData.data && queryData.data.length > 0
                             && queryData.data.map(bookmark =>
@@ -171,7 +174,7 @@ export function AddBookmarkForm() {
                                         disabled={addToBookmarkMutation.isPending || removeLaunchMutation.isPending}
                                     />
                                     <p className="margin-inline-8 clr-dark-cosmos-300 fw-regular ellipsis-single-md fs-small-200">{bookmark?.bookmark}</p>
-                                    <Button className="btn btn-transparent clr-dark-cosmos-300" onClick={() => handleOnNavigate(`bookmarks/${bookmark.bookmark}`)}>
+                                    <Button className="btn btn--transparent clr-dark-cosmos-300" onClick={() => handleOnNavigate(`bookmarks/${bookmark.bookmark}`)}>
                                         <FontAwesomeIcon icon={faEye} />
                                     </Button>
                                 </div>
@@ -179,7 +182,8 @@ export function AddBookmarkForm() {
                     </div>
                 </div>
                 <div className="flex flex-wrap justify-center margin-block-4">
-                    <Button onClick={() => setToggle(!toggle)} className="btn-transparent btn-big clr-dark-cosmos-300">
+                    <Button onClick={() => setToggle(!toggle)}
+                            className="btn--transparent btn--big--transparent clr-dark-cosmos-300">
                         {toggle ? (
                             <FontAwesomeIcon icon={faAngleUp} />
                         ) : (
@@ -209,7 +213,7 @@ export function AddBookmarkForm() {
                         </div>
                         <div className="flex flex-wrap justify-center">
                             <Button
-                                className="btn btn-primary btn-big"
+                                className="btn btn--primary btn--big"
                                 type="submit"
                                 disabled={createBookmarkMutation.isPending || addToBookmarkMutation.isPending || removeLaunchMutation.isPending}
                             >

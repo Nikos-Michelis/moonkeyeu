@@ -48,23 +48,23 @@ function BasicFiltering({defaultFilters, searchPlaceHolder, field}) {
     };
 
     return (
-        <section className="item-filter-section">
-            <div className="toolbar-container margin-block-start-12 margin-block-end-8 margin-inline-8">
-                <div className="search-container flex justify-center">
+        <section className="toolbar">
+            <div className="toolbar__container margin-block-start-12 margin-block-end-8 margin-inline-8">
+                <div className="search flex justify-center">
                     <input type="hidden" name="action" value="search" />
                     <input
-                        className="searchbar box-shadow-light"
+                        className="search__searchbar box-shadow-light"
                         value={locaSearch || ""}
                         type="text"
                         name="search"
                         placeholder={searchPlaceHolder}
                         onChange={(e) => setLocalSearch(e.target.value)}
                     />
-                    <div className="search-button box-shadow-light">
+                    <div className="search__btn-search box-shadow-light">
                         <FontAwesomeIcon icon={faSearch} />
                     </div>
                 </div>
-                <div className="tools-container">
+                <div className="toolbar__tools">
                     <CustomSelect
                         options={limitOptions || []}
                         field="limit"
@@ -74,10 +74,10 @@ function BasicFiltering({defaultFilters, searchPlaceHolder, field}) {
                         setSelectedOption={setSelectedOption}
                         defaultValue={Number(limit)}
                         isSearchable={false}
-                        btnClassName="select-btn-small"
-                        dropDownClassName="ctn-medium"
+                        btnClassName="select__btn select__btn--small"
+                        dropDownClassName="select__content--medium"
                     />
-                    <Button  className="btn btn-overlay" onClick={handleReset}>
+                    <Button  className="btn btn--overlay" onClick={handleReset}>
                         <FontAwesomeIcon icon={faArrowsRotate} />
                     </Button>
                     <CustomSelect
@@ -89,8 +89,8 @@ function BasicFiltering({defaultFilters, searchPlaceHolder, field}) {
                         setSelectedOption={setSelectedOption}
                         defaultValue={ordering}
                         isSearchable={false}
-                        btnClassName="select-btn-small"
-                        dropDownClassName="ctn-medium"
+                        btnClassName="select__btn select__btn--small"
+                        dropDownClassName="select__content--medium"
                     />
                 </div>
             </div>

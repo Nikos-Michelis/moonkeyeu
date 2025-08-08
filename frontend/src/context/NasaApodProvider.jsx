@@ -30,8 +30,7 @@ export const NasaApodProvider = ({ children }) => {
             isError,
             isPending,
             isFetching
-        }),[data, isError, isPending,
-        isFetching ])
+        }),[data, isError, isPending, isFetching ])
 
     return (
         <NasaApodContext.Provider value={providerValues}>

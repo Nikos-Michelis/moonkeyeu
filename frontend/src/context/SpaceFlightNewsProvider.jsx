@@ -29,7 +29,7 @@ export const SpaceFlightNewsProvider = ({ children }) => {
             isPending,
             isError,
             isFetching
-        }), [ data, isPending, isError, isFetching])
+        }), [ data, isPending, isError, isFetching ])
 
     return (
         <SpaceFlightNewsContext.Provider value={providerValues}>

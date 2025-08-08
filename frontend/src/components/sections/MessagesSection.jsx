@@ -2,6 +2,7 @@ import React from 'react';
 import ContentSection from "@/components/sections/ContentSection.jsx";
 import MessageCard from "@/components/cards/MessageCard.jsx";
 import SkeletonLandscapeLoader from "@/components/skeleton/SkeletonLandscapeLoader.jsx";
+import {faMessage} from "@fortawesome/free-solid-svg-icons";
 
 const MessagesSection = ({ messages, isPending , isFetching , isError  }) =>{
     const items = messages._embedded?.contactDTOes || [];
@@ -10,14 +11,13 @@ const MessagesSection = ({ messages, isPending , isFetching , isError  }) =>{
         component: SkeletonLandscapeLoader,
         styles: {
             wrapper: "small-wrapper",
-            img: "small-img",
             section: "messages-section",
         },
     };
     const emptyList= {
         heading: "There are no messages at the moment!",
-        message: "",
-        icon: ""
+        message: "Once we receive a message, it will appear here.",
+        icon: faMessage
     }
     const options = {
         showBackBtn: true,

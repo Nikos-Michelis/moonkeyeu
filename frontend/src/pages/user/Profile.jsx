@@ -60,68 +60,73 @@ const Profile = () =>{
                 description="View and edit your profile information."
             />
             <ScrollToTop behavior="auto" />
-            <section className="article-section">
-                <div className="container flex justify-center" data-height="full" data-type="medium" data-spacing="none">
-                    <div className="container overlay padding-inline-8 padding-block-10" data-type="fixed-inherit" data-spacing="none">
+            <section className="profile">
+                <div className="container flex justify-center" data-height="auto" data-type="medium" data-spacing="none">
+                    <div className="container container--light-overlay padding-inline-8 padding-block-10" data-type="fixed-inherit" data-spacing="none">
                         <div className="container flex justify-start padding-block-end-4">
-                            <Button className="btn-transparent" onClick={() => window.history.back()}>
+                            <Button className="btn--transparent" onClick={() => window.history.back()}>
                                 <FontAwesomeIcon icon={faChevronLeft} /> Back
                             </Button>
                         </div>
-                        <div className="profile-img margin-block-end-8">
+                        <div className="profile__user-icon margin-block-end-8">
                             <FontAwesomeIcon icon={faUserAstronaut} className="fa-user-astronaut" />
                         </div>
-                        <div className="article-info-container container flex flex-column" data-spacing="none">
-                            <section className="account-managment-section">
+                        <div className="container flex flex-column" data-spacing="none">
+                            <section className="profile__managment">
                                 <div className="flex align-center clr-star-300">
                                     <FontAwesomeIcon icon={faGear} className="fs-small-700" />
                                     <h2 className="padding-1">Account Management</h2>
                                 </div>
-                                <div className="panel-body">
-                                    <h4 className="astronaut-name"></h4>
+                                <div className="panel">
                                     <hr/>
-                                    <div className="panel-info-wrapper">
-                                        <div className="panel-info-container">
-                                            <div className="detail-wrapper fs-small-200 clr-star-300 padding-2">
-                                                <p className="info-panel-row">Username</p>
-                                                <p className="info-panel-row">{user?.username}</p>
+                                    <div className="panel__wrapper">
+                                        <div className="panel__container">
+                                            <div className="panel__detail-box fs-small-200 clr-star-300 padding-2">
+                                                <p className="panel__text">Username</p>
+                                                <p className="panel__text">{user?.username}</p>
                                             </div>
-                                            <div className="detail-wrapper fs-small-200 clr-star-300 padding-2">
-                                                <p className="info-panel-row">Email</p>
-                                                <p className="info-panel-row">{user?.email}</p>
+                                            <div className="panel__detail-box fs-small-200 clr-star-300 padding-2">
+                                                <p className="panel__text">Email</p>
+                                                <p className="panel__text">{user?.email}</p>
                                             </div>
                                         </div>
-                                        <div className="panel-info-container">
-                                            <div className="detail-wrapper fs-small-200 clr-star-300 padding-2">
-                                                <p className="info-panel-row">Role</p>
-                                                <p className="info-panel-row">{user?.role?.[0]}</p>
+                                        <div className="panel__container">
+                                            <div className="panel__detail-box fs-small-200 clr-star-300 padding-2">
+                                                <p className="panel__text">Role</p>
+                                                <p className="panel__text">{user?.role?.[0]}</p>
                                             </div>
-                                            <div className="detail-wrapper fs-small-200 clr-star-300 padding-2">
-                                                <p className="info-panel-row">Member Since</p>
-                                                <p className="info-panel-row">{formattedZonedDateTime}</p>
+                                            <div className="panel__detail-box fs-small-200 clr-star-300 padding-2">
+                                                <p className="panel__text">Member Since</p>
+                                                <p className="panel__text">{formattedZonedDateTime}</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <hr />
+                                    <hr/>
                                 </div>
                                 <div className="container flex flex-wrap justify-center align-center padding-block-8" data-type="full-bleed">
                                     <div className="container flex flex-wrap justify-center">
                                         {hasRole(roles) && (
-                                            <LinkButton className="btn btn-primary btn-big-hg" to="/dashboard">
+                                            <LinkButton
+                                                className="btn btn--primary btn--big-hg margin-2"
+                                                to="/dashboard">
                                                 <FontAwesomeIcon icon={faTableColumns} /> Dashboard
                                             </LinkButton>
                                         )}
-                                        <LinkButton className="btn btn-primary btn-big-hg" to="change-password">
+                                        <LinkButton
+                                            className="btn btn--primary btn--big-hg margin-2"
+                                            to="change-password">
                                             <FontAwesomeIcon icon={faPenToSquare} /> Change Password
                                         </LinkButton>
-                                        <Button className="btn btn-primary btn-big-hg" onClick={() => logout()}>
+                                        <Button
+                                            className="btn btn--primary btn--big-hg margin-2"
+                                            onClick={() => logout()}>
                                             { status.isPending
                                                 ? <FontAwesomeIcon icon={faSpinner} spin />
                                                 : <FontAwesomeIcon icon={faDoorOpen} />
                                             } Logout
                                         </Button>
                                         <Button
-                                            className="btn bg-warning-200 btn-primary btn-big-hg"
+                                            className="btn btn--primary btn--big-hg bg-warning-200 margin-2"
                                             onClick={() =>
                                                 openModal("deleteAccountModal", {
                                                     title: "Delete Account - Are you sure?",
@@ -142,7 +147,7 @@ const Profile = () =>{
                                 </div>
                             </section>
                         </div>
-                        <hr className="hr-6-sm bg-hr-600"/>
+                        <hr className="hr-90-sm bg-hr-600"/>
                     </div>
                 </div>
             </section>

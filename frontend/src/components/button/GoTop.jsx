@@ -26,7 +26,7 @@ const GoTop = ({ scrollUp = () => window.scrollTo({ top: 0, behavior: "smooth" }
     return (
         <>
             {showGoTop && (
-                <div onClick={scrollUp}>
+                <div className="goTopBtn" onClick={scrollUp}>
                     <Button className="btn-goTop">
                         <FontAwesomeIcon icon={faChevronUp} className="btn-goTop__text" />
                     </Button>

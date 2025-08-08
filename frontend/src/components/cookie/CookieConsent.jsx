@@ -23,7 +23,7 @@ export default function CookieConsent(){
                         Without them, the smooth operation is directly affected. By continuing to use this site, you agree to our use of cookies.
                     </p>
                 </div>
-                <Button className="btn btn-primary clr-secondary-300 margin-4" onClick={giveCookieConsent}>I understand</Button>
+                <Button className="btn btn--primary clr-secondary-300 margin-4" onClick={giveCookieConsent}>I understand</Button>
             </div>
         </div>
     );

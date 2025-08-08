@@ -7,13 +7,13 @@ const StarshipCard = () => {
     return (
         <section className="starship-news">
             <div className="flex flex-column justify-center align-center margin-4">
-                <div className="container __aside flex flex-column justify-center align-center bg-secondary-300 padding-4" data-type="full-bleed">
-                    <div className="sidebar-heading padding-2 text-center">
+                <div className="sidebar container flex flex-column justify-center align-center bg-secondary-300 padding-4" data-type="full-bleed">
+                    <div className="sidebar__heading-box">
                         <h3 className="ff-accent">Starship</h3>
                     </div>
                     <div className="container margin-block-end-2">
-                        <article className="portrait-card-wrapper small-card flex flex-column margin-block-2">
-                            <div className="portrait-card-container flex flex-column">
+                        <article className="portrait-card margin-block-4">
+                            <div className="portrait-card__container portrait-card__container--small bg-dark-cosmos-300 flex flex-column">
                                 <div className="starship-animation environment flex flex-column justify-center align-center">
                                     <div className="starship-container">
                                         <Img
@@ -41,7 +41,7 @@ const StarshipCard = () => {
                         </article>
                     </div>
                     <div className="flex justify-center">
-                        <Link className="btn btn-primary btn-lg"  to="/programs/1">
+                        <Link className="btn btn--primary btn-lg"  to="/programs/1">
                             <FontAwesomeIcon icon={faArrowRight} /> VIEW STARSHIP
                         </Link>
                     </div>

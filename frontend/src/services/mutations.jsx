@@ -3,11 +3,11 @@ import {handleDelete, handlePost, handlePut} from "@/services/api.jsx";
 import toast from "react-hot-toast";
 import showErrorToast from "@/components/utils/ShowErrorToast.jsx";
 
-
 export const useCreateMutation = (
     {
         successMessage = undefined,
-        errorMessage = "Something went wrong!",
+        errorMessage = "Opps! Something went wrong...",
+        showError = true,
         queryKeysToInvalidate = [],
         mutationOptions = {}
     } = {}) => {
@@ -19,7 +19,7 @@ export const useCreateMutation = (
             !!successMessage && toast.success(successMessage);
         },
         onError: (error) => {
-            showErrorToast(error, error ? error.response?.data?.error : errorMessage);
+            showError && showErrorToast(error, error ? error.response?.data?.error : errorMessage);
         },
         onSettled: async (_, error) => {
             if (!error && queryKeysToInvalidate.length > 0) {
@@ -36,7 +36,8 @@ export const useCreateMutation = (
 export const useDeleteMutation = (
     {
         successMessage = undefined,
-        errorMessage = "Something went wrong!",
+        errorMessage = "Opps! Something went wrong...",
+        showError = true,
         queryKeysToInvalidate = [],
         mutationOptions = {}
     } = {}) => {
@@ -49,7 +50,7 @@ export const useDeleteMutation = (
             mutationOptions.onSuccess?.(data, variables, context);
         },
         onError: (error) => {
-            showErrorToast(error, error ? error.response?.data?.error : errorMessage);
+            showError && showErrorToast(error, error ? error.response?.data?.error : errorMessage);
         },
         onSettled: async (_, error) => {
             if (!error && queryKeysToInvalidate.length > 0) {
@@ -66,7 +67,8 @@ export const useDeleteMutation = (
 export const useUpdateMutation = (
     {
         successMessage = "Operation successful!",
-        errorMessage = "Something went wrong!",
+        errorMessage = "Opps! Something went wrong...",
+        showError = true,
         queryKeysToInvalidate = [],
         mutationOptions = {}
     } = {}) => {
@@ -78,7 +80,7 @@ export const useUpdateMutation = (
             toast.success(successMessage);
         },
         onError: (error) => {
-            showErrorToast(error, error ? error.response?.data?.error : errorMessage);
+            showError && showErrorToast(error, error ? error.response?.data?.error : errorMessage);
         },
         onSettled: async (_, error, variables) => {
             if (!error && queryKeysToInvalidate.length > 0) {

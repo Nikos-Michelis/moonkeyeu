@@ -46,18 +46,17 @@ const CustomSelect = (
     useClickOutside({ modalRef: dropdownRef, handler: handleClickOutside });
 
     return (
-        <div className="select-wrapper" ref={dropdownRef}>
-            <div className={`select-btn ${btnClassName}`} onClick={() => setIsOpen(!isOpen)}>
+        <div className="select" ref={dropdownRef}>
+            <div className={`select__btn ${btnClassName}`} onClick={() => setIsOpen(!isOpen)}>
                 <span>{selectedOption?.[field] || preSelected || placeholder}</span>
                 <FontAwesomeIcon icon={isOpen ? faAngleUp : faAngleDown} />
             </div>
             {isOpen && (
-                <div className={`content ${dropDownClassName}`}>
+                <div className={`select__content ${dropDownClassName}`}>
                     {isSearchable && (
-                        <div className="search">
+                        <div className="select__search">
                             <FontAwesomeIcon icon={faMagnifyingGlass} />
                             <input
-                                className="filter-search-input"
                                 type="text"
                                 placeholder="Search"
                                 value={searchValue?.[field] || ""}
@@ -65,7 +64,7 @@ const CustomSelect = (
                             />
                         </div>
                     )}
-                    <ul className="options">
+                    <ul className="select__options">
                         {filteredOptions.length > 0 ? (
                             filteredOptions.map((option) => (
                                 <li className={`${defaultValue === option.id? "selected" : ""}`} key={option.id} onClick={() => handleOnSelect(option)}>

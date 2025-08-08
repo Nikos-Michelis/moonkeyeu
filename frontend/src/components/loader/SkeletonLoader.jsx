@@ -20,11 +20,7 @@ export function SkeletonLoader(
             <>
                 {Array.from({ length: contentConfig?.count ?? 12}).map((_, index) => (
                     Component && (
-                        <Component
-                            key={index}
-                            skeletonStyle={contentConfig?.styles?.wrapper}
-                            skeletonImgStyle={contentConfig?.styles?.img}
-                        />
+                        <Component key={index} {...contentConfig?.styles}/>
                     )
                 ))}
             </>

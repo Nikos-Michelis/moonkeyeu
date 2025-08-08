@@ -9,7 +9,6 @@ const LauncherSection = ({launcher, isFetching, isError}) => {
         component: SkeletonLandscapeLoader,
         styles: {
             wrapper: "medium-wrapper",
-            img: "small-img",
             section: "launcher-articles",
         },
     };

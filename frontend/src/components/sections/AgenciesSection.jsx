@@ -8,9 +8,8 @@ const AgenciesSection = ({ agencies, isFetching, isError}) => {
         component: SkeletonLandscapeLoader,
         styles: {
             wrapper: "small-wrapper",
-            img: "small-img",
             section: "spacecraft-articles",
-            bottomGap:"bottom-gap"
+            bottomGap:"margin-block-end-15"
         },
     };
     return (

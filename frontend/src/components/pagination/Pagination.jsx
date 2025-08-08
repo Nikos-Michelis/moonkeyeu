@@ -15,18 +15,20 @@ Pagination.propTypes = {
 };
 export default function Pagination({ page, totalPages, totalElements, nextPage, previousPage, firstPage, lastPage, isPending, isFetching }) {
     return (
-        <section className="pagination-section">
-            <div className="pagination-container margin-block-12">
+        <section className="pagination">
+            <div className="pagination__container margin-block-12">
                 <div className="backward-arrows">
                     { page !== FIRST_PAGE &&
-                    <Button className="btn btn-overlay" disabled={page === FIRST_PAGE || (isPending || isFetching)} onClick={firstPage}>
+                    <Button className="btn btn--overlay"
+                            disabled={page === FIRST_PAGE || (isPending || isFetching)}
+                            onClick={firstPage}>
                         <FontAwesomeIcon icon={faAnglesLeft} />
                     </Button> }
-                    <Button className="btn btn-overlay" disabled={page === FIRST_PAGE || (isPending || isFetching)} onClick={previousPage}>
+                    <Button className="btn btn--overlay" disabled={page === FIRST_PAGE || (isPending || isFetching)} onClick={previousPage}>
                         <FontAwesomeIcon icon={faAngleLeft} /> Prev
                     </Button>
                 </div>
-                <span className="paging-text">
+                <span className="pagination__text">
                     Page
                     <span> {page} </span>
                     /
@@ -36,11 +38,11 @@ export default function Pagination({ page, totalPages, totalElements, nextPage, 
                     items
                 </span>
                 <div className="forward-arrows">
-                    <Button className="btn btn-overlay" disabled={page === totalPages || (isPending || isFetching)} onClick={nextPage}>
+                    <Button className="btn btn--overlay" disabled={page === totalPages || (isPending || isFetching)} onClick={nextPage}>
                         Next <FontAwesomeIcon icon={faAngleRight} />
                     </Button>
                     { page !== totalPages &&
-                    <Button className="btn btn-overlay" disabled={page === totalPages || (isPending || isFetching)} onClick={lastPage}>
+                    <Button className="btn btn--overlay" disabled={page === totalPages || (isPending || isFetching)} onClick={lastPage}>
                         <FontAwesomeIcon icon={faAnglesRight} />
                     </Button> }
                 </div>

@@ -1,10 +1,17 @@
 @use "../abstracts" as abs;
 
-.xs-wrapper {
-  height: 8rem;
-}
-
 @include abs.mq(medium) {
+  .article-card {
+    &--small-wrapper {
+      height: 16rem;
+    }
+    &--medium-wrapper {
+      height: 18.5rem;
+    }
+    &--large-wrapper {
+      height: 21rem;
+    }
+  }
   .small-wrapper {
     height: 16rem;
   }
@@ -18,7 +25,7 @@
 
 @include abs.mq(xl) {
   .medium-wrapper {
-    height: 18.5rem;
+    height: 20rem;
   }
   .large-wrapper {
     height: 22rem;
@@ -26,7 +33,10 @@
 }
 
 @include abs.mq(xxl) {
+  .medium-wrapper {
+    height: 18.5rem;
+  }
   .large-wrapper {
-    height: 20.5rem;
+    height: 21rem;
   }
 }

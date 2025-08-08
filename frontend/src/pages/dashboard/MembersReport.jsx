@@ -107,10 +107,10 @@ function MembersReport() {
             />
             <TablePagination table={table} />
             <section className="members-section">
-                <div className="container padding-inline-5 rounded-sm overlay" data-type="wide">
+                <div className="container container--light-overlay padding-5 rounded-sm" data-type="wide">
                     {!(queryData.isPending || queryData.isFetching) &&
                         <div className="flex justify-start margin-block-4">
-                            <Button className="btn-transparent" onClick={() => window.history.back()}>
+                            <Button className="btn--transparent" onClick={() => window.history.back()}>
                                 <FontAwesomeIcon icon={faChevronLeft} /> Back
                             </Button>
                         </div>

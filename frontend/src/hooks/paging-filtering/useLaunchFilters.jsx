@@ -5,7 +5,6 @@ const defaultFilters = {
     page: 1,
     limit: 12,
     upcoming: 'true',
-   // ordering: 'asc',
 };
 export function useLaunchFilters() {
     const [filterParams, setSearchParams] = useSearchParams();

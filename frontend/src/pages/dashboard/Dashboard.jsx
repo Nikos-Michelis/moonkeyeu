@@ -12,7 +12,7 @@ import {
     faMessage,
     faUsers,
     faDatabase,
-    faChevronLeft
+    faChevronLeft, faServer
 } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = () =>{
@@ -31,15 +31,15 @@ const Dashboard = () =>{
                 description="Access and manage the advanced functionalities."
             />
             <ScrollToTop behavior="auto" />
-                <section className="dashboard-section">
-                    <div className="container flex justify-center" data-height="full" data-type="medium" data-spacing="none">
-                        <div className="container overlay padding-inline-8 padding-block-10" data-type="fixed-inherit" data-spacing="none">
+                <section className="dashboard">
+                    <div className="container flex justify-center" data-height="auto" data-type="medium" data-spacing="none">
+                        <div className="container container--light-overlay padding-inline-8 padding-block-10" data-type="fixed-inherit" data-spacing="none">
                             <div className="container flex justify-start padding-block-end-4">
-                                <Button className="btn-transparent" onClick={() => window.history.back()}>
+                                <Button className="btn--transparent" onClick={() => window.history.back()}>
                                     <FontAwesomeIcon icon={faChevronLeft} /> Back
                                 </Button>
                             </div>
-                            <div className="container flex flex-column padding-8" data-spacing="none">
+                            <div className="container flex flex-column padding-block-12" data-spacing="none">
                                 <section className="account-managment-section">
                                     <div className="flex align-center clr-star-300">
                                         <FontAwesomeIcon icon={faTableColumns} className="fs-small-700" />
@@ -49,14 +49,14 @@ const Dashboard = () =>{
                                     <div className="container flex flex-wrap justify-center align-center padding-block-8" data-type="full-bleed" data-spacing="none">
                                         <div className="container flex flex-wrap justify-center">
                                             <LinkButton
-                                                className="btn btn-primary btn-big-hg"
+                                                className="btn btn--primary btn--big-hg"
                                                 to="etl-report"
                                                 disabled={true}
                                             >
                                                 <FontAwesomeIcon icon={faDatabase} /> ETL Tasks
                                             </LinkButton>
                                             <LinkButton
-                                                className="btn btn-primary btn-big-hg"
+                                                className="btn btn--primary btn--big-hg"
                                                 to={grafanaUrl}
                                                 disabled={!hasRole(roles)}
                                                 isExternal={true}
@@ -64,14 +64,21 @@ const Dashboard = () =>{
                                                 <FontAwesomeIcon icon={faChartLine} /> Grafana
                                             </LinkButton>
                                             <LinkButton
-                                                className="btn btn-primary btn-big-hg"
+                                                className="btn btn--primary btn--big-hg"
+                                                to="ai-usage-report"
+                                                disabled={true}
+                                            >
+                                                <FontAwesomeIcon icon={faServer} /> AI Usage
+                                            </LinkButton>
+                                            <LinkButton
+                                                className="btn btn--primary btn--big-hg"
                                                 to="members"
                                                 disabled={!hasRole(roles)}
                                             >
                                                 <FontAwesomeIcon icon={faUsers} /> Members
                                             </LinkButton>
                                             <LinkButton
-                                                className="btn btn-primary btn-big-hg"
+                                                className="btn btn--primary btn--big-hg"
                                                 to="messages"
                                                 disabled={!hasRole(roles)}
                                             >
@@ -81,7 +88,7 @@ const Dashboard = () =>{
                                     </div>
                                 </section>
                             </div>
-                            <hr className="hr-6-sm bg-hr-600"/>
+                            <hr className="hr-90-sm bg-hr-600"/>
                         </div>
                     </div>
                 </section>

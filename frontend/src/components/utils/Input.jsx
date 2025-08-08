@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import InputElement from "@/components/utils/html/InputElement.jsx";
 import FloatingLabel from "@/components/utils/html/FloatingLabel.jsx";
 
-
 const Input = ({ label= "", register, name, rules, errors = null, defaultValue = "", disabled, ...props }) => {
 
     const [isActive, setIsActive] = useState(!!defaultValue);

@@ -20,7 +20,7 @@ const ContentSection = (
         emptyList= {
             heading: "No Results Match Current Settings!",
             message: "Check your filtering settings using the above",
-            icon: <FontAwesomeIcon icon={faFilter} />
+            icon: faFilter
         },
         options = {
             showPrevBtn: false,
@@ -36,14 +36,14 @@ const ContentSection = (
     return (
         <section className={contentConfig?.styles?.section}>
             <div className="flex justify-center">
-                <div className={`container __wrapper ${contentConfig?.styles?.bottomGap || ""} flex flex-wrap justify-center rounded-md overlay box-shadow-light`} data-spacing="none">
-                    <div className="container __landscape padding-block-5 padding-inline-4" data-type="fixed-inherit" data-overflow="visible">
+                <div className={`container container--light-overlay ${contentConfig?.styles?.bottomGap || ""} flex flex-wrap justify-center rounded-md box-shadow-light`}  data-layout="grid-wrapper" data-spacing="none">
+                    <div className="grid-layout container padding-block-5 padding-inline-4" data-layout="grid-wrapper" data-overflow="visible">
                         { options?.showPrevBtn && <div className="flex"><PreviousBtn/></div>}
                         { (options?.showBackBtn || options?.showItemsLimit) &&
                             <div className="flex justify-space-between margin-block-end-4">
                                 { options?.showBackBtn &&
                                     (
-                                        <Button className="btn-transparent margin-block-2" onClick={() => window.history.back()}>
+                                        <Button className="btn--transparent margin-block-2" onClick={() => window.history.back()}>
                                             <FontAwesomeIcon icon={faChevronLeft} /> Back
                                         </Button>
                                     )
@@ -59,7 +59,7 @@ const ContentSection = (
                                 }
                              </div>
                         }
-                        <div className={`landscape-grid ${contentConfig?.styles?.grid || ''}`}>
+                        <div className={`grid-layout__landscape ${contentConfig?.styles?.grid || ''}`}>
                            <SkeletonLoader
                                 isPending={isPending}
                                 isFetching={isFetching}
@@ -74,12 +74,13 @@ const ContentSection = (
                                             isBookmarked={isBookmarked}
                                             navUrl={navUrl}
                                             isDetailed={isDetailed}
+                                            cardStyles={contentConfig?.styles}
                                         />
                                     ))
                                 ) : (
-                                    <div>
+                                    <div className="padding-8 text-center">
                                         <h2>{emptyList.heading}</h2>
-                                        <p>{emptyList.message} {emptyList.icon}</p>
+                                        <p>{emptyList.message} <FontAwesomeIcon icon={emptyList.icon}/></p>
                                     </div>
                                 )}
                            </SkeletonLoader>

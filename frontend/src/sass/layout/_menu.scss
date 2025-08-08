@@ -1,100 +1,113 @@
 @use "../abstracts" as abs;
 @use "../abstracts" as *;
 
-header {
-  & nav.navbar {
+.navbar {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  min-width: 260px;
+  overflow: hidden;
+  background-color: var(--clr-main-300);
+  padding: 0.5rem 2rem 0.5rem 2rem;
+  border-bottom: 1px solid var(--clr-star-300);
+
+  &__brand-box {
     display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    min-width: 260px;
-    overflow: hidden;
-    background-color: var(--clr-main-300);
-    padding: 0.5rem 2rem 0.5rem 2rem;
-    border-bottom: 1px solid var(--clr-star-300);
-    & .brand-box{
-      display: flex;
-      align-items: center;
-      & img{
-        width: 50px;
-        height: 50px;
-        text-decoration: none;
-        box-sizing: border-box;
-        border: 2px solid var(--clr-dark-cosmos-300);
-        border-radius: 0.5rem;
-        box-shadow: 0 0.3rem 0 var(--clr-dark-cosmos-300);
-        &:active{
-          box-shadow: 0 0 0;
-          transform: translateY(3px);
-        }
-      }
-      & div.navbar-brand {
-        display: inline-block;
-        text-align: center;
-        padding: 5px;
-        & h1{
-          @include abs.font($font-size: var(--fs-400), $font-weight: 900, $color: var(--clr-dark-cosmos-300), $font-family: $font-family-accent);
-        }
-      }
+    align-items: center;
+  }
+
+  &__image-link {
+    width: 50px;
+    height: 50px;
+    text-decoration: none;
+    box-sizing: border-box;
+    border: 2px solid var(--clr-dark-cosmos-300);
+    border-radius: 0.5rem;
+    box-shadow: 0 0.3rem 0 var(--clr-dark-cosmos-300);
+
+    &:active {
+      box-shadow: 0 0 0;
+      transform: translateY(3px);
     }
-    & .hamb-label {
-      position: relative;
-      display: block;
-      cursor: pointer;
-      transition: transform 0.5s;
-      transform: rotateZ(-360deg);
+  }
 
-      & .hamb-line {
-        display: block;
-        position: inherit;
-        background: var(--clr-dark-cosmos-300);
-        height: 6px;
-        width: 40px;
-        border: 1px solid var(--clr-dark-cosmos-300);
-        border-radius: 10px;
-        transition: all 0.1s ease-out;
+  &__brand-icon {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
 
-        &.line1 {
-          top: 10px;
+  &__brand-title {
+    display: inline-block;
+    text-align: center;
+    padding: 5px;
+
+    & h1 {
+      @include abs.font($font-size: var(--fs-400), $font-weight: 900, $color: var(--clr-dark-cosmos-300), $font-family: $font-family-accent);
+    }
+  }
+
+  &__hamburger-checkbox {
+    display: none;
+    &:checked {
+      & ~ .navbar__hamburger-label {
+        transition: transform 0.5s;
+        transform: rotateZ(360deg);
+
+        & .navbar__hamburger-line--top {
+          transform: rotate(45deg);
+          top: 25px;
         }
 
-        &.line2 {
-          top: 18px;
+        & .navbar__hamburger-line--middle {
+          border-color: transparent;
+          background-color: transparent;
         }
 
-        &.line3 {
-          top: 26px;
+        & .navbar__hamburger-line--bottom {
+          transform: rotate(-45deg);
+          top: 13px;
         }
       }
-    }
 
-    .hamb-checkbox {
-      display: none;
-      &:checked {
-        & ~ .hamb-label {
-          transition: transform 0.5s;
-          transform: rotateZ(360deg);
-
-          & .line1 {
-            transform: rotate(45deg);
-            top: 25px;
-          }
-          & .line2 {
-            border-color: transparent;
-            background-color: transparent;
-          }
-          & .line3 {
-            transform: rotate(-45deg);
-            top: 13px;
-          }
-        }
-        & ~ div.nav-list-container {
-          height: fit-content;
-        }
+      & ~ .navbar__nav-container {
+        height: fit-content;
       }
     }
   }
 
-  div.nav-list-container {
+  &__hamburger-label {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    transition: transform 0.5s;
+    transform: rotateZ(-360deg);
+  }
+
+  &__hamburger-line {
+    display: block;
+    position: inherit;
+    background: var(--clr-dark-cosmos-300);
+    height: 6px;
+    width: 40px;
+    border: 1px solid var(--clr-dark-cosmos-300);
+    border-radius: 10px;
+    transition: all 0.1s ease-out;
+
+    &--top {
+      top: 10px;
+    }
+
+    &--middle {
+      top: 18px;
+    }
+
+    &--bottom {
+      top: 26px;
+    }
+  }
+
+  &__nav-container {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -103,97 +116,126 @@ header {
     margin: 0;
     interpolate-size: allow-keywords;
     transition: ease-in-out height 0.2s;
-    & > ul {
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: center;
-      list-style-type: none;
-      padding: 10px;
-      & > li.nav-item {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        width: 100%;
-          & > a {
-            display: block;
-            padding: 10px 10px;
-            border-radius: 10px;
-            text-decoration: none;
-            margin: 0;
-            width: 100%;
-            @include abs.font($font-size: var(--fs-300), $color: var(--clr-dark-cosmos-300));
-            &:hover {
-              color: var(--clr-star-100);
-              transition: ease-in-out 0.2s;
-            }
-            &.active{
-              color: var(--clr-star-100);
-            }
-          }
-        }
-      }
+  }
+
+  &__nav-list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    list-style-type: none;
+    padding: 10px;
+  }
+
+  &__nav-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  &__nav-link {
+    display: block;
+    padding: 10px 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    margin: 0;
+    width: 100%;
+    @include abs.font($font-size: var(--fs-300), $color: var(--clr-dark-cosmos-300));
+
+    &:hover {
+      color: var(--clr-star-100);
+      transition: ease-in-out 0.2s;
     }
-    div.user-option {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      cursor: pointer;
-      & > button, a {
-        display: flex;
-        justify-content: center;
-        padding: 10px;
-        border-radius: 50px;
-        text-decoration: none;
-        transition: ease-in-out 0.2s;
-        margin: 1px 5px;
-        @include abs.font($font-size: var(--fs-500), $color:  var(--clr-dark-cosmos-300));
-        &:hover {
-          transition: ease-in-out 0.2s;
-          transform: scale(1.2);
-        }
-      }
+
+    &.active {
+      color: var(--clr-star-100);
     }
   }
 
+  &__user-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+  }
 
-@include abs.mq(small){
-  header nav.navbar .brand-box{
-    & img{
+  &__user-button {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: ease-in-out 0.2s;
+    margin: 1px 5px;
+    @include abs.font($font-size: var(--fs-500), $color: var(--clr-dark-cosmos-300));
+
+    &:hover {
+      transition: ease-in-out 0.2s;
+      transform: scale(1.2);
+    }
+  }
+
+  &__user-link {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: ease-in-out 0.2s;
+    margin: 1px 5px;
+    @include abs.font($font-size: var(--fs-500), $color: var(--clr-dark-cosmos-300));
+
+    &:hover {
+      transition: ease-in-out 0.2s;
+      transform: scale(1.2);
+    }
+  }
+
+}
+
+@include abs.mq(small) {
+  .navbar {
+    &__image-link {
       width: 70px;
       height: 70px;
-      text-decoration: none;
     }
-    & div.navbar-brand h1{
+
+    &__brand-title h1 {
       font-size: var(--fs-600);
     }
-  }
-  header nav.navbar .hamb-label{
-    padding: 10px 10px;
+
+    &__hamburger-label {
+      padding: 10px 10px;
+    }
   }
 }
 
 @include abs.mq(xl) {
-  header nav.navbar {
+  .navbar {
     flex-flow: row;
     justify-content: flex-start;
-    label.hamb-label {
+
+    &__hamburger-label {
       display: none;
     }
-    div.nav-list-container {
+
+    &__nav-container {
       display: flex;
       justify-content: flex-end;
       align-items: center;
       padding: 2.5rem 0;
       max-height: 0;
       width: 100%;
-      & > ul {
-        display: flex;
-        flex-flow: row;
-        list-style-type: none;
-        white-space: nowrap;
-      }
+    }
+
+    &__nav-list {
+      display: flex;
+      flex-flow: row;
+      list-style-type: none;
+      white-space: nowrap;
     }
   }
 }
+

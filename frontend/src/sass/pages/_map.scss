@@ -1,24 +1,56 @@
 @use "../abstracts/index" as abs;
 
-.map-container {
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  & div.leaflet-popup-content{
-    min-width: fit-content;
-    max-width: 10rem;
-  }
-  & div.leaflet-popup-container{
-    div.card-img-box img{
-      width: 10rem;
-      max-height: 10rem;
-      object-fit: contain;
+.map {
+  &__container {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    & div.leaflet-popup-content-wrapper{
+      overflow: hidden;
+      padding: 0;
+    }
+    & a.leaflet-popup-close-button{
+      color: var(--clr-star-300);
+      &:hover{
+        color: var(--clr-dark-cosmos-300);
+      }
+    }
+    & div.leaflet-popup-content {
+      min-width: fit-content;
+      max-width: 14rem;
+      margin: 0;
     }
   }
-  & div.location-dot-wrapper{
+  &__media{
+    display: flex;
+    justify-content: center;
+  }
+  &__image {
+    width: 14rem;
+    max-height: 10rem;
+    object-fit: contain;
+  }
+  &__info-box{
+    margin-block: 0.5rem;
+    margin-inline: 0.4rem;
+    text-align: center;
+  }
+  &__title{
+    font-size: 0.925rem;
+    margin-block-end: 0.25rem;
+  }
+  &__actions {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    & a {
+      color: var(--clr-dark-cosmos-300);
+    }
+  }
+  &__launch-pad{
     background: rgba(255, 255, 255, 0.8);
     padding: 0.5rem 0.75rem;
     border-radius: 0.5rem;

@@ -1,7 +1,13 @@
-.tooltip-wrapper {
+.tooltip {
   position: relative;
   display: inline-block;
-  & .tooltiptext {
+
+  &:hover .tooltip__text,
+  &:active .tooltip__text {
+    visibility: visible;
+  }
+
+  &__text {
     visibility: hidden;
     width: 120px;
     background-color: var(--clr-secondary-300);
@@ -15,6 +21,7 @@
     left: 50%;
     margin-left: -60px;
     font-size: 0.8rem;
+
     &::after {
       content: "";
       position: absolute;
@@ -26,10 +33,4 @@
       border-color: var(--clr-secondary-300) transparent transparent transparent;
     }
   }
-  &:hover .tooltiptext,
-  &:active .tooltiptext{
-    visibility: visible;
-  }
 }
-
-

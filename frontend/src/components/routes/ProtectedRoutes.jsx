@@ -8,6 +8,5 @@ export function ProtectedRoutes({ children }) {
         return <Navigate to="/launches" />;
     }
 
-
     return <>{children}</>;
 }

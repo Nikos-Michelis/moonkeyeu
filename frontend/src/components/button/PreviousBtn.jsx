@@ -14,7 +14,7 @@ const PreviousBtn = () => {
         setSearchParams(searchParams, { replace: true });
     };
     return (
-        <Button className="btn-transparent btn-previous margin-block-end-2" onClick={handleLaunchState}>
+        <Button className="btn--transparent btn-previous margin-block-end-2" onClick={handleLaunchState}>
             <FontAwesomeIcon icon={faClockRotateLeft} /> {upcoming === "true" ? "Previous" : "Upcoming"}
         </Button>
     );

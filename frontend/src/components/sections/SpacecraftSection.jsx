@@ -8,7 +8,6 @@ const SpacecraftSection = ({ spacecraft, isFetching, isError }) => {
         component: SkeletonLandscapeLoader,
         styles: {
             wrapper: "medium-wrapper",
-            img: "small-img",
             section: "spacecraft-articles",
         },
     };

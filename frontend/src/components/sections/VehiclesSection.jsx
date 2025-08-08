@@ -44,9 +44,9 @@ const VehiclesSection = () => {
     return (
         <section className="vehicles-section">
             <div className="flex justify-center margin-block-end-15">
-                <div className="container __portrait flex justify-center overlay rounded-md" data-type="wide" data-spacing="none">
+                <div className="grid-layout--col container container--light-overlay flex justify-center rounded-md" data-layout="grid-wrapper" data-spacing="none">
                     <div className="container" data-type="full-bleed" data-spacing="none">
-                        <div className="portrait-grid __vehicle">
+                        <div className="grid-layout__portrait-vehicle">
                             {sections.map((section, index) => (
                                 <VehicleOptionCard
                                     key={index}

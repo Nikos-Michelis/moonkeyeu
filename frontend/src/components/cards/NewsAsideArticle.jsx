@@ -1,14 +1,14 @@
 import React from "react";
 import Img from "@/components/utils/Img.jsx";
-const NewsArticle = ({imageSrc, title, author, url}) => {
+const NewsAsideArticle = ({imageSrc, title, author, url}) => {
     return (
-        <article className="portrait-card-wrapper small-card flex flex-column margin-block-4 bg-dark-cosmos-300">
-            <div className="portrait-card-container flex flex-column">
-                <a href={url} className="sidebar-image-container" target="_blank" rel="noopener noreferrer">
+        <article className="portrait-card margin-block-4">
+            <div className="portrait-card__container portrait-card__container--small bg-dark-cosmos-300 flex flex-column">
+                <a href={url} className="portrait-card__image-link" target="_blank" rel="noopener noreferrer">
                     <Img
                         src={imageSrc}
                         alt={title || "default"}
-                        className={`sidebar-image`}
+                        className={`portrait-card__sidebar-img`}
                         defaultSrc={`${import.meta.env.VITE_CLOUDFRONT_URL}/assets/logo/moonkeyeu-logo.svg`}
                     />
                 </a>
@@ -23,4 +23,4 @@ const NewsArticle = ({imageSrc, title, author, url}) => {
     );
 };
 
-export default NewsArticle;
+export default NewsAsideArticle;

@@ -1,3 +1,4 @@
+import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleExclamation} from "@fortawesome/free-solid-svg-icons";
 
@@ -26,23 +27,23 @@ const ErrorBox = ({ errors, apiError }) => {
         ));
 
     return (
-            <div className="response-error-wrapper">
-                <div className="response-error-container">
-                    <div className="error-circle">
-                        <FontAwesomeIcon icon={faCircleExclamation} />
-                    </div>
-                    <ul>
-                        {renderMessages(formErrorMessages)}
-                        {apiValidationErrorMessages.flatMap((error, index) =>
-                            Object.entries(error).map(([field, errorMessage]) => (
-                                <li key={`${field}-${index}`}>
-                                    <span className="response-error-message">{errorMessage}</span>
-                                </li>
-                            ))
-                        )}
-                    </ul>
+        <div className="response-error-wrapper">
+            <div className="response-error-container">
+                <div className="error-circle">
+                    <FontAwesomeIcon icon={faCircleExclamation} />
                 </div>
+                <ul>
+                    {renderMessages(formErrorMessages)}
+                    {apiValidationErrorMessages.flatMap((error, index) =>
+                        Object.entries(error).map(([field, errorMessage]) => (
+                            <li key={`${field}-${index}`}>
+                                <span className="response-error-message">{errorMessage}</span>
+                            </li>
+                        ))
+                    )}
+                </ul>
             </div>
+        </div>
     );
 
 };

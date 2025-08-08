@@ -1,23 +1,28 @@
 @use "../abstracts/index" as abs;
 
-div.pagination-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  & span.paging-text {
+.pagination {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__text {
     text-decoration: underline var(--clr-main-300);
     margin: 0.625rem;
     @include abs.font($font-size: 1rem, $color: var(--clr-main-300));
+
     & span {
       color: var(--clr-main-300);
       font-weight: bold;
     }
   }
-}
-@include abs.mq(medium){
-  div.pagination-container{
-    flex-direction: row;
+
+  @include abs.mq(medium) {
+    &__container {
+      flex-direction: row;
+    }
   }
 }

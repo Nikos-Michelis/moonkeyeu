@@ -9,21 +9,19 @@ const FallbackComponent = ({code = "", heading= "", message= "", error= ""}) =>{
             <Head
                 title={code.toString()}
             />
-            <section className="error-section">
-                <div className="container __error flex" data-height="full">
-                    <div className="container flex flex-column justify-center text-center" data-type="wide">
-                        {code && <h1>{code}</h1>}
-                        {heading &&
-                            <div>
-                                <FontAwesomeIcon icon={faGears} />
-                                <h1 className="heading-message">{heading}</h1>
-                            </div>
-                        }
-                        <hr className="hr-5-xs" />
-                        {message && <h2>{message}</h2>}
-                        {error && <p>{error}</p>}
-                        <hr className="hr-5-xs" />
-                    </div>
+            <section className="error">
+                <div className="container flex flex-column justify-center text-center" data-type="wide" data-height="full">
+                    {code && <h1 className="error__code">{code}</h1>}
+                    {heading &&
+                        <div>
+                            <FontAwesomeIcon icon={faGears} />
+                            <h1 className="error__heading">{heading}</h1>
+                        </div>
+                    }
+                    <hr className="hr-75-xs" />
+                    {message && <h2 className="error__message">{message}</h2>}
+                    {error && <p className="error_details">{error}</p>}
+                    <hr className="hr-75-xs" />
                 </div>
             </section>
         </>

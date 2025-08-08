@@ -77,59 +77,59 @@ function LaunchPad(){
                 isPending={queryData.isFetching}
                 isError={queryData.isError}
                 contentConfig={contentConfig}>
-                <section className="article-section">
-                    <div className="container __article flex justify-center" data-type="wide" data-spacing="none">
-                        <div className="container __article overlay flex flex-column align-center" data-type="fixed" data-spacing="none">
+                <section className="article">
+                    <div className="container flex justify-center" data-type="wide" data-spacing="none">
+                        <div className="container container--light-overlay article__content flex flex-column align-center" data-type="fixed" data-spacing="none">
                             <div className="container flex justify-start padding-block-start-7 padding-block-end-2">
-                                <Button className="btn-transparent" onClick={() => window.history.back()}>
+                                <Button className="btn--transparent" onClick={() => window.history.back()}>
                                     <FontAwesomeIcon icon={faChevronLeft} /> Back
                                 </Button>
                             </div>
-                            <div className="container __overview flex flex-column justify-center align-center bg-dark-cosmos-300" data-type="full-bleed">
-                                <div className="image-box">
+                            <div className="container article__overview flex flex-column justify-center align-center bg-dark-cosmos-300" data-type="full-bleed">
+                                <div className="article__image-box">
                                     <Img
                                         src={data?.map_image}
                                         alt={data?.name || "default"}
-                                        className="card-img"
+                                        className="article__image"
                                         defaultSrc={`${import.meta.env.VITE_CLOUDFRONT_URL}/assets/logo/moonkeyeu-logo.svg`}
                                     />
                                 </div>
-                                <div className="overview-info-wrapper container flex flex-column justify-center padding-2" data-type="full-bleed">
-                                    <div className="article-detail-container">
-                                        <h3 className="launchpad-name">{data?.name}</h3>
-                                        <h5>{data?.location?.name}</h5>
-                                        <div className="panel-body">
-                                            <hr />
-                                            <div className="panel-info-wrapper">
-                                                <div className="panel-info-container">
-                                                    <div className="detail-wrapper fs-small-200 clr-star-300 padding-2">
-                                                        <p className="info-panel-row">Active</p>
-                                                        <p className="info-panel-row">{checkValue(booleanConverter(data?.active))}</p>
-                                                    </div>
-                                                    <div className="detail-wrapper fs-small-200 clr-star-300 padding-2">
-                                                        <p className="info-panel-row">Total launches</p>
-                                                        <p className="info-panel-row">{data?.total_launch_count}</p>
-                                                    </div>
+                                <div className="container flex flex-column justify-center padding-2" data-type="full-bleed">
+                                    <div className="article__title-box">
+                                        <h3 className="article__title">{data?.name}</h3>
+                                        <h5 className="article__subtitle">{data?.location?.name}</h5>
+                                    </div>
+                                    <div className="panel">
+                                        <hr className="bg-star-300"/>
+                                        <div className="panel__wrapper">
+                                            <div className="panel__container">
+                                                <div className="panel__detail-box fs-small-200 clr-star-300 padding-2">
+                                                    <p className="panel__text">Active</p>
+                                                    <p className="panel__text">{checkValue(booleanConverter(data?.active))}</p>
                                                 </div>
-                                                <hr/>
-                                                {data?.description &&
-                                                    <>
-                                                        <div className="panel-info-container">
-                                                            <div className="detail-wrapper clr-star-300 paddin-1">
-                                                                <p className="description-panel padding-block-2">{data?.description}</p>
-                                                            </div>
-                                                        </div>
-                                                        <hr/>
-                                                    </>
-                                                }
+                                                <div className="panel__detail-box fs-small-200 clr-star-300 padding-2">
+                                                    <p className="panel__text">Total launches</p>
+                                                    <p className="panel__text">{data?.total_launch_count}</p>
+                                                </div>
                                             </div>
+                                            <hr className="bg-star-300"/>
+                                            {data?.description &&
+                                                <>
+                                                    <div className="panel__container">
+                                                        <div className="panel__detail-box clr-star-300 padding-1">
+                                                            <p className="panel__description">{data?.description}</p>
+                                                        </div>
+                                                    </div>
+                                                    <hr className="bg-star-300"/>
+                                                </>
+                                            }
                                         </div>
                                     </div>
                                     <div className="container flex justify-space-evenly align-center padding-block-2" data-type="full-bleed" data-overflow="visible">
                                         { data?.info_url ? (
                                             <div className="info">
                                                 <LinkButton
-                                                    className="btn-transparent btn-instragram"
+                                                    className="btn--transparent btn-instragram"
                                                     to={data.info_url}
                                                     isExternal={true}
                                                 >
@@ -140,7 +140,7 @@ function LaunchPad(){
                                             <Tooltip message="No Info Available">
                                                 <div className="info">
                                                     <LinkButton
-                                                        className="btn-transparent btn-wikipedia"
+                                                        className="btn--transparent btn-wikipedia"
                                                         isExternal={true}
                                                         disabled={true}
                                                     >
@@ -152,7 +152,7 @@ function LaunchPad(){
                                         { data?.wiki_url ? (
                                             <div className="wiki">
                                                 <LinkButton
-                                                    className="btn-transparent btn-wiki"
+                                                    className="btn--transparent btn-wiki"
                                                     to={data?.wiki_url}
                                                     isExternal={true}
                                                 >
@@ -163,7 +163,7 @@ function LaunchPad(){
                                             <Tooltip message="No Wiki Available">
                                                 <div className="wiki">
                                                     <LinkButton
-                                                        className="btn-transparent btn-wikipedia"
+                                                        className="btn--transparent btn-wikipedia"
                                                         isExternal={true}
                                                         disabled={true}
                                                     >
@@ -174,7 +174,7 @@ function LaunchPad(){
                                         )}
                                         <div>
                                             <Tooltip message={copied ? "Copied!" :"Copied to clipboard!"}>
-                                                <Button className="btn-transparent" onClick={handleShare} disabled={copied}>
+                                                <Button className="btn--transparent" onClick={handleShare} disabled={copied}>
                                                     <FontAwesomeIcon icon={faShareFromSquare} />
                                                 </Button>
                                             </Tooltip>
@@ -182,18 +182,20 @@ function LaunchPad(){
                                     </div>
                                 </div>
                             </div>
-                            <div className="article-info-container container flex flex-column" data-type="full-bleed">
-                                <section className="location-section">
-                                    <div className="container flex flex-wrap justify-center align-center padding-block-8" data-type="full-bleed">
-                                        <div className="flex justify-space-between margin-block-2">
-                                            <p>{data?.location?.description}</p>
+                            <div className="article__info-container container flex flex-column" data-type="full-bleed">
+                                {data?.location?.description &&
+                                    <section className="location-section">
+                                        <div className="container flex flex-wrap justify-center align-center padding-block-8" data-type="full-bleed">
+                                            <div className="flex justify-space-between margin-block-2">
+                                                <p>{data?.location?.description}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </section>
+                                    </section>
+                                }
                                 <Agencies agencies={data?.agencies}/>
-                                <Launch launches={launches} navUrl={'/launches/'} pagination={pagination} hasPagination={true}/>
+                                {launches.length > 0 && <Launch launches={launches} navUrl={'/launches/'} pagination={pagination} hasPagination={true}/>}
                                 <div className="padding-block-end-4">
-                                    <hr className="hr-6-md"/>
+                                    <hr className="hr-90-md"/>
                                 </div>
                             </div>
                         </div>

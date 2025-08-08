@@ -25,7 +25,13 @@ import useClipboard from "@/hooks/util/useClipboard.jsx";
 import JsonLdEvent from "@/components/seo/jsonld/JsonLdEvent.jsx";
 import RelatedPrograms from "@/components/article-details/RelatedPrograms.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTriangleExclamation, faChevronLeft, faShareFromSquare, faLocationDot, faCalendarDays } from '@fortawesome/free-solid-svg-icons';
+import {
+    faTriangleExclamation,
+    faChevronLeft,
+    faShareFromSquare,
+    faLocationDot,
+    faCalendarDays,
+} from '@fortawesome/free-solid-svg-icons';
 
 function Launch(){
     const baseUrl = `${import.meta.env.VITE_BACKEND_BASE_URL}/public/launch`;
@@ -85,91 +91,91 @@ function Launch(){
                 isPending={queryData.isFetching}
                 isError={queryData.isError}
                 contentConfig={contentConfig}>
-                <section className="article-section">
-                    <div className="container __article flex justify-center" data-type="wide" data-spacing="none">
-                        <div className="container __article overlay flex flex-column align-center" data-type="fixed" data-spacing="none">
-                                <div className="container flex justify-start padding-block-start-7 padding-block-end-2">
-                                    <Button
-                                        className="btn-transparent"
-                                        onClick={() => window.history.back()}
-                                    >
-                                        <FontAwesomeIcon icon={faChevronLeft} /> Back
-                                    </Button>
+                <section className="article">
+                    <div className="container flex justify-center" data-type="wide" data-spacing="none">
+                        <div className="container container--light-overlay article__content flex flex-column align-center" data-type="fixed" data-spacing="none">
+                            <div className="container flex justify-start padding-block-start-7 padding-block-end-2">
+                                <Button
+                                    className="btn--transparent"
+                                    onClick={() => window.history.back()}
+                                >
+                                    <FontAwesomeIcon icon={faChevronLeft} /> Back
+                                </Button>
+                            </div>
+                            <div className="container article__overview flex flex-column justify-center align-center bg-dark-cosmos-300" data-type="full-bleed">
+                                {zonedDateTime.invalid === null && zonedDateTime > Date.now() ? (
+                                    <CountdownTimer net={zonedDateTime} timerStyle="counter--container"/>
+                                ) : null }
+                                <div className="article__image-box">
+                                    <Img
+                                        src={data.rocket?.configuration?.image?.image_url}
+                                        alt={data.rocket?.configuration?.image?.name || "default"}
+                                        className="article__image"
+                                        defaultSrc={`${import.meta.env.VITE_CLOUDFRONT_URL}/assets/logo/moonkeyeu-logo.svg`}
+                                    />
                                 </div>
-                                <div className="container __overview flex flex-column justify-center align-center bg-dark-cosmos-300" data-type="full-bleed">
-                                    {zonedDateTime.invalid === null && zonedDateTime > Date.now() ? (
-                                        <CountdownTimer net={zonedDateTime} timerStyle="article"/>
-                                    ) : null }
-                                    <div className="image-box">
-                                        <Img
-                                            src={data.rocket?.configuration?.image?.image_url}
-                                            alt={data.rocket?.configuration?.image?.name || "default"}
-                                            className="card-img"
-                                            defaultSrc={`${import.meta.env.VITE_CLOUDFRONT_URL}/assets/logo/moonkeyeu-logo.svg`}
-                                        />
+                                <div className="container flex flex-column justify-center padding-2" data-type="full-bleed">
+                                    <div className="article__title-box">
+                                        <h3 className="article__title">{data?.fullname}</h3>
+                                        <h5 className="article__subtitle">{data.launch_provider?.name}</h5>
                                     </div>
-                                    <div className="overview-info-wrapper container flex flex-column justify-center padding-2" data-type="full-bleed">
-                                        <div className="article-detail-container">
-                                            <h3 className="rocket-name">{data?.fullname}</h3>
-                                            <h5 className="rocket-manufacturer">{data.launch_provider?.name}</h5>
-                                            <hr className="hr-7-xs"/>
-                                            <div className="article-detail-box launch-status">
-                                                <FontAwesomeIcon icon={faTriangleExclamation} />
-                                                <p className="status-text">{data?.status}</p>
-                                            </div>
-                                            <div className="article-detail-box launch-schedule">
-                                                <FontAwesomeIcon icon={faCalendarDays} />
-                                                <p className="launch-date">{formattedZonedDateTime}</p>
-                                            </div>
-                                            <div className="article-detail-box launch-location">
-                                                <FontAwesomeIcon icon={faLocationDot} />
-                                                <p className="launch-location">{data.pad?.location?.name}</p>
-                                            </div>
-                                            <hr className="hr-7-xs"/>
-                                            <div className="container flex justify-space-evenly align-center padding-block-2" data-type="full-bleed" data-overflow="visible">
-                                                <Tooltip message={copied ? "Copied!" :"Copied to clipboard!"}>
-                                                    <Button className="btn-transparent" onClick={handleShare} disabled={copied}>
-                                                        <FontAwesomeIcon icon={faShareFromSquare} />
-                                                    </Button>
-                                                </Tooltip>
-                                            </div>
-                                        </div>
+                                    <hr className="hr-100-xs hr-my-xs"/>
+                                    <div className="article__detail-box">
+                                        <FontAwesomeIcon icon={faTriangleExclamation} />
+                                        <p className="article__text">{data?.status}</p>
                                     </div>
-                                </div>
-                                <div className="article-info-container container flex flex-column" data-type="full-bleed">
-                                    {orderedVideo?.videoUrl && <YoutubeVideo videoUrl={orderedVideo?.videoUrl} />}
-                                    <Trajectory flightclub_url={data.flightclub_url}/>
-                                    <Agency launchProvider={data.launch_provider}/>
-                                    {data?.mission &&
-                                        <Mission
-                                            mission={data.mission || {}}
-                                            launchCost={rocketConfig.launch_cost}
-                                            missionPatches={data.mission_patches || []}
-                                        />
-                                    }
-                                    {spacecraftStage.length > 0 &&
-                                        <Spacecraft stage={spacecraftStage[0] || []}/>
-                                    }
-                                    {spacecraftStage[0] &&
-                                        spacecraftStage[0]?.crew?.length > 0 &&
-                                        <Crew key={data.rocket.id} crew={spacecraftStage[0].crew || []}/>
-                                    }
-                                    <Location pad={data?.pad}/>
-                                    {rocketConfig && <Rocket {...rocketConfig}/>}
-                                    {launcherStage.length > 0 && <Boosters stage={launcherStage} />}
-                                    {programs.length > 0 && <RelatedPrograms programs={programs} />}
-                                    {newsArticles.length > 0 && <RelatedNews articles={newsArticles}/>}
-                                    <section className="last-updated-section">
-                                        <div className="flex flex-wrap justify-center align-center padding-block-start-8">
-                                            <p>Last Updated: {formattedZonedDateTime}</p>
-                                        </div>
-                                    </section>
-                                    <div className="padding-block-end-4">
-                                        <hr className="hr-6-md"/>
+                                    <div className="article__detail-box">
+                                        <FontAwesomeIcon icon={faCalendarDays} />
+                                        <p className="article__text">{formattedZonedDateTime}</p>
+                                    </div>
+                                    <div className="article__detail-box">
+                                        <FontAwesomeIcon icon={faLocationDot} />
+                                        <p className="article__text">{data.pad?.location?.name}</p>
+                                    </div>
+                                    <hr className="hr-100-xs hr-my-xs"/>
+                                    <div className="container flex justify-space-evenly align-center padding-block-2" data-type="full-bleed" data-overflow="visible">
+                                        <Tooltip message={copied ? "Copied!" :"Copied to clipboard!"}>
+                                            <Button className="btn--transparent" onClick={handleShare} disabled={copied}>
+                                                <FontAwesomeIcon icon={faShareFromSquare} />
+                                            </Button>
+                                        </Tooltip>
                                     </div>
                                 </div>
                             </div>
+                            <div className="article__info-container container flex flex-column" data-type="full-bleed">
+                                {orderedVideo?.videoUrl && <YoutubeVideo videoUrl={orderedVideo?.videoUrl} />}
+                                <Trajectory flightclub_url={data.flightclub_url}/>
+                                <Agency launchProvider={data.launch_provider}/>
+                                {data?.mission &&
+                                    <Mission
+                                        mission={data.mission || {}}
+                                        launchCost={rocketConfig.launch_cost}
+                                        missionPatches={data.mission_patches || []}
+                                    />
+                                }
+                                {spacecraftStage.length > 0 &&
+                                    <Spacecraft stage={spacecraftStage[0] || []}/>
+                                }
+                                {spacecraftStage[0] &&
+                                    spacecraftStage[0]?.crew?.length > 0 &&
+                                    <Crew key={data.rocket.id} crew={spacecraftStage[0].crew || []}/>
+                                }
+                                <Location pad={data?.pad}/>
+                                {rocketConfig && <Rocket {...rocketConfig}/>}
+                                {launcherStage.length > 0 && <Boosters stage={launcherStage} />}
+                                {programs.length > 0 && <RelatedPrograms programs={programs} />}
+                                {newsArticles.length > 0 && <RelatedNews articles={newsArticles}/>}
+                                <section className="last-update-section">
+                                    <div className="flex flex-wrap justify-center align-center padding-block-start-8">
+                                        <p>Last Updated: {formattedZonedDateTime}</p>
+                                    </div>
+                                </section>
+                                <div className="padding-block-end-4">
+                                    <hr className="hr-90-md"/>
+                                </div>
+                            </div>
                         </div>
+                    </div>
                 </section>
             </SkeletonLoader>
         </>

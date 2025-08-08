@@ -1,50 +1,45 @@
 @use "../abstracts/index" as abs;
 
-div.toolbar-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  & .search-heading-container {
+.toolbar {
+  &__container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    width: 100%;
-    margin-bottom: 1rem;
-    color: var(--clr-star-300);
-    & h2 {
-      text-transform: capitalize;
-      font-weight: bold;
-      text-align: center;
-      & svg {
-        padding: 0.5rem;
-      }
-    }
+    align-items: center;
   }
-  & div.tools-container {
+
+  &__tools {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 2rem;
   }
-  & .toolbar-option{
+
+  &__wrapper {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     background-color: var(--clr-star-200);
     border-radius: 0.3rem;
     box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
-    & .select-option-container {
-      box-sizing: inherit;
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: center;
-      height: auto;
-      gap: 10px;
-    }
   }
-}
-@include abs.mq(xl){
-  div.toolbar-container div.toolbar-option {
-    width: 60%;
+
+  &__options {
+    box-sizing: inherit;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    height: auto;
+    gap: 10px;
+  }
+
+  &__actions{
+    width: 100%;
+  }
+
+  @include abs.mq(xl) {
+    &__wrapper {
+      width: 60%;
+    }
   }
 }

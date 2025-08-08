@@ -1,7 +1,7 @@
 @use "../abstracts" as abs;
 
-footer.info_section {
- display: flex;
+.footer {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -9,82 +9,54 @@ footer.info_section {
   padding: 1rem;
   overflow: hidden;
   z-index: 1;
-  & .social_container{
-    padding: 2rem;
-    & .social_box{
-      @include abs.font($font-size: var(--fs-600));
-      & > a{
-        text-decoration: none;
-        padding: 0.5rem;
-        color: var(--clr-dark-cosmos-300);
-      }
+
+  &__social_box {
+    @include abs.font($font-size: var(--fs-600));
+
+    & > a {
+      text-decoration: none;
+      padding: 0.5rem;
+      color: var(--clr-dark-cosmos-300);
     }
   }
-  hr{
-    width: 35%;
-    box-sizing: border-box;
-    border-color: var(--clr-hr-800);
-  }
-  & div.info-text-container {
+
+  &__container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     width: 100%;
     margin-bottom: 1rem;
-
-    & div.info-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: start;
+    &--start {
+      align-items: flex-start;
+    }
+    &--center {
       align-items: center;
-      @include abs.font($font-size: var(--fs-200));
-      & a {
-        color: var(--clr-star-200);
-      }
     }
   }
 
-  & .footer_section{
-    width: 100%;
-    & p{
-      @include abs.font($font-size: var(--fs-300), $font-weight: 500);
-      text-align: center;
-      color: var(--clr-dark-cosmos-300);
-    }
+
+  &__info-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
     & a {
-      color: var(--clr-star-200);
+      @include abs.font($font-size: var(--fs-200), $color: var(--clr-star-200));
     }
-  }
-}
 
-@include abs.mq(small) {
-  .info_container {
-    justify-content: center;
-    & div.info_box {
-      align-items: flex-start;
+    & p {
+      @include abs.font($font-size: var(--fs-300), $font-weight: 400, $color:var(--clr-dark-cosmos-300));
     }
-  }
-}
 
-@include abs.mq(medium) {
-  .info_container {
-    justify-content: center;
-    & div.info_box {
-      max-width: 30%;
-      align-items: flex-start;
-      & div{
-        text-align: start;
-        height: 100%;
-      }
+    &--copyright {
+      @include abs.font($font-size: var(--fs-300), $font-weight: 500);
     }
   }
-}
-@include abs.mq(xl) {
-  .info_container {
-    justify-content: center;
-    & div.info_box {
-      max-width: 25%;
+
+  @include abs.mq(small) {
+    &__container {
+        align-items: center;
     }
   }
 }

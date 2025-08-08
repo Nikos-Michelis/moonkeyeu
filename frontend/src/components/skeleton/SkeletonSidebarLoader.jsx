@@ -1,11 +1,9 @@
 import React from 'react';
 const SkeletonSidebarLoader = () => {
     return (
-        <article className="portrait-card-wrapper small-card flex flex-column margin-block-2">
-            <div className="portrait-card-container flex flex-column">
-                <div className="sidebar-articles-list">
-                    <span className="card-loader"></span>
-                </div>
+        <article className="portrait-card margin-block-3">
+            <div className="portrait-card__container portrait-card__container--small">
+                <span className="card-loader"></span>
             </div>
         </article>
     );
