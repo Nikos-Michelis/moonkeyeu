@@ -1,6 +1,5 @@
 @use "../abstracts/sizes" as *;
 
-// Border radius
 @each $name, $radius in $common-values {
   .rounded#{if($name != "", "-#{$name}", "")} {
     border-radius: #{$radius};

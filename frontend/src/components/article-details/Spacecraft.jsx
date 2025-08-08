@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faShuttleSpace,
     faCircleInfo,
-    faSatellite,
     faHelicopterSymbol,
     faLocationDot
 } from '@fortawesome/free-solid-svg-icons';
@@ -26,93 +25,93 @@ const spacecraft = ({ stage }) =>{
     }
     return(
         <section className="spacecraft-section">
-            <div className="heading-box">
+            <div className="article__heading-box">
                 <FontAwesomeIcon icon={faShuttleSpace} />
                 <h2>Spacecraft</h2>
             </div>
-            <hr className="hr-7-sm bg-hr-600" />
-            <div className="container flex flex-wrap justify-center align-center padding-block-8" data-type="full-bleed" data-spacing="none">
-                <div className="img-box container flex flex-column justify-center align-center margin-block-start-5" data-type="full-bleed">
+            <hr className="hr-100-sm bg-hr-600" />
+            <div className="container flex flex-wrap justify-space-around align-center padding-block-8" data-type="full-bleed" data-spacing="none">
+                <div className="article__img-box margin-block-2">
                     <Img
                         src={configuration.images?.[0]?.image_url}
                         alt={configuration.images?.[0]?.name || "default"}
-                        className="article-img"
+                        className="article__img"
                         defaultSrc={`${import.meta.env.VITE_CLOUDFRONT_URL}/assets/logo/moonkeyeu-logo.svg`}
                     />
                 </div>
-                <div className="panel-body small">
-                    <h3 className="panel-title">{checkValue(configuration.name)}</h3>
-                    <hr className="hr-5-sm bg-hr-600" />
-                    <div className="panel-info-wrapper">
-                        <div className="panel-info-container">
-                            <div className="detail-wrapper fs-small-200 clr-star-300 padding-2">
-                                <p className="info-panel-row">Serial</p>
-                                <p className="info-panel-row">{checkValue(spacecraft.serial_number)}</p>
+                <div className="panel panel--small">
+                    <h3 className="panel__title">{checkValue(configuration.name)}</h3>
+                    <hr className="hr-75-sm bg-hr-600" />
+                    <div className="panel__wrapper">
+                        <div className="panel__container">
+                            <div className="panel__detail-box fs-small-200 clr-star-300 padding-2">
+                                <p className="panel__text">Serial</p>
+                                <p className="panel__text">{checkValue(spacecraft.serial_number)}</p>
                             </div>
-                            <div className="detail-wrapper fs-small-200 clr-star-300 padding-2">
-                                <p className="info-panel-row">Status</p>
-                                <p className="info-panel-row">{checkValue(spacecraft.status)}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="panel-info-wrapper">
-                        <div className="panel-info-container">
-                            <div className="detail-wrapper fs-small-200 clr-star-300 padding-2">
-                                <p className="info-panel-row">Crew Capacity</p>
-                                <p className="info-panel-row">{checkValue(configuration.crew_capacity)}</p>
-                            </div>
-                            <div className="detail-wrapper fs-small-200 clr-star-300 padding-2">
-                                <p className="info-panel-row">flights</p>
-                                <p className="info-panel-row">{checkValue()}</p>
+                            <div className="panel__detail-box fs-small-200 clr-star-300 padding-2">
+                                <p className="panel__text">Status</p>
+                                <p className="panel__text">{checkValue(spacecraft.status)}</p>
                             </div>
                         </div>
                     </div>
-                    <hr className="hr-5-sm bg-hr-600" />
-                    <div className="panel-info-wrapper">
-                        <div className="panel-info-container">
-                            <div className="detail-wrapper fs-small-200 clr-star-300 padding-2">
-                                <p className="info-panel-row">Landing Attempt</p>
-                                <p className="info-panel-row">{booleanConverter(checkValue(landing.attempt))}</p>
+                    <div className="panel__wrapper">
+                        <div className="panel__container">
+                            <div className="panel__detail-box fs-small-200 clr-star-300 padding-2">
+                                <p className="panel__text">Crew Capacity</p>
+                                <p className="panel__text">{checkValue(configuration.crew_capacity)}</p>
                             </div>
-                            <div className="detail-wrapper fs-small-200 clr-star-300 padding-2">
-                                <p className="info-panel-row">Type</p>
-                                <p className="info-panel-row">{checkValue(landingType.abbrev)}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="panel-info-wrapper">
-                        <div className="panel-info-container">
-                            <div className="detail-wrapper fs-small-200 clr-star-300 padding-2">
-                                <p className="info-panel-row">Landing Success</p>
-                                <p className="info-panel-row">{booleanConverter(checkValue(landing.success))}</p>
-                            </div>
-                            <div className="detail-wrapper fs-small-200 clr-star-300 padding-2">
-                                <p className="info-panel-row">Location</p>
-                                <p className="info-panel-row">{checkValue(landingZone.abbrev)}</p>
+                            <div className="panel__detail-box fs-small-200 clr-star-300 padding-2">
+                                <p className="panel__text">flights</p>
+                                <p className="panel__text">{checkValue()}</p>
                             </div>
                         </div>
                     </div>
-                    <hr className="hr-5-sm bg-hr-600" />
+                    <hr className="hr-75-sm bg-hr-600" />
+                    <div className="panel__wrapper">
+                        <div className="panel__container">
+                            <div className="panel__detail-box fs-small-200 clr-star-300 padding-2">
+                                <p className="panel__text">Landing Attempt</p>
+                                <p className="panel__text">{booleanConverter(checkValue(landing.attempt))}</p>
+                            </div>
+                            <div className="panel__detail-box fs-small-200 clr-star-300 padding-2">
+                                <p className="panel__text">Type</p>
+                                <p className="panel__text">{checkValue(landingType.abbrev)}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="panel__wrapper">
+                        <div className="panel__container">
+                            <div className="panel__detail-box fs-small-200 clr-star-300 padding-2">
+                                <p className="panel__text">Landing Success</p>
+                                <p className="panel__text">{booleanConverter(checkValue(landing.success))}</p>
+                            </div>
+                            <div className="panel__detail-box fs-small-200 clr-star-300 padding-2">
+                                <p className="panel__text">Location</p>
+                                <p className="panel__text">{checkValue(landingZone.abbrev)}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr className="hr-75-sm bg-hr-600" />
                     <div className="flex justify-center flex-wrap padding-block-start-4">
                         {configuration?.id ? (
-                            <div className="info">
-                                <LinkButton className="btn btn-primary" to={`/vehicles/spacecraft/${configuration?.id}`} >
+                            <div className="article__btn-info">
+                                <LinkButton className="btn btn--primary" to={`/vehicles/spacecraft/${configuration?.id}`} >
                                     <FontAwesomeIcon icon={faCircleInfo} />
                                 </LinkButton>
                             </div>
                         ) : (
                             <Tooltip message="No Info Available">
-                                <div className="info">
-                                    <LinkButton className="btn btn-primary">
+                                <div className="article__btn-info">
+                                    <LinkButton className="btn btn--primary">
                                         <FontAwesomeIcon icon={faCircleInfo} />
                                     </LinkButton>
                                 </div>
                             </Tooltip>
                         )}
                         { configuration?.wiki_url ? (
-                            <div className="wiki">
+                            <div className="article__wiki">
                                 <LinkButton
-                                    className="btn btn-primary"
+                                    className="btn btn--primary"
                                     to={configuration?.wiki_url}
                                     isExternal={true}
                                 >
@@ -121,9 +120,9 @@ const spacecraft = ({ stage }) =>{
                             </div>
                         ) : (
                             <Tooltip message="No Wiki Available">
-                                <div className="wiki">
+                                <div className="article__wiki">
                                     <LinkButton
-                                        className="btn btn-primary"
+                                        className="btn btn--primary"
                                         isExternal={true}
                                         disabled={true}
                                     >
@@ -137,20 +136,21 @@ const spacecraft = ({ stage }) =>{
             </div>
             { landing &&
                 <>
-                    <div className="info-box">
+                    <div className="article__info-box">
                         <FontAwesomeIcon icon={faLocationDot} />
                         <span>{stage.destination}</span>
                     </div>
                     {landing?.landing_zone &&
-                        <div className="info-box">
+                        <div className="article__info-box">
                             <FontAwesomeIcon icon={faHelicopterSymbol} />
                             <span>{landing?.landing_zone?.name} - ({landing?.landing_zone?.abbrev}) - {landing?.landing_type?.name} - ({landing?.landing_type?.abbrev})</span>
                         </div>
                     }
-                    <div className="info-box">
+                    <div className="article__info-box">
                         <p>{configuration.details}</p>
                     </div>
-                </>}
+                </>
+            }
         </section>
     );
 }

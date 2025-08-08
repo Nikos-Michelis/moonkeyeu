@@ -18,6 +18,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faCircleInfo, faShareFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { faWikipediaW } from '@fortawesome/free-brands-svg-icons';
 import {useStatePagination} from "@/hooks/paging-filtering/useStatePagination.jsx";
+import UpcomingLaunch from "@/components/article-details/UpcomingLaunch.jsx";
 
 const LIMIT = 4;
 function Program(){
@@ -75,41 +76,41 @@ function Program(){
                 isPending={queryData.isFetching}
                 isError={queryData.isError}
                 contentConfig={contentConfig}>
-                <section className="article-section">
-                    <div className="container __article flex justify-center" data-type="wide" data-spacing="none">
-                        <div className="container __article overlay flex flex-column align-center" data-type="fixed" data-spacing="none">
+                <section className="article">
+                    <div className="container flex justify-center" data-type="wide" data-spacing="none">
+                        <div className="container container--light-overlay article__content flex flex-column align-center" data-type="fixed" data-spacing="none">
                             <div className="container flex justify-start padding-block-start-7 padding-block-end-2">
-                                <Button className="btn-transparent" onClick={() => window.history.back()}>
+                                <Button className="btn--transparent" onClick={() => window.history.back()}>
                                     <FontAwesomeIcon icon={faChevronLeft} /> Back
                                 </Button>
                             </div>
-                            <div className="container __overview flex flex-column justify-center align-center bg-dark-cosmos-300" data-type="full-bleed">
-                                <div className="image-box">
+                            <div className="container article__overview flex flex-column justify-center align-center bg-dark-cosmos-300" data-type="full-bleed">
+                                <div className="article__image-box">
                                     <Img
                                         src={data?.images?.[0]?.image_url}
                                         alt={data?.images?.[0]?.name || "default"}
-                                        className="card-img scale-down-img"
+                                        className="article__image article__image--scale-down"
                                         defaultSrc={`${import.meta.env.VITE_CLOUDFRONT_URL}/assets/logo/moonkeyeu-logo.svg`}
                                     />
                                 </div>
-                                <div className="overview-info-wrapper container flex flex-column justify-center padding-2" data-type="full-bleed">
-                                    <div className="article-detail-container">
-                                        <h3 className="program-name">{data?.name}</h3>
-                                        <div className="flex justify-space-between margin-block-2">
-                                            <h5 className="program-type">{data?.type}</h5>
-                                            <h5 className="program-name">{formattedZonedDateTime}</h5>
+                                <div className="container flex flex-column justify-center padding-2" data-type="full-bleed">
+                                    <div className="article__title-box">
+                                        <h3 className="article__title">{data?.name}</h3>
+                                         <div className="article__detail-row">
+                                            <h5 className="article__subtitle">{data?.type}</h5>
+                                            <h5 className="article__subtitle">{formattedZonedDateTime}</h5>
                                         </div>
-                                        <hr className="hr-7-xs"/>
-                                        <div className="article-detail-box">
-                                            <p className="article-description">{data?.description}</p>
-                                        </div>
-                                        <hr className="hr-7-xs"/>
                                     </div>
+                                    <hr className="hr-100-xs hr-my-sm"/>
+                                    <div className="article__detail-box">
+                                        <p className="article__description">{data?.description}</p>
+                                    </div>
+                                    <hr className="hr-100-xs hr-my-sm"/>
                                     <div className="container flex justify-space-evenly align-center padding-block-2" data-type="full-bleed" data-overflow="visible">
                                         { data?.info_url ? (
                                             <div className="info">
                                                 <LinkButton
-                                                    className="btn-transparent btn-instragram"
+                                                    className="btn--transparent btn-instragram"
                                                     to={data?.info_url}
                                                     isExternal={true}
                                                 >
@@ -120,7 +121,7 @@ function Program(){
                                             <Tooltip message="No Info Available">
                                                 <div className="info">
                                                     <LinkButton
-                                                        className="btn-transparent btn-instagram"
+                                                        className="btn--transparent btn-instagram"
                                                         isExternal={true}
                                                         disabled={true}
                                                     >
@@ -132,7 +133,7 @@ function Program(){
                                         { data?.wiki_url ? (
                                             <div className="wiki">
                                                 <LinkButton
-                                                    className="btn-transparent btn-wiki"
+                                                    className="btn--transparent btn-wiki"
                                                     to={data?.wiki_url}
                                                     isExternal={true}
                                                 >
@@ -143,7 +144,7 @@ function Program(){
                                             <Tooltip message="No Wiki Available">
                                                 <div className="wiki">
                                                     <LinkButton
-                                                        className="btn-transparent btn-wikipedia"
+                                                        className="btn--transparent btn-wikipedia"
                                                         isExternal={true}
                                                         disabled={true}
                                                     >
@@ -154,7 +155,7 @@ function Program(){
                                         )}
                                         <div>
                                             <Tooltip message={copied ? "Copied!" :"Copied to clipboard!"}>
-                                                <Button className="btn-transparent" onClick={handleShare} disabled={copied}>
+                                                <Button className="btn--transparent" onClick={handleShare} disabled={copied}>
                                                     <FontAwesomeIcon icon={faShareFromSquare} />
                                                 </Button>
                                             </Tooltip>
@@ -162,11 +163,12 @@ function Program(){
                                     </div>
                                 </div>
                             </div>
-                            <div className="article-info-container container flex flex-column" data-type="full-bleed">
+                            <div className="article__info-container container flex flex-column" data-type="full-bleed">
+                                {data?.upcoming_launch && <UpcomingLaunch launch={data?.upcoming_launch}/>}
                                 <Agencies agencies={data?.agencies}/>
                                 <Launch queryData={launchesQuery} navUrl={'/launches/'} pagination={pagination} hasPagination={true}/>
                                 <div className="padding-block-end-4">
-                                    <hr className="hr-6-md"/>
+                                    <hr className="hr-90-md"/>
                                 </div>
                             </div>
                         </div>

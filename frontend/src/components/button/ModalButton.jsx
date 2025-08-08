@@ -11,7 +11,7 @@ const ModalButton =({triggerRef, setOpen, open}) => {
         <div className="z-overlay margin-inline-2">
             <Button
                 ref={triggerRef}
-                className="btn-transparent bg-star-200 padding-2 rounded-xxl box-shadow-4"
+                className="btn--transparent bg-star-200 padding-2 rounded-xxl box-shadow-4"
                 onClick={() => toggleOptions(true)}>
                 {!open
                     ? <FontAwesomeIcon icon={faMagnifyingGlass} className="clr-dark-cosmos-300 fs-small-400" />

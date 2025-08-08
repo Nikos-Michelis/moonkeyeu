@@ -9,7 +9,6 @@ const ProgramsSection = ({ programs, isFetching, isError }) => {
         component: SkeletonLandscapeLoader,
         styles: {
             wrapper: "small-wrapper",
-            img: "small-img",
             section: "programs-articles",
         },
     };

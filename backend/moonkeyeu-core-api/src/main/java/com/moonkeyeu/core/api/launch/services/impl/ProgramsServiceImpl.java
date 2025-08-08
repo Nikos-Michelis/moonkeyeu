@@ -1,10 +1,13 @@
 package com.moonkeyeu.core.api.launch.services.impl;
 
+import com.moonkeyeu.core.api.launch.dto.launch.LaunchNormalDTO;
 import com.moonkeyeu.core.api.launch.dto.paging.PageSortingDTO;
 import com.moonkeyeu.core.api.launch.dto.program.ProgramDetailedDTO;
 import com.moonkeyeu.core.api.launch.dto.program.ProgramSummarizedDTO;
+import com.moonkeyeu.core.api.launch.model.launch.Launch;
 import com.moonkeyeu.core.api.launch.model.program.Programs;
 import com.moonkeyeu.core.api.launch.dto.DTOEntity;
+import com.moonkeyeu.core.api.launch.repository.LaunchRepository;
 import com.moonkeyeu.core.api.launch.repository.ProgramsRepository;
 import com.moonkeyeu.core.api.launch.repository.specifications.ProgramSpecification;
 import com.moonkeyeu.core.api.launch.services.ProgramsService;
@@ -25,11 +28,13 @@ import java.util.Optional;
 public class ProgramsServiceImpl implements ProgramsService {
 
     private final ProgramsRepository programsRepository;
+    private final LaunchRepository launchRepository;
     private final DtoConverter dtoConverter;
     @Autowired
-    public ProgramsServiceImpl(DtoConverter dtoConverter, ProgramsRepository programsRepository) {
+    public ProgramsServiceImpl( DtoConverter dtoConverter, ProgramsRepository programsRepository, LaunchRepository launchRepository) {
         this.dtoConverter = dtoConverter;
         this.programsRepository = programsRepository;
+        this.launchRepository = launchRepository;
     }
 
     @Cacheable(value = "program-cache",  key = "'program-pagination' + #requestParams + #pageSortingDTO", sync = true)
@@ -53,7 +58,15 @@ public class ProgramsServiceImpl implements ProgramsService {
     @Cacheable(value = "program-cache",  key = "'program-' + #programId", sync = true)
     @Override
     public Optional<DTOEntity> getProgramById(Integer programId) {
-        Optional<Programs> spacecraft = programsRepository.findProgramById(programId);
-        return spacecraft.map(program -> dtoConverter.convertToDto(program, ProgramDetailedDTO.class));
+        Optional<Programs> programs = programsRepository.findProgramById(programId);
+        Optional<Launch> launch = launchRepository.findUpcomingLaunchesByProgramId(programId);
+        return programs.map(org -> {
+            ProgramDetailedDTO dto = dtoConverter.convertToDto(org, ProgramDetailedDTO.class);
+            launch.ifPresent(l -> {
+                LaunchNormalDTO launchDTO = dtoConverter.convertToDto(l, LaunchNormalDTO.class);
+                dto.setUpcomingLaunches(launchDTO);
+            });
+            return dto;
+        });
     }
 }

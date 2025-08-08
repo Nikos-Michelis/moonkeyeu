@@ -25,7 +25,6 @@ public class EmailService {
     @Value("${spring.mail.sender}")
     private String sender;
 
-
     private MimeMessageHelper MimeMessageSetup() throws MessagingException {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         return new MimeMessageHelper(

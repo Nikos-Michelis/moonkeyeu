@@ -16,20 +16,20 @@ import java.util.Set;
 @NoArgsConstructor
 @JsonPropertyOrder(
         {
-                "id",
-                "name",
-                "type",
-                "abbrev",
-                "administrator",
-                "description",
-                "founding_year",
-                "successful_launches",
-                "failed_launches",
-                "pending_launches",
-                "info_url",
-                "wiki_url",
-                "images",
-                "country",
+            "id",
+            "name",
+            "type",
+            "abbrev",
+            "administrator",
+            "description",
+            "founding_year",
+            "successful_launches",
+            "failed_launches",
+            "pending_launches",
+            "info_url",
+            "wiki_url",
+            "images",
+            "country",
         })
 public class AgencyNormalDTO implements DTOEntity {
     @JsonProperty("id")

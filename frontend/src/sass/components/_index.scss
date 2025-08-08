@@ -2,15 +2,12 @@
 @forward "cards/bookmark-card";
 @forward "cards/generic-cards/portrait-card";
 @forward "cards/generic-cards/landscape-card";
-@forward "skeleton/landscape-skeleton-card";
-@forward "skeleton/portrait-skeleton-card";
-@forward "skeleton/article-skeleton";
+@forward "skeleton/skeleton-frame";
 @forward "cards/vehicle-card-option";
 @forward "badges/badge";
 @forward "background/background-stars";
 @forward "scrollbar/scrollbar";
-@forward "counter/generic-counter";
-@forward "counter/article-counter";
+@forward "counter/counter";
 @forward "heading/heading";
 @forward "button/button";
 @forward "button/btn-goTop";
@@ -29,4 +26,5 @@
 @forward "animations/starship";
 @forward "animations/fade-transitions";
 @forward "animations/prev-button";
+@forward "animations/hover-transitions";
 @forward "searchbar";

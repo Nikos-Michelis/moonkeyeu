@@ -11,9 +11,9 @@ const AstronautsSection = ({astronauts, isFetching, isLoading, isError}) => {
     return (
         <section className="astronauts-section">
             <div className="flex justify-center">
-                <div className="container __wrapper __portrait flex justify-center overlay rounded-md" data-type="fixed-inherit" data-spacing="none">
-                    <div className="container" >
-                        <div className="portrait-grid">
+                <div className="grid-layout--col container container--light-overlay flex justify-center rounded-md" data-layout="grid-wrapper" data-spacing="none">
+                    <div className="container">
+                        <div className="grid-layout__portrait">
                             <SkeletonLoader
                                 isFetching={isFetching}
                                 isLoading={isLoading}

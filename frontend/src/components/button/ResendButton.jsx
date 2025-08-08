@@ -20,7 +20,7 @@ const ResendButton = ({ handleOtpResend, otpToken, status, delay }) => {
 
     return (
         <Button
-            className="btn btn-primary btn-small btn-resend bg-secondary-300"
+            className="btn btn--primary btn--small btn-resend bg-secondary-300"
             type="button"
             onClick={handleResendClick}
             disabled={isDisabled || status.isPending}

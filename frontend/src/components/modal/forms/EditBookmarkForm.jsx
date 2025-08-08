@@ -63,7 +63,7 @@ export function EditBookmarkForm() {
         <div className="form-popup-container bookmark-form-container">
             <Button
                 onClick={handleClose}
-                className="btn-transparent close-btn clr-dark-cosmos-300">
+                className="btn--transparent btn--close clr-dark-cosmos-300">
                 <FontAwesomeIcon icon={faXmark} />
             </Button>
             <div className="form-box small-form flex flex-column justify-center align-center">
@@ -110,7 +110,7 @@ export function EditBookmarkForm() {
                                 errors={errors}/>
                         </div>
                         <div className="flex flex-wrap justify-center">
-                            <Button className="btn btn-primary btn-big" type="submit">
+                            <Button className="btn btn--primary btn--big" type="submit">
                                 {updateBookmarkMutation.isPending
                                     ? <FontAwesomeIcon icon={faSpinner} spin />
                                     : <FontAwesomeIcon icon={faArrowRight} />} Continue

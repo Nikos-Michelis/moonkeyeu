@@ -24,7 +24,7 @@ export function PromptModal({ modalId }) {
         <div className="form-popup-container bookmark-form-container">
             <Button
                 onClick={handleClose}
-                className="btn-transparent close-btn clr-dark-cosmos-300"
+                className="btn--transparent btn--close clr-dark-cosmos-300"
             >
                 <FontAwesomeIcon icon={faXmark} />
             </Button>
@@ -42,14 +42,14 @@ export function PromptModal({ modalId }) {
             </div>
             <div className="flex flex-wrap justify-center">
                 <Button
-                    className="btn btn-primary"
+                    className="btn btn--primary"
                     onClick={handleClose}
                 >
                     {cancelLabel}
                 </Button>
                 {hasConfirmBtn &&
                     <Button
-                        className="btn btn-primary bg-warning-200"
+                        className="btn btn--primary bg-warning-200"
                         onClick={confirmFn}
                         disabled={modalStatus?.[modalId]?.isPending}
                     >

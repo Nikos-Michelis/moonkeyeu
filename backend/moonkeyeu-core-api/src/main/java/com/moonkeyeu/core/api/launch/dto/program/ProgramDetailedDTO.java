@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.moonkeyeu.core.api.launch.dto.agency.AgencyNormalDTO;
 import com.moonkeyeu.core.api.launch.dto.DTOEntity;
 import com.moonkeyeu.core.api.launch.dto.ImageDTO;
+import com.moonkeyeu.core.api.launch.dto.launch.LaunchNormalDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,4 +49,6 @@ public class ProgramDetailedDTO implements DTOEntity {
     private Set<ImageDTO> programImages;
     @JsonProperty ("agencies")
     private Set<AgencyNormalDTO> agencies;
+    @JsonProperty("upcoming_launch")
+    private LaunchNormalDTO upcomingLaunches;
 }

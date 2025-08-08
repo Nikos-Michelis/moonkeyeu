@@ -9,10 +9,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo, faShareFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { faWikipediaW } from '@fortawesome/free-brands-svg-icons';
 
-const AgencyCard = ({id, name, type, administrator, description, spacecraft, launchers, info_url, wiki_url, images, country, isDetailed = false }) => {
+const AgencyCard = ({id, name, type, administrator, description, spacecraft, launchers, wiki_url, images, country, isDetailed = false, cardStyles}) => {
     const { copied, copyToClipboard } = useClipboard();
     const tooltipInfoMessage = id ? "" : "No Info Available";
-
     const handleShare = () => {
         const url = window.location.origin + window.location.pathname + "/" + id;
         copyToClipboard(url);
@@ -20,118 +19,114 @@ const AgencyCard = ({id, name, type, administrator, description, spacecraft, lau
     const checkValue = (value) => { return (value ? value : "―"); }
 
     return (
-        <article className="landscape-card-outer-wrapper flex justify-center small-wrapper">
-            <div className="landscape-card-wrapper flex justify-center">
-                <div className="card-info-container flex flex-column justify-center align-center">
-                    <div className="card-img-box">
-                        <Img
-                            src={images?.[0]?.image_url}
-                            alt={images?.[0]?.name || "default"}
-                            className="card-img scale-down-img"
-                            defaultSrc={`${import.meta.env.VITE_CLOUDFRONT_URL}/assets/logo/moonkeyeu-logo-transparent.svg`}
-                        />
-                    </div>
-                    <section className="card-info-section flex flex-column justify-space-evenly">
-                        {!isDetailed &&
-                            <>
-                                <div className="card-detail-container">
-                                    <h4 className="rocket-name">{name}</h4>
-                                    <div className="card-detail-box">
-                                        <h5 className="agency-type">{type}</h5>
+        <article className={`landscape-card flex justify-center ${cardStyles?.wrapper || ''}`}>
+            <div className={`landscape-card__container ${cardStyles?.card_type || ''}`}>
+                <div className="landscape-card__media">
+                    <Img
+                        src={images?.[0]?.image_url}
+                        alt={images?.[0]?.name || "default"}
+                        className="landscape-card__image landscape-card__image--scale-down"
+                        defaultSrc={`${import.meta.env.VITE_CLOUDFRONT_URL}/assets/logo/moonkeyeu-logo-transparent.svg`}
+                    />
+                </div>
+                <section className="landscape-card__content flex flex-column justify-space-evenly">
+                    {!isDetailed &&
+                        <>
+                            <div className="landscape-card__detail-box">
+                                <h4>{name}</h4>
+                            </div>
+                            <div className="landscape-card__detail-box">
+                                <h5 className="agency-type">{type}</h5>
+                            </div>
+                            <div className="landscape-card__detail-box landscape-card--ellipsis">
+                                <p>{description}</p>
+                            </div>
+                            <hr className="hr-100-sm bg-hr-600"/>
+                        </>
+                    }
+                    {isDetailed &&
+                        <div className="panel">
+                            <h4 className="panel__title">{checkValue(name)}</h4>
+                            <hr/>
+                            <div className="panel__wrapper">
+                                <div className="panel__container">
+                                    <div className="panel__detail-box fs-small-100 padding-1">
+                                        <p className="panel__text">Type</p>
+                                        <p className="panel__text">{checkValue(type)}</p>
                                     </div>
-                                    <div className="card-detail-box ellipsis">
-                                        <p>{description}</p>
+                                    <div className="panel__detail-box fs-small-100 padding-1">
+                                        <p className="panel__text">CountryCode</p>
+                                        <p className="panel__text">{country?.[0]?.alpha_3_code}</p>
                                     </div>
                                 </div>
-                                <hr className="hr-7-sm bg-hr-600"/>
-                            </>
-                        }
-                        {isDetailed &&
-                            <div className="card-detail-container">
-                                <div className="panel-body">
-                                    <h4 className="astronaut-name">{checkValue(name)}</h4>
-                                    <hr className="hr-7-sm bg-hr-600"/>
-                                    <div className="panel-info-wrapper">
-                                        <div className="panel-info-container">
-                                            <div className="detail-wrapper fs-small-100 padding-1">
-                                                <p className="info-panel-row">Type</p>
-                                                <p className="info-panel-row">{checkValue(type)}</p>
-                                            </div>
-                                            <div className="detail-wrapper fs-small-100 padding-1">
-                                                <p className="info-panel-row">CountryCode</p>
-                                                <p className="info-panel-row">{country?.[0]?.alpha_3_code}</p>
-                                            </div>
-                                        </div>
-                                        <div className="panel-info-container">
-                                            <div className="detail-wrapper fs-small-100 padding-1">
-                                                <p className="info-panel-row">Spacecraft</p>
-                                                <p className="info-panel-row">{checkValue(spacecraft)}</p>
-                                            </div>
-                                            <div className="detail-wrapper fs-small-100 padding-1">
-                                                <p className="info-panel-row">Launchers</p>
-                                                <p className="info-panel-row">{checkValue(launchers)}</p>
-                                            </div>
-                                        </div>
-                                        <div className="panel-info-container">
-                                            <div className="detail-wrapper fs-small-100 padding-1">
-                                                <p className="info-panel-row">Administrator</p>
-                                                <p className="info-panel-row">{checkValue(administrator)}</p>
-                                            </div>
-                                        </div>
+                                <div className="panel__container">
+                                    <div className="panel__detail-box fs-small-100 padding-1">
+                                        <p className="panel__text">Spacecraft</p>
+                                        <p className="panel__text">{checkValue(spacecraft)}</p>
                                     </div>
-                                    <hr className="hr-7-sm bg-hr-600"/>
+                                    <div className="panel__detail-box fs-small-100 padding-1">
+                                        <p className="panel__text">Launchers</p>
+                                        <p className="panel__text">{checkValue(launchers)}</p>
+                                    </div>
+                                </div>
+                                <div className="panel__container">
+                                    <div className="panel__detail-box fs-small-100 padding-1">
+                                        <p className="panel__text">Administrator</p>
+                                        <p className="panel__text">{checkValue(administrator)}</p>
+                                    </div>
                                 </div>
                             </div>
-                        }
-                        <div className="flex flex-wrap justify-center padding-block-2">
-                            {id ? (
-                                <div className="info">
-                                    <Link className="btn btn-primary" to={`/agencies/${id.toString()}`} >
+                            <hr/>
+                        </div>
+                    }
+                    <div className="landscape-card__actions flex flex-wrap justify-center padding-block-2">
+                        {id ? (
+                            <div className="landscape-card__info-box">
+                                <Link className="btn btn--primary" to={`/agencies/${id.toString()}`} >
+                                    <FontAwesomeIcon icon={faCircleInfo} /> INFO
+                                </Link>
+                            </div>
+                        ) : (
+                            <Tooltip message={tooltipInfoMessage}>
+                                <div className="landscape-card__info">
+                                    <Link className="btn btn--primary" to="#" >
                                         <FontAwesomeIcon icon={faCircleInfo} /> INFO
                                     </Link>
                                 </div>
-                            ) : (
-                                <Tooltip message={tooltipInfoMessage}>
-                                    <div className="info">
-                                        <Link className="btn btn-primary" to="#" >
-                                            <FontAwesomeIcon icon={faCircleInfo} /> INFO
-                                        </Link>
-                                    </div>
-                                </Tooltip>
-                            )}
-                            { wiki_url ? (
-                                <div className="wiki">
+                            </Tooltip>
+                        )}
+                        { wiki_url ? (
+                            <div className="landscape-card__wiki">
+                                <LinkButton
+                                    className="btn btn--primary"
+                                    to={wiki_url}
+                                    isExternal={true}
+                                >
+                                    <FontAwesomeIcon icon={faWikipediaW} /> WIKI
+                                </LinkButton>
+                            </div>
+                        ) : (
+                            <Tooltip message="No Wiki Available">
+                                <div className="landscape-card__wiki">
                                     <LinkButton
-                                        className="btn btn-primary"
-                                        to={wiki_url}
+                                        className="btn btn--primary"
                                         isExternal={true}
+                                        disabled={true}
                                     >
                                         <FontAwesomeIcon icon={faWikipediaW} /> WIKI
                                     </LinkButton>
                                 </div>
-                            ) : (
-                                <Tooltip message="No Wiki Available">
-                                    <div className="wiki">
-                                        <LinkButton
-                                            className="btn btn-primary"
-                                            isExternal={true}
-                                            disabled={true}
-                                        >
-                                            <FontAwesomeIcon icon={faWikipediaW} /> WIKI
-                                        </LinkButton>
-                                    </div>
-                                </Tooltip>
-                            )}
-                            <div className="share">
-                                <Tooltip copied={copied} message={copied ? "Copied!" :"Copied to clipboard!"}>
-                                    <Button className="btn btn-primary" onClick={handleShare} disabled={copied}>
-                                        <FontAwesomeIcon icon={faShareFromSquare} /> SHARE
-                                    </Button>
-                                </Tooltip>
-                            </div>
+                            </Tooltip>
+                        )}
+                        <div className="landscape-card__share">
+                            <Tooltip copied={copied} message={copied ? "Copied!" :"Copied to clipboard!"}>
+                                <Button className="btn btn--primary" onClick={handleShare} disabled={copied}>
+                                    <FontAwesomeIcon icon={faShareFromSquare} /> SHARE
+                                </Button>
+                            </Tooltip>
                         </div>
-                    </section>
-                </div>
+                    </div>
+                </section>
             </div>
         </article>
     );

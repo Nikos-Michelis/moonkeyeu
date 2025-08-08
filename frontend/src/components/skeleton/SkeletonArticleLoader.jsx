@@ -1,74 +1,69 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
-
 function SkeletonArticleLoader(){
     return(
         <>
-            <section className="article-section">
-                <div className="container __article flex justify-center" data-type="wide" data-spacing="none">
-                    <div className="container __article overlay flex flex-column align-center" data-type="fixed" data-spacing="none">
-                            <div className="container flex justify-start padding-block-start-7 padding-block-end-2" data-type="full-bleed">
-                                <div className="skeleton bg-dark-cosmos-300 opacity-6 skeleton-btn"></div>
+            <section className="article">
+                <div className="container flex justify-center" data-type="wide" data-spacing="none">
+                    <div className="container container--light-overlay article__content flex flex-column align-center" data-type="fixed" data-spacing="none">
+                            <div className="container flex justify-start padding-block-start-7 padding-block-end-4">
+                                <div className="skeleton skeleton--btn bg-dark-cosmos-300 opacity-6"></div>
                             </div>
-                            <div className="container __overview flex flex-column justify-center align-center bg-dark-cosmos-300" data-type="full-bleed">
-                                <div className="skeleton skeleton-img">
-                                    <div className="article-img">
-                                        <div className="img-icon-box skeleton-launch">
+                            <div className="container article__overview flex flex-column justify-center align-center bg-dark-cosmos-300" data-type="full-bleed">
+                                <div className="article__image-box skeleton bg-dark-cosmos-300 opacity-6">
+                                    <div className="skeleton--container skeleton--container--article">
+                                        <div className="skeleton--container__icon skeleton-launch">
                                             <FontAwesomeIcon icon={faImage} />
                                         </div>
                                     </div>
                                 </div>
-                                <div className="overview-info-wrapper container flex flex-column justify-center padding-2" data-type="full-bleed">
-                                    <div className="article-detail-container">
-                                        <h1 className="article-detail skeleton bg-star-300 opacity-6 skeleton-title"></h1>
-                                        <div className="panel-body">
-                                            <hr className="hr-7-xs"/>
-                                            <div className="panel-info-wrapper">
-                                                <div className="panel-info-container">
-                                                    <div className="skeleton bg-star-300 opacity-6 skeleton-title"></div>
-                                                    <div className="skeleton bg-star-300 opacity-6 skeleton-title"></div>
-                                                </div>
-                                                <div className="panel-info-container">
-                                                    <div className="skeleton bg-star-300 opacity-6 skeleton-title"></div>
-                                                    <div className="skeleton bg-star-300 opacity-6 skeleton-title"></div>
-                                                </div>
+                                <div className="container flex flex-column justify-center padding-2" data-type="full-bleed">
+                                    <h1 className="skeleton skeleton--title bg-star-300 opacity-6"></h1>
+                                    <div className="panel">
+                                        <hr/>
+                                        <div className="panel__wrapper">
+                                            <div className="panel__container">
+                                                <div className="skeleton skeleton--title bg-star-300 opacity-6"></div>
+                                                <div className="skeleton skeleton--title bg-star-300 opacity-6"></div>
                                             </div>
-                                            <hr className="hr-7-xs"/>
+                                            <div className="panel__container">
+                                                <div className="skeleton skeleton--title bg-star-300 opacity-6"></div>
+                                                <div className="skeleton skeleton--title bg-star-300 opacity-6"></div>
+                                            </div>
                                         </div>
-                                        <div className="skeleton bg-star-300 skeleton-heading"></div>
+                                        <hr/>
                                     </div>
+                                    <div className="skeleton skeleton--heading bg-star-300"></div>
                                 </div>
                             </div>
-                            <div className="article-info-container container flex flex-column" data-type="full-bleed">
+                            <div className="article__info-container container skeleton--skeleton--container flex flex-column" data-type="full-bleed">
                                 <section>
-                                    <div className="heading-box skeleton bg-dark-cosmos-300 opacity-6 skeleton-heading"></div>
-                                    <hr className="hr-7-sm bg-hr-600" />
-                                    <div className="info-box">
-                                        <p className="skeleton bg-dark-cosmos-300 opacity-6 skeleton-title"></p>
-                                        <p className="skeleton bg-dark-cosmos-300 opacity-6 skeleton-heading"></p>
-                                        <p className="skeleton bg-dark-cosmos-300 opacity-6 skeleton-text"></p>
-                                    </div>
-                                    <div className="img-box"></div>
-                                </section>
-                                <section>
-                                    <div className="heading-box skeleton bg-dark-cosmos-300 opacity-6 skeleton-heading"></div>
-                                    <hr className="hr-7-sm bg-hr-600" />
-                                    <div className="info-box">
-                                        <p className="skeleton bg-dark-cosmos-300 opacity-6 skeleton-title"></p>
-                                        <p className="skeleton bg-dark-cosmos-300 opacity-6 skeleton-heading"></p>
-                                        <p className="skeleton bg-dark-cosmos-300 opacity-6 skeleton-text"></p>
+                                    <div className="article__heading-box skeleton skeleton--heading bg-dark-cosmos-300 opacity-6"></div>
+                                    <hr className="hr-100-sm bg-hr-600" />
+                                    <div className="article__info-box article__info-box--col">
+                                        <p className="skeleton skeleton--title bg-dark-cosmos-300 opacity-6"></p>
+                                        <p className="skeleton skeleton--heading bg-dark-cosmos-300 opacity-6"></p>
+                                        <p className="skeleton skeleton--text bg-dark-cosmos-300 opacity-6"></p>
                                     </div>
                                 </section>
                                 <section>
-                                    <div className="heading-box skeleton bg-dark-cosmos-300 opacity-6 skeleton-heading"></div>
-                                    <hr className="hr-7-sm bg-hr-600" />
-                                    <div className="info-box">
-                                        <p className="skeleton bg-dark-cosmos-300 opacity-6 skeleton-title"></p>
-                                        <p className="skeleton bg-dark-cosmos-300 opacity-6 skeleton-heading"></p>
-                                        <p className="skeleton bg-dark-cosmos-300 opacity-6 skeleton-text"></p>
+                                    <div className="article__heading-box skeleton skeleton--heading bg-dark-cosmos-300 opacity-6"></div>
+                                    <hr className="hr-100-sm bg-hr-600" />
+                                    <div className="article__info-box">
+                                        <p className="skeleton skeleton--title bg-dark-cosmos-300 opacity-6"></p>
+                                        <p className="skeleton skeleton--heading bg-dark-cosmos-300 opacity-6"></p>
+                                        <p className="skeleton skeleton--text bg-dark-cosmos-300 opacity-6"></p>
                                     </div>
-                                    <div className="img-box"></div>
+                                </section>
+                                <section>
+                                    <div className="article__heading-box skeleton skeleton--heading bg-dark-cosmos-300 opacity-6"></div>
+                                    <hr className="hr-100-sm bg-hr-600" />
+                                    <div className="article__info-box">
+                                        <p className="skeleton skeleton--title bg-dark-cosmos-300 opacity-6"></p>
+                                        <p className="skeleton skeleton--heading bg-dark-cosmos-300 opacity-6"></p>
+                                        <p className="skeleton skeleton--text bg-dark-cosmos-300 opacity-6"></p>
+                                    </div>
                                 </section>
                             </div>
                         </div>

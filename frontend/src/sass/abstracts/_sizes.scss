@@ -21,21 +21,34 @@ $sizes: (
 );
 
 $percentages: (
-  1: 15%,
-  2: 30%,
-  3: 45%,
-  4: 60%,
-  5: 75%,
-  6: 90%,
-  7: 100%,
+   0:0,
+  15: 15%,// 1
+  30: 30%,// 2
+  45: 45%,// 3
+  60: 60%,// 4
+  75: 75%,// 5
+  90: 90%,// 6
+  100: 100%,// 7
 );
-
+// hr margins
 $hr-heights: (
   xs: 0.0625rem,
   sm: 0.125rem,
   md: 0.25rem,
   lg: 0.5rem,
   xl: 1rem
+);
+
+$hr-margins: (
+  xs: 0.15rem,
+  sm: 0.25rem,
+  md: 0.5rem,
+  lg: 1rem
+);
+
+$hr-margin-types: (
+  my: margin-block,
+  mx: margin-inline
 );
 
 $common-values: (
@@ -54,7 +67,7 @@ $container-heights: (
   half: 50vh,
   small: 25vh,
   screen: 100dvh,
-  auto: auto
+  auto: auto,
 );
 
 $z-indexes: (

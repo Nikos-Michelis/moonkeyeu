@@ -9,7 +9,6 @@ const RocketSection = ({rocket, isFetching, isError}) => {
         component: SkeletonLandscapeLoader,
         styles: {
             wrapper: "medium-wrapper",
-            img: "small-img",
             section: "rocket-articles",
         },
     };

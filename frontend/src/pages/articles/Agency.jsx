@@ -76,64 +76,62 @@ function Agency(){
                 isPending={queryData.isFetching}
                 isError={queryData.isError}
                 contentConfig={contentConfig}>
-                <section className="article-section">
-                    <div className="container __article flex justify-center" data-type="wide" data-spacing="none">
-                        <div className="container __article overlay flex flex-column align-center" data-type="fixed" data-spacing="none">
+                <section className="article">
+                    <div className="container flex justify-center" data-type="wide" data-spacing="none">
+                        <div className="container container--light-overlay article__content flex flex-column align-center" data-type="fixed" data-spacing="none">
                             <div className="container flex justify-start padding-block-start-7 padding-block-end-2">
-                                <Button className="btn-transparent" onClick={() => window.history.back()}>
+                                <Button className="btn--transparent" onClick={() => window.history.back()}>
                                     <FontAwesomeIcon icon={faChevronLeft} /> Back
                                 </Button>
                             </div>
-                            <div className="container __overview flex flex-column justify-center align-center bg-dark-cosmos-300" data-type="full-bleed">
-                                <div className="image-box">
+                            <div className="container article__overview flex flex-column justify-center align-center bg-dark-cosmos-300" data-type="full-bleed">
+                                <div className="article__image-box">
                                     <Img
                                         src={data?.images?.[0]?.image_url}
                                         alt={data?.images?.[0]?.name || "default"}
-                                        className="card-img scale-down-img"
+                                        className="article__image article__image--scale-down"
                                         defaultSrc={`${import.meta.env.VITE_CLOUDFRONT_URL}/assets/logo/moonkeyeu-logo.svg`}
                                     />
                                 </div>
-                                <div className="overview-info-wrapper container flex flex-column justify-center padding-2" data-type="full-bleed">
-                                    <div className="article-detail-container">
-                                        <div className="panel-body">
-                                            <h3 className="agency-name">{data?.name}</h3>
-                                            <hr className="hr-7-sm" />
-                                            <div className="panel-info-wrapper">
-                                                <div className="panel-info-container">
-                                                    <div className="detail-wrapper fs-small-200 padding-1 clr-star-300">
-                                                        <p className="info-panel-row">Type</p>
-                                                        <p className="info-panel-row">{data?.type}</p>
-                                                    </div>
-                                                    <div className="detail-wrapper fs-small-200 padding-1 clr-star-300">
-                                                        <p className="info-panel-row">Country</p>
-                                                        <p className="info-panel-row">{country?.[0]?.alpha_3_code}</p>
-                                                    </div>
+                                <div className="container flex flex-column justify-center padding-2">
+                                    <div className="panel">
+                                        <h3 className="panel__title clr-star-300 text-center">{data?.name}</h3>
+                                        <hr className="bg-star-300"/>
+                                        <div className="panel__wrapper">
+                                            <div className="panel__container">
+                                                <div className="panel__detail-box fs-small-200 padding-1 clr-star-300">
+                                                    <p className="panel__text">Type</p>
+                                                    <p className="panel__text">{data?.type}</p>
                                                 </div>
-                                                <div className="panel-info-container">
-                                                    <div className="detail-wrapper fs-small-200 padding-1 clr-star-300">
-                                                        <p className="info-panel-row">Spacecraft</p>
-                                                        <p className="info-panel-row">{checkValue(data?.Spacecraft)}</p>
-                                                    </div>
-                                                    <div className="detail-wrapper fs-small-200 padding-1 clr-star-300">
-                                                        <p className="info-panel-row">Launchers</p>
-                                                        <p className="info-panel-row">{checkValue(data?.Launchers)}</p>
-                                                    </div>
-                                                </div>
-                                                <div className="panel-info-container">
-                                                    <div className="detail-wrapper fs-small-200 padding-1 clr-star-300">
-                                                        <p className="info-panel-row">Administrator</p>
-                                                        <p className="info-panel-row">{checkValue(data?.administrator)}</p>
-                                                    </div>
+                                                <div className="panel__detail-box fs-small-200 padding-1 clr-star-300">
+                                                    <p className="panel__text">Country</p>
+                                                    <p className="panel__text">{country?.[0]?.alpha_3_code}</p>
                                                 </div>
                                             </div>
-                                            <hr className="hr-7-sm" />
+                                            <div className="panel__container">
+                                                <div className="panel__detail-box fs-small-200 padding-1 clr-star-300">
+                                                    <p className="panel__text">Spacecraft</p>
+                                                    <p className="panel__text">{checkValue(data?.Spacecraft)}</p>
+                                                </div>
+                                                <div className="panel__detail-box fs-small-200 padding-1 clr-star-300">
+                                                    <p className="panel__text">Launchers</p>
+                                                    <p className="panel__text">{checkValue(data?.Launchers)}</p>
+                                                </div>
+                                            </div>
+                                            <div className="panel__container">
+                                                <div className="panel__detail-box fs-small-200 padding-1 clr-star-300">
+                                                    <p className="panel__text">Administrator</p>
+                                                    <p className="panel__text">{checkValue(data?.administrator)}</p>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <hr className="bg-star-300"/>
                                     </div>
                                     <div className="container flex justify-space-evenly align-center padding-block-2" data-type="full-bleed" data-overflow="visible">
                                         { data?.info_url ? (
                                             <div className="info">
                                                 <LinkButton
-                                                    className="btn-transparent btn-instragram"
+                                                    className="btn--transparent btn-instragram"
                                                     to={data?.info_url}
                                                     isExternal={true}
                                                 >
@@ -144,7 +142,7 @@ function Agency(){
                                             <Tooltip message="No Info Available">
                                                 <div className="info">
                                                     <LinkButton
-                                                        className="btn-transparent btn-wikipedia"
+                                                        className="btn--transparent btn-wikipedia"
                                                         isExternal={true}
                                                         disabled={true}
                                                     >
@@ -155,7 +153,7 @@ function Agency(){
                                         )}
                                         <div>
                                             <Tooltip message={copied ? "Copied!" :"Copied to clipboard!"}>
-                                                <Button className="btn-transparent" onClick={handleShare} disabled={copied}>
+                                                <Button className="btn--transparent" onClick={handleShare} disabled={copied}>
                                                     <FontAwesomeIcon icon={faShareFromSquare} />
                                                 </Button>
                                             </Tooltip>
@@ -163,19 +161,21 @@ function Agency(){
                                     </div>
                                 </div>
                             </div>
-                            <div className="article-info-container container flex flex-column" data-type="full-bleed">
-                                <section className="agency-section">
-                                    <div className="heading-box">
-                                        <FontAwesomeIcon icon={faAlignLeft} />
-                                        <h2>Agency Description</h2>
-                                    </div>
-                                    <hr className="hr-7-sm bg-hr-600" />
-                                    <div className="info-box">
-                                        <p>{data?.description}</p>
-                                    </div>
-                                </section>
+                            <div className="article__info-container container flex flex-column" data-type="full-bleed">
+                                { data?.description &&
+                                    <section className="agency-section">
+                                        <div className="article__heading-box">
+                                            <FontAwesomeIcon icon={faAlignLeft} />
+                                            <h2>Agency Description</h2>
+                                        </div>
+                                        <hr className="hr-100-sm bg-hr-600" />
+                                        <div className="article__info-box">
+                                            <p>{data?.description}</p>
+                                        </div>
+                                    </section>
+                                }
                                 {data?.upcoming_launch && <UpcomingLaunch launch={data?.upcoming_launch}/>}
-                                {rocketConfig?.length > 0 &&
+                                {(rocketConfig?.length > 0 || rocketConfigQuery.isPending) &&
                                     <RocketConfig
                                         queryData={rocketConfigQuery}
                                         pagination={pagination}
@@ -187,7 +187,7 @@ function Agency(){
                                     />
                                 }
                                 <div className="padding-block-end-4">
-                                    <hr className="hr-6-md"/>
+                                    <hr className="hr-90-md"/>
                                 </div>
                             </div>
                         </div>

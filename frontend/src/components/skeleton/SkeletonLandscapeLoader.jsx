@@ -1,26 +1,24 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
-const SkeletonLandscapeLoader = ({skeletonStyle, skeletonImgStyle}) => {
+const SkeletonLandscapeLoader = ({wrapper, img, card_type}) => {
     return (
-        <article className={`landscape-card-outer-wrapper flex justify-center ${skeletonStyle}`}>
-            <div className="landscape-card-wrapper flex justify-center">
-                <div className="card-info-container flex flex-column justify-center align-center">
-                    <div className="card-img-box skeleton bg-dark-cosmos-300 opacity-6 skeleton-img">
-                        <div className={`card-img ${skeletonImgStyle}`}>
-                            <div className={`img-icon-box`}>
-                                <FontAwesomeIcon icon={faImage} />
-                            </div>
+        <article className={`landscape-card flex justify-center ${wrapper}`}>
+            <div className={`landscape-card__container ${card_type}`}>
+                <div className="landscape-card__media skeleton bg-dark-cosmos-300 opacity-6">
+                    <div className={`skeleton--container ${`skeleton--container${img}` || ''}`}>
+                        <div className="skeleton--container__icon">
+                            <FontAwesomeIcon icon={faImage} />
                         </div>
                     </div>
-                    <div className="card-info-section flex flex-column justify-space-evenly skeleton-container">
-                        <div className="skeleton bg-dark-cosmos-300 opacity-6 skeleton-text"></div>
-                        <div className="skeleton bg-dark-cosmos-300 opacity-6 skeleton-text"></div>
-                        <div className="skeleton bg-dark-cosmos-300 opacity-6 skeleton-text"></div>
-                        <div className="skeleton bg-dark-cosmos-300 opacity-6 skeleton-text"></div>
-                        <div className="skeleton bg-dark-cosmos-300 opacity-6 skeleton-text"></div>
-                        <div className="skeleton bg-dark-cosmos-300 opacity-6 skeleton-text"></div>
-                    </div>
+                </div>
+                <div className="skeleton--skeleton-container skeleton--skeleton-container--landscape">
+                    <div className="skeleton skeleton--text bg-dark-cosmos-300 opacity-6"></div>
+                    <div className="skeleton skeleton--text bg-dark-cosmos-300 opacity-6"></div>
+                    <div className="skeleton skeleton--text bg-dark-cosmos-300 opacity-6"></div>
+                    <div className="skeleton skeleton--text bg-dark-cosmos-300 opacity-6"></div>
+                    <div className="skeleton skeleton--text bg-dark-cosmos-300 opacity-6"></div>
+                    <div className="skeleton skeleton--text bg-dark-cosmos-300 opacity-6"></div>
                 </div>
             </div>
         </article>

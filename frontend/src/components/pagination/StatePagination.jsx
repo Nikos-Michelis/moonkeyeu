@@ -9,7 +9,7 @@ const StatePagination = ({ pagination, isPending, isFetching}) => {
         <div className="flex justify-center align-center fs-small-200">
             { pagination?.page !== FIRST_PAGE &&
                 <Button
-                    className="btn btn-primary no-ellipsis"
+                    className="btn btn--primary btn--no-ellipsis"
                     disabled={pagination?.page === FIRST_PAGE || (isPending || isFetching)}
                     onClick={pagination?.firstPage}
                 >
@@ -17,7 +17,7 @@ const StatePagination = ({ pagination, isPending, isFetching}) => {
                 </Button>
             }
              <Button
-                className="btn btn-primary no-ellipsis"
+                className="btn btn--primary btn--no-ellipsis"
                 disabled={pagination?.page === FIRST_PAGE || (isPending || isFetching)}
                 onClick={pagination?.prevPage}
             >
@@ -38,7 +38,7 @@ const StatePagination = ({ pagination, isPending, isFetching}) => {
                 </div>
             </span>
             <Button
-                className="btn btn-primary no-ellipsis"
+                className="btn btn--primary btn--no-ellipsis"
                 disabled={pagination?.page === pagination?.totalPages || (isPending || isFetching)}
                 onClick={pagination?.nextPage}
             >
@@ -46,7 +46,7 @@ const StatePagination = ({ pagination, isPending, isFetching}) => {
             </Button>
             { pagination?.page !== pagination?.totalPages &&
                 <Button
-                    className="btn btn-primary no-ellipsis"
+                    className="btn btn--primary btn--no-ellipsis"
                     disabled={pagination?.page === pagination?.totalPages || (isPending || isFetching)}
                     onClick={pagination?.lastPage}
                 >

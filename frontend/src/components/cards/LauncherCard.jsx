@@ -7,7 +7,19 @@ import Img from "@/components/utils/Img.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShareFromSquare, faShuttleSpace} from "@fortawesome/free-solid-svg-icons";
 
-const RocketCard = ({id, details, flight_proven, serial_number, successful_landings, attempted_landings, flights, last_launch_date, first_launch_date, status, images}) => {
+const RocketCard = (
+    {
+        id,
+        details,
+        flight_proven,
+        serial_number,
+        successful_landings,
+        attempted_landings,
+        flights,
+        status,
+        images,
+        cardStyles
+    }) => {
     const tooltipInfoMessage = id ? "" : "No Info Available";
     const { copied, copyToClipboard } = useClipboard();
 
@@ -22,81 +34,78 @@ const RocketCard = ({id, details, flight_proven, serial_number, successful_landi
         return value ? value === true ? "Yes" : "No" : null;
     }
     return (
-        <article className="landscape-card-outer-wrapper flex justify-center medium-wrapper">
-            <div className="landscape-card-wrapper flex justify-center">
-                <div className="card-info-container flex flex-column justify-center align-center">
-                    <div className="card-img-box">
+        <article className={`landscape-card flex justify-center ${cardStyles?.wrapper || 'medium-wrapper'}`}>
+            <div className="landscape-card__container">
+                    <div className="landscape-card__media">
                         <Img
                             src={images?.[0]?.image_url}
                             alt={images?.[0]?.name || "default"}
-                            className="card-img small-img"
+                            className="landscape-card__image"
                             defaultSrc={`${import.meta.env.VITE_CLOUDFRONT_URL}/assets/logo/moonkeyeu-logo.svg`}
                         />
                     </div>
-                    <section className="card-info-section flex flex-column justify-space-evenly">
-                        <div className="card-detail-container">
-                            <div className="panel-body">
-                                <h4 className="booster-name">{checkValue(serial_number)}</h4>
-                                <hr className="hr-7-sm bg-hr-600"/>
-                                <div className="panel-info-wrapper">
-                                    <div className="panel-info-container">
-                                        <div className="detail-wrapper fs-small-100 padding-1">
-                                            <p className="info-panel-row">Status</p>
-                                            <p className="info-panel-row">{checkValue(status)}</p>
-                                        </div>
-                                        <div className="detail-wrapper fs-small-100 padding-1">
-                                            <p className="info-panel-row"></p>
-                                            <p className="info-panel-row"></p>
-                                        </div>
+                    <section className="landscape-card__content flex flex-column justify-space-evenly">
+                        <div className="panel">
+                            <h4 className="panel__title">{checkValue(serial_number)}</h4>
+                            <hr/>
+                            <div className="panel__wrapper">
+                                <div className="panel__container">
+                                    <div className="panel__detail-box fs-small-100 padding-1">
+                                        <p className="panel__text">Status</p>
+                                        <p className="panel__text">{checkValue(status)}</p>
                                     </div>
-                                    <div className="panel-info-container">
-                                        <div className="detail-wrapper fs-small-100 padding-1">
-                                            <p className="info-panel-row">flights</p>
-                                            <p className="info-panel-row">{checkValue(flights)}</p>
-                                        </div>
-                                        <div className="detail-wrapper fs-small-100 padding-1">
-                                            <p className="info-panel-row">Flight Proven</p>
-                                            <p className="info-panel-row">{checkValue(booleanConverter(flight_proven))}</p>
-                                        </div>
+                                    <div className="panel__detail-box fs-small-100 padding-1">
+                                        <p className="panel__text"></p>
+                                        <p className="panel__text"></p>
                                     </div>
-                                    <div className="panel-info-container">
-                                        <div className="detail-wrapper fs-small-100 padding-1">
-                                            <p className="info-panel-row">Successful Landings</p>
-                                            <p className="info-panel-row">{checkValue(successful_landings)}</p>
-                                        </div>
-                                        <div className="detail-wrapper fs-small-100 padding-1">
-                                            <p className="info-panel-row">Attempted Landings</p>
-                                            <p className="info-panel-row">{checkValue(attempted_landings)}</p>
-                                        </div>
+                                </div>
+                                <div className="panel__container">
+                                    <div className="panel__detail-box fs-small-100 padding-1">
+                                        <p className="panel__text">flights</p>
+                                        <p className="panel__text">{checkValue(flights)}</p>
                                     </div>
-                                    <hr className="hr-7-sm bg-hr-600"/>
-                                    <div className="panel-info-container">
-                                        <div className="detail-wrapper fs-small-100">
-                                            <p className="description-panel padding-block-2">{details}</p>
-                                        </div>
+                                    <div className="panel__detail-box fs-small-100 padding-1">
+                                        <p className="panel__text">Flight Proven</p>
+                                        <p className="panel__text">{checkValue(booleanConverter(flight_proven))}</p>
+                                    </div>
+                                </div>
+                                <div className="panel__container">
+                                    <div className="panel__detail-box fs-small-100 padding-1">
+                                        <p className="panel__text">Successful Landings</p>
+                                        <p className="panel__text">{checkValue(successful_landings)}</p>
+                                    </div>
+                                    <div className="panel__detail-box fs-small-100 padding-1">
+                                        <p className="panel__text">Attempted Landings</p>
+                                        <p className="panel__text">{checkValue(attempted_landings)}</p>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div className="panel__container">
+                                    <div className="panel__detail-box fs-small-100">
+                                        <p className="panel__text padding-block-2">{details}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-wrap justify-center padding-block-2">
+                        <div className="landscape-card__actions flex flex-wrap justify-center padding-block-2">
                             {id ? (
-                                <div className="info">
-                                    <LinkButton className="btn btn-primary" to={`/launches?page=1&limit=12&launcher=${id.toString()}&upcoming=all`} >
+                                <div className="landscape-card__info">
+                                    <LinkButton className="btn btn--primary" to={`/launches?page=1&limit=12&launcher=${id.toString()}&upcoming=all`} >
                                         <FontAwesomeIcon icon={faShuttleSpace} /> View Launch
                                     </LinkButton>
                                 </div>
                             ) : (
                                 <Tooltip message={tooltipInfoMessage}>
-                                    <div className="info">
-                                        <LinkButton className="btn btn-primary" >
+                                    <div className="landscape-card__info">
+                                        <LinkButton className="btn btn--primary" >
                                             <FontAwesomeIcon icon={faShuttleSpace} /> View Launch
                                         </LinkButton>
                                     </div>
                                 </Tooltip>
                             )}
-                            <div className="share">
+                            <div className="landscape-card__share">
                                 <Tooltip  message={copied ? "Copied!" : "Copied to clipboard!"}>
-                                    <Button className="btn btn-primary" onClick={() => handleShare(`launches?page=1&limit=12&launcher=${id.toString()}&upcoming=all`)} disabled={copied}>
+                                    <Button className="btn btn--primary" onClick={() => handleShare(`launches?page=1&limit=12&launcher=${id.toString()}&upcoming=all`)} disabled={copied}>
                                         <FontAwesomeIcon icon={faShareFromSquare} /> SHARE
                                     </Button>
                                 </Tooltip>
@@ -104,7 +113,6 @@ const RocketCard = ({id, details, flight_proven, serial_number, successful_landi
                         </div>
                     </section>
                 </div>
-            </div>
         </article>
     );
 };

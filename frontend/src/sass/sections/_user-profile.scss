@@ -1,25 +1,29 @@
 @use "../abstracts/index" as abs;
 
-div.profile-img {
-  display: flex;
-  width: 100%;
-  min-height: 10rem;
-  justify-content: center;
-  align-items: center;
-  font-size: 6rem;
+.profile, .dashboard {
+  &__user-icon {
+    display: flex;
+    width: 100%;
+    min-height: 10rem;
+    justify-content: center;
+    align-items: center;
+    font-size: 6rem;
 
-  svg {
-    color: var(--clr-dark-cosmos-300);
-    border: 0.2rem solid var(--clr-dark-cosmos-300);
-    border-radius: 5rem;
-    padding: 2rem;
-    background-color: var(--clr-secondary-300);
+    svg {
+      color: var(--clr-dark-cosmos-300);
+      border: 0.2rem solid var(--clr-dark-cosmos-300);
+      border-radius: 5rem;
+      padding: 2rem;
+      background-color: var(--clr-secondary-300);
+    }
   }
-}
-
-@include abs.mq(medium) {
-  .btn.btn-primary.btn-big-hg {
-    width: 45%;
+  & .btn--big-hg {
     margin: 0.5rem;
+  }
+
+  @include abs.mq(medium) {
+    .btn--big-hg {
+      width: 45%;
+    }
   }
 }

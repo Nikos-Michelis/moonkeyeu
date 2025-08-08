@@ -19,7 +19,6 @@ const LaunchesSection = (
         component: SkeletonLandscapeLoader,
         styles: {
             wrapper: "large-wrapper",
-            img: "small-img",
             section: "launches-articles",
         },
     };

@@ -1,7 +1,7 @@
 @use "../../abstracts/index" as *;
 
 .badge {
-  &.badge-pill {
+  &--pill {
     font-size: 0.7rem;
     text-transform: uppercase;
     color: var(--clr-dark-cosmos-300);

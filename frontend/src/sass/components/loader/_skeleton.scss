@@ -1,68 +1,72 @@
 .skeleton {
   display: block;
-  width: 95%;
   padding: 0.5rem 0;
-  background-image:
-          linear-gradient(
-                          90deg,
-                          rgba(hsl(272, 57%, 75%), 0),
-                          rgba(hsl(272, 57%, 75%), 0.5),
-                          rgba(hsl(272, 57%, 75%), 0)
-          );
+  background-image: linear-gradient(
+                  90deg,
+                  rgba(hsl(272, 57%, 75%), 0),
+                  rgba(hsl(272, 57%, 75%), 0.5),
+                  rgba(hsl(272, 57%, 75%), 0)
+  );
   background-size: 40px 100%;
   background-repeat: no-repeat;
   background-position: left -40px top 0;
   animation: shine 1s ease infinite;
   will-change: transform, opacity;
-}
 
-.skeleton-img{
-  width: 100%;
-}
-.skeleton-circle{
-  width: 1.8rem;
-  height: 1.8rem;
-  border-radius: 10rem;
-  margin: 1px 10px;
-  padding: 10px;
-}
-.skeleton-title {
-  width: 70%;
-  height: 0.2rem;
-  margin: 0.5rem 0.2rem;
-  border-radius: 0.2rem;
-}
 
-.skeleton-subtitle {
-  width: 50%;
-  height: 0.2rem;
-  margin: 0.5rem 0.2rem;
-  border-radius: 0.2rem;
-}
+  &--img {
+    width: 100%;
+    padding: 0  ;
+  }
 
-.skeleton-text {
-  width: 100%;
-  height: 0.2rem;
-  margin: 0.5rem 0.2rem;
-  border-radius: 0.2rem;
-}
+  &--circle {
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 10rem;
+    margin: 1px 10px;
+    padding: 10px;
+  }
 
-.skeleton-heading {
-  width: 40%;
-  height: 0.2rem;
-  margin: 0.5rem 0.2rem;
-  border-radius: 0.2rem;
-}
+  &--title {
+    width: 70%;
+    height: 0.2rem;
+    margin: 0.5rem 0.2rem;
+    border-radius: 0.2rem;
+  }
 
-.skeleton-paragraph {
-  width: 100%;
-  height: 120px;
-  margin: 16px 0;
-}
-.skeleton-btn {
-  width: 10%;
-  height: 0.2rem;
-  border-radius: 0.2rem;
+  &--subtitle {
+    width: 50%;
+    height: 0.2rem;
+    margin: 0.5rem 0.2rem;
+    border-radius: 0.2rem;
+  }
+
+  &--text {
+    width: 100%;
+    height: 0.2rem;
+    margin: 0.5rem 0.2rem;
+    border-radius: 0.2rem;
+  }
+
+  &--heading {
+    width: 40%;
+    height: 0.2rem;
+    margin: 0.5rem 0.2rem;
+    border-radius: 0.2rem;
+  }
+
+  &--paragraph {
+    width: 100%;
+    height: 120px;
+    margin: 16px 0;
+  }
+
+  &--btn {
+    width: 10%;
+    height: 0.2rem;
+    border-radius: 0.2rem;
+    margin-inline: 0.625rem;
+  }
 }
 
 @keyframes shine {

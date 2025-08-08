@@ -1,0 +1,11 @@
+.hover {
+  transition: transform 0.1s ease-in-out;
+
+  &.scale-small:hover{
+    transform: scale(1.2);
+  }
+
+  &.scale-medium:hover{
+    transform: scale(1.5);
+  }
+}

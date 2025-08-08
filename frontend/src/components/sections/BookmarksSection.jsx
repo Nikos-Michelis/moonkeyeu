@@ -16,9 +16,7 @@ const BookmarksSection = ({ bookmarks, isPending, isFetching, isError }) =>{
         component: SkeletonBookMarkLoader,
         styles: {
             wrapper: "small-wrapper",
-            section: "bookmark-section",
-            grid: "__bookmark-grid",
-            bottomGap:"bottom-gap"
+            section: "bookmark-section"
         },
     };
 
@@ -37,12 +35,12 @@ const BookmarksSection = ({ bookmarks, isPending, isFetching, isError }) =>{
     return(
         <section className="bookmarks-section">
             <div className="flex justify-center margin-block-end-15">
-                <div className="container __wrapper __portrait flex justify-center overlay rounded-md" data-type="fixed-inherit" data-spacing="none">
+                <div className="grid-layout--col container container--light-overlay flex justify-center rounded-md" data-layout="grid-wrapper" data-spacing="none">
                     <div className="container">
                         <div className="flex justify-space-between margin-block-start-4 margin-inline-4">
                             { options?.showBackBtn &&
                                 (
-                                    <Button className="btn-transparent margin-block-2" onClick={() => window.history.back()}>
+                                    <Button className="btn--transparent margin-block-2" onClick={() => window.history.back()}>
                                         <FontAwesomeIcon icon={faChevronLeft} /> Back
                                     </Button>
                                 )
@@ -57,27 +55,26 @@ const BookmarksSection = ({ bookmarks, isPending, isFetching, isError }) =>{
                                 )
                             }
                         </div>
-                        {bookmarks.length > 0 ?
-                            <div className="portrait-grid">
-                                <SkeletonLoader
-                                    isFetching={isFetching}
-                                    isPending={isPending || status.isPending}
-                                    isError={isError}
-                                    contentConfig={contentConfig}>
-                                    {bookmarks.map(bookmark => (
-                                            <BookmarkCard
-                                                key={bookmark?.id}
-                                                {...bookmark}
-                                            />
-                                        ))}
-                                </SkeletonLoader>
-                            </div>
-                        :
-                            <div className="padding-8 text-center">
-                                <h2>{emptyList.heading}</h2>
-                                <p>{emptyList.message} {emptyList.icon}</p>
-                            </div>
-                        }
+                        <div className="grid-layout__portrait">
+                            <SkeletonLoader
+                                isFetching={isFetching}
+                                isPending={isPending || status.isPending}
+                                isError={isError}
+                                contentConfig={contentConfig}>
+                                {bookmarks.length > 0 ?
+                                    bookmarks.map(bookmark => (
+                                    <BookmarkCard
+                                        key={bookmark?.id}
+                                        {...bookmark}
+                                    />
+                                )) :
+                                    <div className="padding-8 text-center">
+                                        <h2>{emptyList.heading}</h2>
+                                        <p>{emptyList.message} {emptyList.icon}</p>
+                                    </div>
+                                }
+                            </SkeletonLoader>
+                        </div>
                     </div>
                     <aside>
                         <BuyMeACoffee />

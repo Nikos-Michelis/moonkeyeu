@@ -23,9 +23,9 @@ const SearchPopUp = ({setSearchValue, value}) => {
         <div className="flex justify-end align-center pos-fixed bottom-8 left-0 right-0 z-overlay margin-block-4 margin-inline-2">
                 <div ref={searchRef} className={`box-shadow-2 width-fade ${ open ? "show md" : ""}`}>
                     <div className="flex justify-space-between" data-type="full-width">
-                        <div className="search-container flex justify-end">
+                        <div className="search flex justify-end">
                             <input
-                                className="searchbar search-small"
+                                className="search__searchbar search__searchbar--small"
                                 value={value || ""}
                                 type="text"
                                 name="search"
@@ -33,7 +33,7 @@ const SearchPopUp = ({setSearchValue, value}) => {
                                 onChange={(e) => setSearchValue(e.target.value)}
 
                             />
-                            <div className="search-button">
+                            <div className="search__btn-search">
                                 <FontAwesomeIcon icon={faSearch} />
                             </div>
                         </div>

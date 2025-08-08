@@ -7,7 +7,7 @@ import {useCallback, useEffect, useRef, useState} from "react";
 
 export const useCountDown = (initialTimeInMillis, interval) => {
     const targetTime = useRef(initialTimeInMillis);
-    const [remainingTime, setRemainingTime] = useState({months: 0, days: 0, hours: 0, minutes: 0, seconds: 0,});
+    const [remainingTime, setRemainingTime] = useState({ months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 });
     const intervalIdRef = useRef(null);
 
     const dateTimeFormat = useCallback((distance) => {

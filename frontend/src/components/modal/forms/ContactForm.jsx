@@ -6,11 +6,10 @@ import ErrorBox from "@/components/utils/ErrorBox.jsx";
 import Select from "@/components/utils/Select.jsx";
 import TextArea from "@/components/utils/TextArea.jsx";
 import {value} from "lodash/seq.js";
-import ScrollToTop from "@/components/utils/ScrollToTop.jsx";
 import {useCreateMutation} from "@/services/mutations.jsx";
 import {useAuth} from "@/context/AuthProvider.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faArrowRight, faChevronLeft, faSpinner} from '@fortawesome/free-solid-svg-icons';
+import {faArrowRight, faBug, faChevronLeft, faSpinner} from '@fortawesome/free-solid-svg-icons';
 import {LinkButton} from "@/components/button/LinkButton.jsx";
 
 const ContactForm = () => {
@@ -59,14 +58,31 @@ const ContactForm = () => {
     return (
         <>
             <section className="contact-section">
-                <div className="container flex justify-center" data-height="full" data-type="medium" data-spacing="none">
-                    <div className="container overlay flex flex-column align-center  padding-inline-8 padding-block-10" data-type="fixed-inherit" data-spacing="none">
+                <div className="container flex justify-center" data-type="medium" data-spacing="none">
+                    <div className="container container--light-overlay flex flex-column align-center padding-inline-8 padding-block-10" data-type="fixed-inherit" data-spacing="none">
                         <div className="container flex justify-start padding-block-end-4">
-                            <Button className="btn-transparent" onClick={() => window.history.back()}>
+                            <Button
+                                className="btn--transparent"
+                                onClick={() => window.history.back()}>
                                 <FontAwesomeIcon icon={faChevronLeft} /> Back
                             </Button>
                         </div>
-                        <div className="container __form box-shadow-3 bg-star-100 rounded-sm margin-5" data-type="narrow">
+                        <div className="container margin-block-8" data-type="narrow">
+                            <div className="flex justify-center">
+                                <h2 className="heading-2"><FontAwesomeIcon icon={faBug}/> Report</h2>
+                            </div>
+                            <hr className="bg-hr-600"/>
+                            <p className="clr-star-300 fs-small-300">
+                                To help us organize bug reports more effectively, please create a new issue
+                                <LinkButton
+                                    className="btn--transparent fw-bold" to="https://github.com/Nikos-Michelis/MoonkeyEU-Feedback/issues/new"
+                                    isExternal={true}> here. </LinkButton>
+                                Thank you for your feedback — we're striving to make the platform better!
+                            </p>
+                            <hr className="bg-hr-600"/>
+                            <p className="clr-star-300 margin-block-start-2 fs-small-300 text-center">You can email us at moonkeyeu@gmail.com</p>
+                        </div>
+                        <div className="container container--form margin-block-end-12 margin-inline-5" data-type="narrow">
                             <div className="form-content">
                                 <h2>Contact</h2>
                                 {(errors && Object.keys(errors).length > 0 || contactFormMutation.error) && <ErrorBox errors={errors} apiError={contactFormMutation.error?.response?.data}/>}
@@ -118,7 +134,7 @@ const ContactForm = () => {
                                         />
                                     </div>
                                     <div className="container flex justify-center">
-                                        <Button className="btn btn-primary btn-big" type="submit" disabled={contactFormMutation.isPending}>
+                                        <Button className="btn btn--primary btn--big" type="submit" disabled={contactFormMutation.isPending}>
                                             {contactFormMutation.isPending
                                                 ? <FontAwesomeIcon icon={faSpinner} spin />
                                                 : <FontAwesomeIcon icon={faArrowRight} />
@@ -127,17 +143,6 @@ const ContactForm = () => {
                                     </div>
                                 </form>
                             </div>
-                        </div>
-                        <div className="container margin-block-8" data-type="narrow">
-                            <p className="clr-star-300 fs-small-300">
-                                To help us organize bug reports more effectively, please create a new issue
-                                <LinkButton
-                                    className="btn-transparent fw-bold" to="https://github.com/Nikos-Michelis/MoonkeyEU-Feedback/issues/new"
-                                    isExternal={true}> here. </LinkButton>
-                                Thank you for your feedback — we're striving to make the platform better!
-                            </p>
-                            <hr className="bg-hr-600"/>
-                            <p className="clr-star-300 margin-block-start-2 fs-small-300 text-center">You can email us at moonkeyeu@gmail.com</p>
                         </div>
                     </div>
                 </div>

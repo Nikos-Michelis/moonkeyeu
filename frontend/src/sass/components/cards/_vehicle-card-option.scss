@@ -1,30 +1,33 @@
 @use "../../abstracts" as abs;
 
-article.portrait-card-wrapper.vehicle-card-option {
-  min-height: 400px;
-  background-position: center center;
-  background-size: cover;
-  & .portrait-card-container {
-    background-color: rgb(50 50 50 / 83%);
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    color: var(--clr-star-300);
-    font-size: 1rem;
-    & p{
-      padding: 1rem;
+.portrait-card {
+  &--vehicle {
+    min-height: 400px;
+    background-position: center center;
+    background-size: cover;
+
+    &__container {
+      background-color: rgb(50 50 50 / 83%);
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      color: var(--clr-star-300);
+      font-size: 1rem;
+      border: 0.2rem solid var(--clr-dark-cosmos-300);
+      border-radius: 0.2rem;
+      box-shadow: 0 0.35rem 0 var(--clr-dark-cosmos-300);
     }
   }
-}
 
-@include abs.mq(small) {
-  article.portrait-card-wrapper.vehicle-card-option {
-    max-width: max-content;
+  @include abs.mq(small) {
+    &--vehicle {
+      max-width: max-content;
+    }
   }
-}
 
-@include abs.mq(xxl) {
-  article.portrait-card-wrapper.vehicle-card-option {
-    max-width: 600px;
+  @include abs.mq(xxl) {
+    &--vehicle {
+      max-width: 600px;
+    }
   }
 }

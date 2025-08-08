@@ -15,14 +15,14 @@ import java.util.Set;
 @NoArgsConstructor
 @JsonPropertyOrder(
         {
-                "id",
-                "name",
-                "type",
-                "administrator",
-                "launchers",
-                "spacecraft",
-                "country",
-                "images",
+            "id",
+            "name",
+            "type",
+            "administrator",
+            "launchers",
+            "spacecraft",
+            "country",
+            "images",
         })
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AgencySummarizedDTO implements DTOEntity {

@@ -10,7 +10,6 @@ const MessagesSection = ({ messages, isPending , isFetching , isError  }) =>{
         component: SkeletonLandscapeLoader,
         styles: {
             wrapper: "small-wrapper",
-            img: "small-img",
             section: "messages-section",
         },
     };

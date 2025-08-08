@@ -6,11 +6,11 @@ import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 const YoutubeVideo = ({videoUrl}) =>{
     return(
         <section className="video-section">
-            <div className="heading-box">
+            <div className="article__heading-box">
                 <FontAwesomeIcon icon={faYoutube} />
                 <h2>Launch Video</h2>
             </div>
-            <hr className="hr-7-sm bg-hr-600" />
+            <hr className="hr-100-sm bg-hr-600" />
             <YouTubeEmbed videoUrl={videoUrl}></YouTubeEmbed>
         </section>
     )

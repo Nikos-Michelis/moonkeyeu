@@ -17,7 +17,9 @@ export function VideoModal() {
     return(
         <div className="modal">
             <div className="modal-container modal-youtube">
-                <Button onClick={handleClose} className="btn-transparent fs-small-600 pos-fixed top-0 right-0">
+                <Button
+                    onClick={handleClose}
+                    className="btn--transparent fs-small-600 pos-fixed top-0 right-0">
                     <FontAwesomeIcon icon={faXmark} />
                 </Button>
                 <div className="modal-content">

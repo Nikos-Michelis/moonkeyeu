@@ -1,91 +1,108 @@
 @use "../../../abstracts/index" as abs;
 
-article.portrait-card-wrapper {
-  width: 100%;
-  border-radius: 0.2rem;
-  border: 0.3rem solid var(--clr-dark-cosmos-300);
-  overflow: hidden;
+.portrait-card {
+  position: relative;
+  word-wrap: break-word;
   box-sizing: inherit;
-  box-shadow: 0 0.3rem 0 var(--clr-dark-cosmos-300);
-  &:not([class*="bg-"]) {
-    background-color: var(--clr-main-300);
-  }
-  &.small-card{
+  width: 100%;
+
+  &__container {
+    border-radius: 0.2rem;
+    border: 0.3rem solid var(--clr-dark-cosmos-300);
+    overflow: hidden;
+    box-shadow: 0 0.3rem 0 var(--clr-dark-cosmos-300);
     width: 100%;
+    &:not([class*="bg-"]) {
+      background-color: var(--clr-main-300);
+    }
+    &--small {
+      width: 100%;
+    }
   }
 
-  & div.portrait-card-container {
-    & a.sidebar-image-container {
-      position: relative;
+  &__image-link {
+    position: relative;
+    display: block;
+    z-index: 1;
+
+    &::after {
+      content: '';
+      background-color: rgba(224, 218, 239, 0.2980392157);
+      width: 100%;
+      height: 100%;
+      border-radius: 2px;
+      position: absolute;
+      top: 0;
+      left: 0;
       display: block;
-      z-index: 1;
-      & img.sidebar-image {
-        border-radius: 2px;
-        display: block;
-        width: 100%;
-        height: 11.5rem;
-        object-fit: cover;
-        outline: 0.2rem solid var(--clr-dark-cosmos-300);
-        pointer-events: none;
-        -webkit-user-drag: none;
-        user-select: none;
-      }
-      &::after {
-        content: '';
-        background-color: rgba(224, 218, 239, 0.2980392157);
-        width: 100%;
-        height: 100%;
-        border-radius: 2px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: block;
-        z-index: 2;
-        opacity: 0;
-        transition: opacity 0.3s ease-out;
-      }
-
-      &:hover::after {
-        opacity: 1;
-      }
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.3s ease-out;
     }
 
-    & div.card-info-section {
-      height: 7rem;
-      & p {
-        width: 100%;
-        margin: 0;
-        @include abs.font($font-size: var(--fs-200), $font-weight: 400, $color:var(--clr-dark-cosmos-300));
-      }
-      & h2 {
-        @include abs.font($font-size: var(--fs-300), $font-weight: 600, $color: var(--clr-dark-cosmos-300));
+    &:hover::after {
+      opacity: 1;
+    }
+  }
+
+  &__sidebar-img {
+    border-radius: 2px;
+    display: block;
+    width: 100%;
+    height: 11.5rem;
+    object-fit: cover;
+    outline: 0.2rem solid var(--clr-dark-cosmos-300);
+    pointer-events: none;
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
+  &__info {
+    height: 7rem;
+  }
+
+  &__text {
+    width: 100%;
+    margin: 0;
+    @include abs.font($font-size: var(--fs-200), $font-weight: 400, $color: var(--clr-dark-cosmos-300));
+  }
+
+  &__title {
+    @include abs.font($font-size: var(--fs-300), $font-weight: 600, $color: var(--clr-dark-cosmos-300));
+  }
+
+  &__details-span {
+    display: inline-block;
+  }
+
+
+  @include abs.mq(small) {
+    &__container {
+      max-width: 400px;
+      &__details-span {
+        padding: 0.625rem 0;
+        max-width: 5rem;
       }
     }
   }
-}
-@include abs.mq(small) {
-  article.portrait-card-wrapper {
-    max-width: 400px;
-    & div.card-details span {
-      padding: 0.625rem 0;
-      max-width: 5rem;
+
+  @include abs.mq(medium) {
+    &__container {
+      max-width: 390px;
     }
   }
-}
-@include abs.mq(medium) {
-  article.portrait-card-wrapper {
-    max-width: 390px;
+
+  @include abs.mq(xl) {
+    &__container:not(.portrait-card__container--small) {
+      max-width: 300px;
+      min-width: 220px;
+    }
   }
-}
-@include abs.mq(xl) {
-  article.portrait-card-wrapper:not(.small-card) {
-    max-width: 300px;
-    min-width: 220px;
-  }
-}
-@include abs.mq(xxl) {
-  article.portrait-card-wrapper:not(.small-card) {
-    max-width: 250px;
-    min-width: 250px;
+
+  @include abs.mq(xxl) {
+    &__container:not(.portrait-card__container--small):not(.portrait-card--vehicle__container) {
+      max-width: 250px;
+      min-width: 250px;
+    }
   }
 }

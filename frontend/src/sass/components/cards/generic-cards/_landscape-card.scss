@@ -1,138 +1,147 @@
 @use "../../../abstracts/index" as abs;
 
-article.landscape-card-outer-wrapper{
+.landscape-card {
   position: relative;
   word-wrap: break-word;
   box-sizing: inherit;
   width: 100%;
-  & div.landscape-card-wrapper {
+
+  &__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--clr-main-300);
     width: 100%;
-    & div.card-info-container {
-      position: relative;
-      background-color: var(--clr-main-300);
-      width: 100%;
+    border: 0.2rem solid var(--clr-dark-cosmos-300);
+    border-radius: 0.2rem;
+    box-shadow: 0 0.35rem 0 var(--clr-dark-cosmos-300);
+    &:not(.landscape-card__container--article-card) {
       max-width: 500px;
-      border: 0.2rem solid var(--clr-dark-cosmos-300);
-      border-radius: 0.2rem;
-      box-shadow: 0 0.35rem 0 var(--clr-dark-cosmos-300);
-      div.card-img-box {
-        width: 100%;
-        height: 100%;
-        & img.card-img {
-          width: 100%;
-          height: 100%;
-          background-size: cover;
-          background-position: center;
-          object-fit: cover;
-          display: block;
-          outline: 0.18rem solid var(--clr-dark-cosmos-300);
-          background-color: var(--clr-star-300);
-          pointer-events: none;
-          -webkit-user-drag: none;
-          user-select: none;
-          &.small-img {
-            aspect-ratio: 3 / 2;
-          }
-          &.scale-down-img{
-            object-fit: scale-down;
-            padding:0.2rem;
-          }
-        }
-      }
+    }
+    &--article-card{
+      max-width: 850px;
+    }
+  }
 
-      & section.card-info-section {
-        color: var(--clr-dark-cosmos-300);
-        width: 100%;
-        height: 100%;
-        padding: 1rem 1rem 0 1rem;
-        & div.card-detail-container {
-          & h3 {
-            font-size: var(--fs-400);
-          }
-          & > div.card-detail-box {
-            display: flex;
-            align-items: baseline;
-            & svg {
-              margin: 0 0.5rem;
-            }
-            &.ellipsis{
-              @include abs.multiline-ellipsis(3);
-            }
-            &.scrolling {
-              max-height: 5rem;
-              overflow-y: scroll;
-            }
-          }
-        }
-      }
+  &__media {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
 
-      & div.bookmark-article-box {
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        z-index: 2;
-        top: 1rem;
-        right: 0.5rem;
-        @include abs.font($font-size: var(--fs-600), $color: var(--clr-star-300));
-        background-color: rgba(2, 0, 60, 0.15);
-        border-radius: 3.125rem;
-        & button {
-          &:hover, &:active {
-            cursor: pointer;
-            & svg {
-              color: var(--clr-main-300);
-              transition: color 0.2s ease;
-            }
-          }
+  &__image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    display: block;
+    outline: 0.18rem solid var(--clr-dark-cosmos-300);
+    background-color: var(--clr-star-300);
+    pointer-events: none;
+    -webkit-user-drag: none;
+    user-select: none;
+
+    &--small {
+      aspect-ratio: 3 / 2;
+    }
+
+    &--scale-down {
+      object-fit: scale-down;
+      padding: 0.2rem;
+    }
+  }
+
+  &__content {
+    color: var(--clr-dark-cosmos-300);
+    width: 100%;
+    height: 100%;
+    padding: 1rem 1rem 0 1rem;
+  }
+
+  & .title{
+      font-size: var(--fs-400);
+  }
+
+  &__assistance {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+  }
+
+  &__detail-box {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: nowrap;
+
+    & .title{
+      font-size: var(--fs-400);
+    }
+
+    & svg {
+      margin: 0 0.5rem;
+    }
+  }
+
+  &--ellipsis {
+    @include abs.multiline-ellipsis(3);
+  }
+
+  &--scrolling {
+    max-height: 5rem;
+    overflow-y: scroll;
+  }
+
+  &__btn-bookmark {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    z-index: 2;
+    top: 1rem;
+    right: 0.5rem;
+    @include abs.font($font-size: var(--fs-600), $color: var(--clr-star-300));
+    background-color: rgba(2, 0, 60, 0.15);
+    border-radius: 3.125rem;
+
+    & button {
+      &:hover, &:active {
+        cursor: pointer;
+        & svg {
+          color: var(--clr-main-300);
+          transition: color 0.2s ease;
         }
       }
     }
   }
-}
 
-@include abs.mq(medium) {
-  article.landscape-card-outer-wrapper{
-    & div.landscape-card-wrapper {
-      & div.card-info-container {
-        max-width: 430px;
-        min-width: 430px;
-        position: relative;
-        flex-direction: row;
-        & div.card-img-box {
-          width: 50%;
-        }
-        & div.bookmark-article-box {
-          right: 18.2rem;
-        }
-      }
+  @include abs.mq(medium) {
+    &__container {
+      flex-direction: row;
+    }
+
+    &__container:not(.landscape-card__container--article-card) {
+      max-width: 430px;
+      min-width: 430px;
+    }
+
+    &__media {
+      width: 50%;
     }
   }
-}
 
-@include abs.mq(xl) {
-  article.landscape-card-outer-wrapper {
-    & div.landscape-card-wrapper {
-      & div.card-info-container {
-        max-width: 600px;
-        min-width: 600px;
-        & div.bookmark-article-box {
-          right: 25.4rem;
-        }
-      }
+  @include abs.mq(xl) {
+    &__container:not(.landscape-card__container--article-card)  {
+      max-width: 600px;
+      min-width: 600px;
     }
   }
-}
 
-@include abs.mq(xxl) {
-  article.landscape-card-outer-wrapper {
-    & div.landscape-card-wrapper {
-      & div.card-info-container {
-        max-width: 800px;
-        min-width: 800px;
-        & div.bookmark-article-box {
-          right: 33.8rem;
-        }
-      }
+  @include abs.mq(xxl) {
+    &__container:not(.landscape-card__container--article-card)  {
+      max-width: 800px;
+      min-width: 800px;
     }
   }
 }

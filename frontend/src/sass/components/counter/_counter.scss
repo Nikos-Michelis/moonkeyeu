@@ -1,0 +1,41 @@
+@use "../../abstracts/index" as abs;
+
+.counter {
+  display: flex;
+  justify-content: center;
+  padding: 0.25rem;
+
+  &--container{
+    position: absolute;
+    top: 27.2rem;
+    background-color: var(--clr-secondary-300);
+    padding: 0.5rem;
+    border: 2px solid var(--clr-dark-cosmos-300);
+    border-radius: 0.3rem;
+    box-shadow: 0 0.3rem 0 var(--clr-dark-cosmos-300);
+  }
+
+  &__digit-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0.2rem;
+  }
+
+  &__number {
+    display: flex;
+    flex-wrap: nowrap;
+    color: var(--clr-dark-cosmos-300);
+    & > span {
+      text-align: center;
+      flex-wrap: nowrap;
+      padding-top: 0.15rem;
+      font-weight: bold
+    }
+  }
+
+  &__label {
+    @include abs.font($font-size: var(--fs-200), $font-weight: bold, $color: var(--clr-dark-cosmos-300), $font-variant: all-small-caps);
+    text-align: center;
+  }
+}

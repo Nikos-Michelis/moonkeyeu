@@ -52,8 +52,8 @@ const ResetPassword = () =>{
             <ScrollToTop behavior="auto" />
             <section className="reset-password-section">
                 <div className="container flex justify-center" data-height="full" data-type="medium" data-spacing="none">
-                    <div className="container overlay flex flex-column align-center  padding-inline-8 padding-block-10" data-type="fixed-inherit" data-spacing="none">
-                        <div className="container __form box-shadow-3 bg-star-100 rounded-sm margin-5" data-type="narrow">
+                    <div className="container container--light-overlay flex flex-column align-center  padding-inline-8 padding-block-10" data-type="fixed-inherit" data-spacing="none">
+                        <div className="container container--form margin-5" data-type="narrow">
                             <div className="form-content">
                                 <h2>Reset Password</h2>
                                 {(errors && Object.keys(errors).length > 0 || changePasswordMutation.error) && <ErrorBox errors={errors} apiError={changePasswordMutation.error?.response?.data}/>}
@@ -84,7 +84,7 @@ const ResetPassword = () =>{
                                     />
                                     <div className="container flex justify-center">
                                         <Button
-                                            className="btn btn-primary btn-big"
+                                            className="btn btn--primary btn--big"
                                             type="submit"
                                             disabled={changePasswordMutation.isPending}>
                                             {changePasswordMutation.isPending

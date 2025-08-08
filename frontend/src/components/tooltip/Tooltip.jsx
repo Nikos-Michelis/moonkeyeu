@@ -1,11 +1,16 @@
 import React from "react";
 
-const Tooltip = ({message, children }) => {
+const Tooltip = ({message, children, show = false }) => {
     return (
-        <div className="tooltip-wrapper">
-            {children}
-            <div className="tooltiptext">{message}</div>
-        </div>
+        <>
+            {!show && (
+                <div className="tooltip">
+                    {children}
+                    <div className="tooltip__text">{message}</div>
+                </div>
+            )}
+            {show && children}
+        </>
     );
 };
 export default Tooltip;
