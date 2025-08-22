@@ -1,6 +1,7 @@
 package com.moonkeyeu.core.api.configuration.caching;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.moonkeyeu.core.api.configuration.utils.CacheNames;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
@@ -19,31 +20,43 @@ public class CacheConfig {
         cacheManager.setCaffeine(Caffeine.newBuilder()
                 .expireAfterWrite(1, TimeUnit.HOURS)
                 .maximumSize(5000));
-        cacheManager.registerCustomCache("filters-cache",
+        cacheManager.registerCustomCache(
+                CacheNames.NASA_APOD_CACHE,
                 Caffeine.newBuilder()
                         .maximumSize(3000)
                         .build()
         );
-        cacheManager.setCacheNames(List.of(
-                "filters-cache",
-                "launch-cache",
-                "astronaut-cache",
-                "launcher-cache",
-                "spacecraft-cache",
-                "program-cache",
-                "agencies-cache",
-                "pad-cache",
-                "rocket-cache",
-                "rocket-images-cache",
-                "agencies-images-cache",
-                "spacecraft-images-cache",
-                "pads-images-cache",
-                "locations-images-cache",
-                "astronauts-images-cache",
-                "launchers-images-cache",
-                "mission-patches-images-cache",
-                "programs-images-cache"
-        ));
+        cacheManager.registerCustomCache(
+                CacheNames.FILTERS_CACHE,
+                Caffeine.newBuilder()
+                        .maximumSize(10)
+                        .build()
+        );
+        cacheManager.setCacheNames(
+                List.of(
+                        CacheNames.LAUNCH_CACHE,
+                        CacheNames.ASTRONAUT_CACHE,
+                        CacheNames.LAUNCHER_CACHE,
+                        CacheNames.SPACECRAFT_CACHE,
+                        CacheNames.PROGRAM_CACHE,
+                        CacheNames.AGENCIES_CACHE,
+                        CacheNames.PAD_CACHE,
+                        CacheNames.ROCKET_CACHE,
+                        CacheNames.ROCKET_IMAGES_CACHE,
+                        CacheNames.AGENCIES_IMAGES_CACHE,
+                        CacheNames.SPACECRAFT_IMAGES_CACHE,
+                        CacheNames.PADS_IMAGES_CACHE,
+                        CacheNames.LOCATIONS_IMAGES_CACHE,
+                        CacheNames.ASTRONAUTS_IMAGES_CACHE,
+                        CacheNames.LAUNCHERS_IMAGES_CACHE,
+                        CacheNames.MISSION_PATCHES_IMAGES_CACHE,
+                        CacheNames.PROGRAMS_IMAGES_CACHE,
+                        CacheNames.BOOKMARKS_CACHE,
+                        CacheNames.BOOKMARKED_ITEMS_CACHE,
+                        CacheNames.CONTACT_MESSAGES_CACHE,
+                        CacheNames.MEMBERS_CACHE
+                )
+        );
         return cacheManager;
     }
 }

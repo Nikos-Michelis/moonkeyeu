@@ -12,10 +12,11 @@ export const useParameterizedQuery = (
         refetchInterval = 30 * 60 * 1000,
         refetchOnWindowFocus = true,
         retry = 2,
+        enableBoundary = true,
         queryOptions = {},
         options = { withCredentials: false, Csrf: false }
     }) => {
-    const {showBoundary} = useErrorBoundary();
+    const { showBoundary } = useErrorBoundary();
        return useQuery({
             queryKey: [cacheKey, params],
             queryFn: () => handleGet(url, options),
@@ -26,7 +27,7 @@ export const useParameterizedQuery = (
             staleTime: staleTime,
             retry: retry,
             ...queryOptions,
-            throwOnError: (error) => showBoundary(error?.response),
+            throwOnError: (error) => enableBoundary ? showBoundary(error?.response) : false,
        });
 };
 

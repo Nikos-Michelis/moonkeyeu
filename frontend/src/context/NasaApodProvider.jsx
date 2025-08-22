@@ -9,11 +9,11 @@ export const NasaApodContext = createContext({
 });
 
 export const NasaApodProvider = ({ children }) => {
-    const baseUrl = import.meta.env.VITE_NASA_APOD_API_URL;
-    const hours = 24 * 60 * 60 * 1000;
+    const baseUrl = import.meta.env.VITE_BACKEND_BASE_URL;
+    const hours = 2 * 60 * 60 * 1000;
     const { data, isPending, isFetching, isError}
         = useSimpleQuery({
-            url: baseUrl,
+            url: `${baseUrl}/public/nasa/apod`,
             cacheKey: 'nasa-apod',
             staleTime: hours,
             refetchInterval: hours,

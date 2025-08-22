@@ -34,12 +34,12 @@ const NasaApod = ({nasaApod, isPendingNasaApod, isFetchingNasaApod, isErrorNasaA
                                 <div>No image available at the moment.</div>
                             )
                         }
-                        </SkeletonLoader>
-                        <div className="flex justify-center">
-                            <LinkButton className="btn btn--primary btn--lg" to="/nasa-apod">
-                                <FontAwesomeIcon icon={faImage} /> VIEW IMAGE
-                            </LinkButton>
-                        </div>
+                    </SkeletonLoader>
+                    <div className="flex justify-center">
+                        <LinkButton className="btn btn--primary btn--lg" to="/nasa-apod" disabled={isErrorNasaApod}>
+                            <FontAwesomeIcon icon={faImage} /> VIEW IMAGE
+                        </LinkButton>
+                    </div>
                 </div>
             </div>
         </section>

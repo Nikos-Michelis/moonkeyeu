@@ -61,8 +61,10 @@ services:
         MAIL_PORT: ${MAIL_PORT}
         MAIL_USERNAME: ${MAIL_USERNAME}
         MAIL_PASSWORD: ${MAIL_PASSWORD}
+        MAIL_SENDER: ${MAIL_SENDER}
         GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
         GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+        NASA_APOD_KEY: ${NASA_APOD_KEY}
     volumes:
       - ./jwt-keys:/app/jwt-keys
     ports:

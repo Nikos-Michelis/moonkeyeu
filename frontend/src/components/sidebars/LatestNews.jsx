@@ -8,6 +8,7 @@ import {useNasaApod} from "@/context/NasaApodProvider.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faNewspaper } from '@fortawesome/free-regular-svg-icons';
 import NewsAsideArticle from "../cards/NewsAsideArticle.jsx";
+import {LinkButton} from "@/components/button/LinkButton.jsx";
 
 const LatestNews = () => {
     const { data: newsData, isPending: isPendingNews, isFetching: isFetchingNews, isError: isErrorNews } = useSpaceFlightNews();
@@ -30,36 +31,34 @@ const LatestNews = () => {
                             isFetching={isFetchingNews}
                             isError={isErrorNews}
                             contentConfig={contentConfig}>
-                        <div className="sidebar__list">
-                                {newsData?.results?.length > 0 && (
-                                    newsData.results.map((article) => (
-                                        <NewsAsideArticle
-                                            key={article.id}
-                                            imageSrc={article.image_url}
-                                            title={article.title}
-                                            author={article.news_site}
-                                            url={article.url}
-                                        />
-                                    )))
-                                }
-                        </div>
+                            <div className="sidebar__list">
+                                    {newsData?.results?.length > 0 && (
+                                        newsData.results.map((article) => (
+                                            <NewsAsideArticle
+                                                key={article.id}
+                                                imageSrc={article.image_url}
+                                                title={article.title}
+                                                author={article.news_site}
+                                                url={article.url}
+                                            />
+                                        )))
+                                    }
+                            </div>
                         </SkeletonLoader>
                         <div className="flex justify-center margin-block-start-2">
-                            <Link className="btn btn--primary" to="/news">
+                            <LinkButton className="btn btn--primary" to="/news" disabled={isErrorNews}>
                                 <FontAwesomeIcon icon={faNewspaper} /> SEE MORE NEWS
-                            </Link>
+                            </LinkButton>
                         </div>
                     </div>
                 </div>
             </section>
-            {nasaApod?.media_type === "image" &&
-                <NasaApod
-                    nasaApod={nasaApod}
-                    isPendingNasaApod={isPendingNasaApod}
-                    isFetchingNasaApod={isFetchingNasaApod}
-                    isErrorNasaApod={isErrorNasaApod}
-                />
-            }
+            <NasaApod
+                nasaApod={nasaApod}
+                isPendingNasaApod={isPendingNasaApod}
+                isFetchingNasaApod={isFetchingNasaApod}
+                isErrorNasaApod={isErrorNasaApod}
+            />
         </>
     );
 };

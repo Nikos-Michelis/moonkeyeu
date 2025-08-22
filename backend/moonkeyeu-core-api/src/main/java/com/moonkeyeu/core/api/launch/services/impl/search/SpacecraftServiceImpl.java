@@ -1,5 +1,6 @@
-package com.moonkeyeu.core.api.launch.services.impl;
+package com.moonkeyeu.core.api.launch.services.impl.search;
 
+import com.moonkeyeu.core.api.configuration.utils.CacheNames;
 import com.moonkeyeu.core.api.launch.dto.paging.PageSortingDTO;
 import com.moonkeyeu.core.api.launch.dto.spacecraft.SpacecraftConfigSummarizedDTO;
 import com.moonkeyeu.core.api.launch.dto.spacecraft.SpacecraftConfigurationDTO;
@@ -33,8 +34,8 @@ public class SpacecraftServiceImpl implements SpacecraftService {
         this.spacecraftRepository = spacecraftRepository;
     }
 
-    @Cacheable(value = "spacecraft-cache",  key = "'spacecraft-pagination' + #requestParams + #pageSortingDTO", sync = true)
     @Override
+    @Cacheable(value = CacheNames.SPACECRAFT_CACHE,  key = "'spacecraft-pagination-' + #requestParams + '-' + #pageSortingDTO", sync = true)
     public Page<DTOEntity> searchSpacecraft(Map<String, String> requestParams, PageSortingDTO pageSortingDTO) {
         Specification<SpacecraftConfiguration> spec = Specification.where(null);
         if (requestParams != null && !requestParams.isEmpty()) {
@@ -52,7 +53,7 @@ public class SpacecraftServiceImpl implements SpacecraftService {
         Page<SpacecraftConfiguration> spacecrafts = spacecraftRepository.findAll(spec, pageable);
         return spacecrafts.map(spacecraft -> dtoConverter.convertToDto(spacecraft, SpacecraftConfigSummarizedDTO.class));
     }
-    @Cacheable(value = "spacecraft-cache",  key = "'spacecrat-' + #spacecraftId", sync = true)
+    @Cacheable(value = CacheNames.SPACECRAFT_CACHE,  key = "'spacecrat-' + #spacecraftId", sync = true)
     public Optional<SpacecraftConfigurationDTO> getSpacecraftById(Integer spacecraftId) {
         Optional<SpacecraftConfiguration> spacecraft = spacecraftRepository.findSpacecraftWithSpacecraftId(spacecraftId);
         return spacecraft.map(s -> dtoConverter.convertToDto(s, SpacecraftConfigurationDTO.class));

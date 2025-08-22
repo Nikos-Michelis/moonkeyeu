@@ -12,6 +12,8 @@ import com.moonkeyeu.core.api.launch.dto.mission.MissionDTO;
 import com.moonkeyeu.core.api.launch.dto.mission.MissionPatchesDTO;
 import com.moonkeyeu.core.api.launch.dto.program.ProgramSummarizedDTO;
 import com.moonkeyeu.core.api.launch.dto.rocket.RocketDetailedDTO;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -58,8 +60,8 @@ public class LaunchDTO implements DTOEntity {
     @JsonProperty("window_end")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssX", timezone = "UTC")
     private Instant windowEnd;
-    @JsonProperty("probability")
-    private Integer probability;
+    @JsonProperty("weather_concerns")
+    private String weatherConcerns;
     @JsonProperty("launch_provider")
     private AgencyNormalDTO agencies;
     @JsonProperty("rocket")

@@ -43,5 +43,4 @@ public class LogoutService implements LogoutHandler {
         ResponseCookie refreshTokenCookie = cookieServiceProvider.clearRefreshTokenCookie();
         response.addHeader(HttpHeaders.SET_COOKIE, refreshTokenCookie.toString());
     }
-
 }

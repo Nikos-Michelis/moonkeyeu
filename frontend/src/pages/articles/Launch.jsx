@@ -32,6 +32,7 @@ import {
     faLocationDot,
     faCalendarDays,
 } from '@fortawesome/free-solid-svg-icons';
+import WeatherConcerns from "@/components/article-details/WeatherConcerns.jsx";
 
 function Launch(){
     const baseUrl = `${import.meta.env.VITE_BACKEND_BASE_URL}/public/launch`;

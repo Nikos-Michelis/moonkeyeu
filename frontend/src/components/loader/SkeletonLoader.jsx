@@ -1,21 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {faGears} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 export function SkeletonLoader(
     {
         isPending,
         isFetching,
         isError,
         contentConfig = {
-            count: 12,
-            styles: {
-                wrapper: "default-wrapper",
-                img: "default-img"
-            }
+            count: 12
         },
         children
     }) {
     const Component = contentConfig?.component || null;
-    if (isFetching || isPending || isError) {
+    if (isFetching || isPending) {
         return (
             <>
                 {Array.from({ length: contentConfig?.count ?? 12}).map((_, index) => (
@@ -25,6 +23,17 @@ export function SkeletonLoader(
                 ))}
             </>
         );
+    }
+
+    if (isError) {
+        return (
+            <>
+                <div className="flex flex-column padding-block-12">
+                    <FontAwesomeIcon icon={faGears} className="fs-small-800 margin-block-start-8"/>
+                    <p>Currently unavailable...</p>
+                </div>
+            </>
+        )
     }
 
     return <>{children}</>;

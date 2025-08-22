@@ -18,6 +18,7 @@ function News() {
             url: `${baseUrl}&${searchParams}`,
             params: `pagination-${searchParams.toString()}`,
             cacheKey: "news-pagination",
+            enableBoundary: false,
             queryOptions:{
                 enabled: !!searchParams.toString().length > 0,
             }

@@ -1,5 +1,6 @@
-package com.moonkeyeu.core.api.launch.services.impl;
+package com.moonkeyeu.core.api.launch.services.impl.search;
 
+import com.moonkeyeu.core.api.configuration.utils.CacheNames;
 import com.moonkeyeu.core.api.launch.dto.astronaut.AstronautDetailedDTO;
 import com.moonkeyeu.core.api.launch.dto.astronaut.AstronautNormalDTO;
 import com.moonkeyeu.core.api.launch.dto.paging.PageSortingDTO;
@@ -10,6 +11,7 @@ import com.moonkeyeu.core.api.launch.repository.specifications.AstronautSpecific
 import com.moonkeyeu.core.api.launch.services.AstronautService;
 import com.moonkeyeu.core.api.configuration.utils.DtoConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +33,7 @@ public class AstronautServiceImpl implements AstronautService {
     }
 
     @Override
+    @Cacheable(value = CacheNames.ASTRONAUT_CACHE,  key = "'astronaut-pagination-' + #requestParams + '-' + #pageSortingDTO", sync = true)
     public Page<DTOEntity> searchAstronaut(Map<String, String> requestParams, PageSortingDTO pageSortingDTO) {
         Specification<Astronaut> spec = Specification.where(null);
         if (requestParams != null && !requestParams.isEmpty()) {
@@ -57,6 +60,7 @@ public class AstronautServiceImpl implements AstronautService {
         return astronauts.map(astronaut -> dtoConverter.convertToDto(astronaut, AstronautNormalDTO.class));
     }
     @Override
+    @Cacheable(value = CacheNames.ASTRONAUT_CACHE,  key = "'astronaut-' + #astronautId", sync = true)
     public Optional<DTOEntity> getAstronautById(Integer astronautId) {
         Optional<Astronaut> astronaut = astronautsRepository.findAstronautAndLaunchByAstronautId(astronautId);
         return astronaut.map(a -> dtoConverter.convertToDto(a, AstronautDetailedDTO.class));

@@ -1,5 +1,6 @@
-package com.moonkeyeu.core.api.launch.services.impl;
+package com.moonkeyeu.core.api.launch.services.impl.search;
 
+import com.moonkeyeu.core.api.configuration.utils.CacheNames;
 import com.moonkeyeu.core.api.launch.dto.launch.LaunchDTO;
 import com.moonkeyeu.core.api.launch.dto.launch.LaunchNormalDTO;
 import com.moonkeyeu.core.api.launch.dto.paging.PageSortingDTO;
@@ -34,8 +35,8 @@ public class LaunchServiceImpl implements LaunchService {
         this.launchRepository = launchRepository;
     }
 
-    @Cacheable(value = "launch-cache",  key = "'launch-pagination' + #requestParams + #pageSortingDTO", sync = true)
     @Override
+    @Cacheable(value = CacheNames.LAUNCH_CACHE,  key = "'launch-pagination-' + #requestParams + '-' + #pageSortingDTO", sync = true)
     public Page<DTOEntity> searchLaunch(Map<String, String> requestParams, PageSortingDTO pageSortingDTO) throws NumberFormatException {
         Specification<Launch> spec = Specification.where(null);
         spec = spec.and(LaunchSpecification.rootSpecification());
@@ -102,7 +103,8 @@ public class LaunchServiceImpl implements LaunchService {
         Page<Launch> launches = launchRepository.findAll(spec, pageable);
         return launches.map(launch -> dtoConverter.convertToDto(launch, LaunchNormalDTO.class));
     }
-    @Cacheable(value = "launch-cache",  key = "'launch-' + #launchId", sync = true)
+    @Override
+    @Cacheable(value = CacheNames.LAUNCH_CACHE,  key = "'launch-' + #launchId", sync = true)
     public Optional<DTOEntity> getLaunchById(String launchId) {
         Optional<Launch> launch = launchRepository.findLaunchWithLaunchId(launchId);
         return launch.map(l -> dtoConverter.convertToDto(l, LaunchDTO.class));

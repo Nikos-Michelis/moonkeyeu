@@ -71,7 +71,12 @@ application:
     cooldown-seconds: 60
     expiration: 300
     length: 6
-
+  api:
+    nasa-apod:
+      url: https://api.nasa.gov/planetary/apod
+      key: ${NASA_APOD_KEY}
+      media:
+        type: 'image'
 management:
   endpoints:
     web:

@@ -1,5 +1,6 @@
 package com.moonkeyeu.core.api.launch.controller;
 
+import com.moonkeyeu.core.api.configuration.utils.CacheNames;
 import com.moonkeyeu.core.api.security.limiter.RateLimited;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
@@ -48,55 +49,55 @@ public class ImageController {
     }
 
     @GetMapping(value = "agencies/{imagePath}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
-    @Cacheable(value = "agencies-images-cache",  key = "'image-' + #imagePath", sync = true)
+    @Cacheable(value = CacheNames.AGENCIES_IMAGES_CACHE,  key = "'image-' + #imagePath", sync = true)
     @RateLimited(requests = 100, durationSeconds = 60)
     public ResponseEntity<Resource> getAgenciesImages(@PathVariable String imagePath) {
         return getResourceResponseEntity(imagePath, agenciesImage);
     }
     @GetMapping(value = "rockets/{imagePath}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
-    @Cacheable(value = "rocket-images-cache",  key = "'image-' + #imagePath", sync = true)
+    @Cacheable(value = CacheNames.ROCKET_IMAGES_CACHE,  key = "'image-' + #imagePath", sync = true)
     @RateLimited(requests = 100, durationSeconds = 60)
     public ResponseEntity<Resource> getRocketImages(@PathVariable String imagePath) {
         return getResourceResponseEntity(imagePath, rocketsImage);
     }
     @GetMapping(value = "spacecraft/{imagePath}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
-    @Cacheable(value = "spacecraft-images-cache",  key = "'image-' + #imagePath", sync = true)
+    @Cacheable(value = CacheNames.SPACECRAFT_IMAGES_CACHE,  key = "'image-' + #imagePath", sync = true)
     @RateLimited(requests = 100, durationSeconds = 60)
     public ResponseEntity<Resource> getSpacecraftImages(@PathVariable String imagePath) {
         return getResourceResponseEntity(imagePath, spacecraftImage);
     }
     @GetMapping(value = "pads/{imagePath}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
-    @Cacheable(value = "pads-images-cache",  key = "'image-' + #imagePath", sync = true)
+    @Cacheable(value = CacheNames.PADS_IMAGES_CACHE,  key = "'image-' + #imagePath", sync = true)
     @RateLimited(requests = 100, durationSeconds = 60)
     public ResponseEntity<Resource> getPadImages(@PathVariable String imagePath) {
         return getResourceResponseEntity(imagePath, padsImage);
     }
     @GetMapping(value = "pads/location/{imagePath}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
-    @Cacheable(value = "locations-images-cache",  key = "'image-' + #imagePath", sync = true)
+    @Cacheable(value = CacheNames.PADS_IMAGES_CACHE,  key = "'image-' + #imagePath", sync = true)
     @RateLimited(requests = 100, durationSeconds = 60)
     public ResponseEntity<Resource> getPadLocationImages(@PathVariable String imagePath) {
         return getResourceResponseEntity(imagePath, padsImageLocation);
     }
     @GetMapping(value = "astronauts/{imagePath}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
-    @Cacheable(value = "astronauts-images-cache",  key = "'image-' + #imagePath", sync = true)
+    @Cacheable(value = CacheNames.ASTRONAUTS_IMAGES_CACHE,  key = "'image-' + #imagePath", sync = true)
     @RateLimited(requests = 100, durationSeconds = 60)
     public ResponseEntity<Resource> getAstronautImages(@PathVariable String imagePath) {
         return getResourceResponseEntity(imagePath, astronautsImage);
     }
     @GetMapping(value = "launchers/{imagePath}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
-    @Cacheable(value = "launchers-images-cache",  key = "'image-' + #imagePath", sync = true)
+    @Cacheable(value = CacheNames.LAUNCHERS_IMAGES_CACHE,  key = "'image-' + #imagePath", sync = true)
     @RateLimited(requests = 100, durationSeconds = 60)
     public ResponseEntity<Resource> getLauncherImages(@PathVariable String imagePath) {
         return getResourceResponseEntity(imagePath, launchersImage);
     }
     @GetMapping(value = "mission-patches/{imagePath}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
-    @Cacheable(value = "mission-patches-images-cache",  key = "'image-' + #imagePath", sync = true)
+    @Cacheable(value = CacheNames.MISSION_PATCHES_IMAGES_CACHE,  key = "'image-' + #imagePath", sync = true)
     @RateLimited(requests = 100, durationSeconds = 60)
     public ResponseEntity<Resource> getMissionPatchesImages(@PathVariable String imagePath) {
         return getResourceResponseEntity(imagePath, missionPatchesImage);
     }
     @GetMapping(value = "programs/{imagePath}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
-    @Cacheable(value = "programs-images-cache",  key = "'image-' + #imagePath", sync = true)
+    @Cacheable(value = CacheNames.PROGRAMS_IMAGES_CACHE,  key = "'image-' + #imagePath", sync = true)
     @RateLimited(requests = 100, durationSeconds = 60)
     public ResponseEntity<Resource> getProgramImages(@PathVariable String imagePath) {
         return getResourceResponseEntity(imagePath, programImages);

@@ -1,5 +1,6 @@
 package com.moonkeyeu.core.api.user.services.impl;
 
+import com.moonkeyeu.core.api.configuration.utils.CacheNames;
 import com.moonkeyeu.core.api.launch.dto.DTOEntity;
 import com.moonkeyeu.core.api.launch.dto.launch.LaunchNormalDTO;
 import com.moonkeyeu.core.api.launch.dto.launch.LaunchSummarizedDTO;
@@ -20,6 +21,10 @@ import com.moonkeyeu.core.api.user.services.BookmarkService;
 import com.moonkeyeu.core.api.configuration.utils.DtoConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -43,6 +48,7 @@ public class BookmarkServiceImpl implements BookmarkService {
     private final DtoConverter dtoConverter;
     private final BookmarkListRepository bookmarkListRepository;
     @Override
+    @Cacheable(value = CacheNames.BOOKMARKS_CACHE, key = "'bookmarks-' + #user.getUserId()", sync = true)
     public List<BookmarkDTO> getUserBookmarks(User user) {
         List<Bookmark> bookmarks = bookmarkRepository.findBookmarkByUser(user);
         return bookmarks
@@ -50,8 +56,8 @@ public class BookmarkServiceImpl implements BookmarkService {
                 .map(bookmark -> dtoConverter.convertToDto(bookmark, BookmarkDTO.class))
                 .collect(Collectors.toList());
     }
-
     @Override
+    @Cacheable(value = CacheNames.BOOKMARKED_ITEMS_CACHE,  key = "#name + '-' + #user.getUserId()", sync = true)
     public Page<DTOEntity> searchLaunchesByUserAndBookmarkName(User user, String name, Map<String, String> requestParams, PageSortingDTO pageSortingDTO) {
         Specification<Launch> spec = Specification.where(null);
         spec = spec.and(MyLaunchesSpecification.rootSpecification());
@@ -71,8 +77,16 @@ public class BookmarkServiceImpl implements BookmarkService {
         return launches.map(launch -> dtoConverter.convertToDto(launch, LaunchNormalDTO.class));
     }
 
-    @Transactional
     @Override
+    @Transactional
+    @Caching(
+            evict = {
+                    @CacheEvict(value = CacheNames.BOOKMARKS_CACHE, key = "'bookmarks-' + #user.getUserId()")
+            },
+            put = {
+                    @CachePut(value = CacheNames.BOOKMARKS_CACHE, key = "'bookmarks-' + #user.getUserId()")
+            }
+    )
     public BookmarkDTO createBookmark(User user, RequestCreateBookmark requestCreateBookmark) {
         if (bookmarkRepository.countByUser(user) >= 20) {
             throw new ConflictException("You can only have up to 20 bookmarks.");
@@ -89,8 +103,9 @@ public class BookmarkServiceImpl implements BookmarkService {
                         .build());
         return dtoConverter.convertToDto(newBookmark, BookmarkDTO.class);
     }
-    @Transactional
     @Override
+    @Transactional
+    @CacheEvict(value = CacheNames.BOOKMARKS_CACHE, key = "'bookmarks-' + #user.getUserId()")
     public BookmarkDTO editBookmark(User user, RequestEditBookmark requestEditBookmark) {
         Bookmark bookmark = bookmarkRepository.findBookmarkByBookmarkNameAndUser(requestEditBookmark.getCurrentName(), user)
                 .orElseThrow(() -> new ResourceNotFoundException("Bookmark with name '"
@@ -104,8 +119,14 @@ public class BookmarkServiceImpl implements BookmarkService {
         Bookmark updatedBookmark = bookmarkRepository.save(bookmark);
         return dtoConverter.convertToDto(updatedBookmark, BookmarkDTO.class);
     }
-    @Transactional
     @Override
+    @Transactional
+    @Caching(
+            evict = {
+                    @CacheEvict(value = CacheNames.BOOKMARKS_CACHE, key = "'bookmarks-' + #user.getUserId()"),
+                    @CacheEvict(value = CacheNames.BOOKMARKED_ITEMS_CACHE, key = "#bookmarkName + '-' + #user.getUserId()")
+            }
+    )
     public BookmarkDTO removeBookmark(User user, String bookmarkName) {
         Bookmark bookmark = bookmarkRepository.findBookmarkByBookmarkNameAndUser(bookmarkName, user)
                 .orElseThrow(() -> new ResourceNotFoundException("Bookmark Name Not Found."));
@@ -114,8 +135,17 @@ public class BookmarkServiceImpl implements BookmarkService {
         return dtoConverter.convertToDto(bookmark, BookmarkDTO.class);
     }
 
-    @Transactional
     @Override
+    @Transactional
+    @Caching(
+            evict = {
+                    @CacheEvict(value = CacheNames.BOOKMARKED_ITEMS_CACHE, key = "#requestBookmark.getBookmarkName() + '-' + #user.getUserId()"),
+                    @CacheEvict(value = CacheNames.BOOKMARKS_CACHE, key = "'bookmarks-' + #user.getUserId()")
+            },
+            put = {
+                    @CachePut(value = CacheNames.BOOKMARKED_ITEMS_CACHE, key = "#requestBookmark.getBookmarkName() + '-' + #user.getUserId()"),
+            }
+    )
     public void addToBookmarkList(User user, RequestBookmark requestBookmark) {
         Bookmark bookmark = bookmarkRepository.findBookmarkByBookmarkNameAndUser(requestBookmark.getBookmarkName(), user)
                 .orElseThrow(() -> new ResourceNotFoundException("Bookmark not found."));
@@ -136,10 +166,16 @@ public class BookmarkServiceImpl implements BookmarkService {
 
         }
     }
-    @Transactional
     @Override
-    public Map<String, Object> removeFromBookmark(User user, String bookMarkName, String launchId) {
-        Bookmark bookmark = bookmarkRepository.findBookmarkByBookmarkNameAndUser(bookMarkName, user)
+    @Transactional
+    @Caching(
+            evict = {
+                    @CacheEvict(value = CacheNames.BOOKMARKED_ITEMS_CACHE, key = "#bookmarkName + '-' + #user.getUserId()"),
+                    @CacheEvict(value = CacheNames.BOOKMARKS_CACHE, key = "'bookmarks-' + #user.getUserId()")
+            }
+    )
+    public Map<String, Object> removeFromBookmark(User user, String bookmarkName, String launchId) {
+        Bookmark bookmark = bookmarkRepository.findBookmarkByBookmarkNameAndUser(bookmarkName, user)
                 .orElseThrow(() -> new ResourceNotFoundException("Bookmark Name Not Found."));
 
         if (bookmark.getLaunches().size() >= 100) {
@@ -154,7 +190,7 @@ public class BookmarkServiceImpl implements BookmarkService {
         }
 
         bookmarkListRepository.deleteByBookmarkIdAndLaunchId(bookmark.getBookmarkId(), launch.getLaunchId());
-        log.debug("Removed launch with ID {} from bookmark {}", launchId, bookMarkName);
+        log.debug("Removed launch with ID {} from bookmark {}", launchId, bookmarkName);
         LaunchSummarizedDTO launchSummarizedDTO = dtoConverter.convertToDto(launch, LaunchSummarizedDTO.class);
 
         Map<String, Object> map = new HashMap<>();

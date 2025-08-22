@@ -6,6 +6,8 @@ import com.moonkeyeu.core.api.user.model.Contact;
 import com.moonkeyeu.core.api.user.reporitory.ContactRepository;
 import com.moonkeyeu.core.api.user.services.CommunityService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class CommunityServiceImpl implements CommunityService {
     private final ContactRepository contactRepository;
     @Override
+    @CacheEvict(value = "contact-messages-cache", allEntries = true)
     public void saveContactForm(ContactRequest contactRequest) {
         contactRepository.save(
                 Contact.builder()

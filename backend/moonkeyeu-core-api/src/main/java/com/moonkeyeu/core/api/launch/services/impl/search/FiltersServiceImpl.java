@@ -1,5 +1,6 @@
-package com.moonkeyeu.core.api.launch.services.impl;
+package com.moonkeyeu.core.api.launch.services.impl.search;
 
+import com.moonkeyeu.core.api.configuration.utils.CacheNames;
 import com.moonkeyeu.core.api.launch.dto.filters.FiltersDTO;
 import com.moonkeyeu.core.api.launch.model.views.BaseFilter;
 import com.moonkeyeu.core.api.launch.repository.filters.FiltersRepository;
@@ -25,8 +26,8 @@ public class FiltersServiceImpl implements FiltersService {
         this.dtoConverter = dtoConverter;
     }
 
-    @Cacheable(value = "filters-cache", key = "'launch-filters'", sync = true)
     @Override
+    @Cacheable(value = CacheNames.FILTERS_CACHE, key = "'launch-filters'", sync = true)
     public Map<String, Object> getLaunchFilters() {
         Map<String, List<FiltersDTO>> data = new HashMap<>();
         List<BaseFilter> launchFiltersViewList = filtersRepository.findAllLaunchFilters();
@@ -48,8 +49,8 @@ public class FiltersServiceImpl implements FiltersService {
 
         return allCommonData;
     }
-    @Cacheable(value = "filters-cache", key = "'astronaut-filters'", sync = true)
     @Override
+    @Cacheable(value = CacheNames.FILTERS_CACHE, key = "'astronaut-filters'", sync = true)
     public Map<String, Object> getAstronautFilters() {
         Map<String, List<FiltersDTO>> data = new HashMap<>();
         List<BaseFilter> astronautFiltersViewList = filtersRepository.findAllAstronautFilters();

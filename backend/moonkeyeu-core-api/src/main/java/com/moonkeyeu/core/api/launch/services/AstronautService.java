@@ -10,6 +10,4 @@ import java.util.Optional;
 public interface AstronautService {
     Page<DTOEntity> searchAstronaut(Map<String, String> requestParams, PageSortingDTO pageSortingDTO);
     Optional<DTOEntity> getAstronautById(Integer astronautId);
-
-
 }

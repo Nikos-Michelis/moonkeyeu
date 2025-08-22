@@ -51,6 +51,7 @@ public class DashboardController {
                                 .sort(ordering)
                                 .build())));
     }
+
     @DeleteMapping("/contact/messages/delete/{messageId}")
     @PreAuthorize("hasAuthority('admin:delete')")
     @RateLimited(requests = 100, durationSeconds = 60)
@@ -71,6 +72,7 @@ public class DashboardController {
     @GetMapping("/report/tasks")
     @PreAuthorize("hasAnyAuthority('developer:read', 'admin:read', 'moderator:read')")
     @RateLimited(requests = 100, durationSeconds = 60)
+    @Deprecated
     public ResponseEntity<?> getBatchJobExecutions() {
         return ResponseEntity.ok().
                 body(ResponseDTO

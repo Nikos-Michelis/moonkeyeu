@@ -122,6 +122,11 @@
             <artifactId>uap-java</artifactId>
             <version>1.5.4</version>
         </dependency>
+        <!--  Webflux  -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
         <!-- Grafana Prometheus-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -162,10 +167,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
             <version>6.1.13</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
         </dependency>
     </dependencies>
 

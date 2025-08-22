@@ -3,6 +3,7 @@ package com.moonkeyeu.core.api.settings;
 import com.moonkeyeu.core.api.settings.exceptions.*;
 import jakarta.mail.MessagingException;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -13,6 +14,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.reactive.function.client.WebClientRequestException;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.HashSet;
@@ -265,7 +268,41 @@ public class GlobalExceptionHandler {
                         .build()
                 );
     }
+    @ExceptionHandler(RemoteServiceUnavailableException.class)
+    public ResponseEntity<ExceptionResponse> handleException(RemoteServiceUnavailableException exp) {
+        return ResponseEntity
+                .status(SERVICE_UNAVAILABLE)
+                .body(ExceptionResponse.builder()
+                        .businessErrorCode(UNAVAILABLE_REMOTE_API.getCode())
+                        .businessErrorDescription(UNAVAILABLE_REMOTE_API.getDescription())
+                        .error(exp.getMessage())
+                        .build()
+                );
+    }
 
+    @ExceptionHandler(WebClientResponseException.class)
+    public ResponseEntity<ExceptionResponse> handleWebClientResponseException(WebClientResponseException exp) {
+        return ResponseEntity
+                .status(exp.getStatusCode())
+                .body(ExceptionResponse.builder()
+                        .businessErrorCode(ERROR_REMOTE_API.getCode())
+                        .businessErrorDescription(ERROR_REMOTE_API.getDescription())
+                        .error(exp.getMessage())
+                        .build()
+                );
+    }
+
+    @ExceptionHandler(WebClientRequestException.class)
+    public ResponseEntity<ExceptionResponse> handleWebClientRequestException(WebClientRequestException exp) {
+        return ResponseEntity
+                .status(HttpStatus.SERVICE_UNAVAILABLE)
+                .body(ExceptionResponse.builder()
+                        .businessErrorCode(UNAVAILABLE_REMOTE_API.getCode())
+                        .businessErrorDescription(UNAVAILABLE_REMOTE_API.getDescription())
+                        .error(exp.getMessage())
+                        .build()
+                );
+    }
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ExceptionResponse> handleException(RuntimeException exp) {
         exp.printStackTrace();

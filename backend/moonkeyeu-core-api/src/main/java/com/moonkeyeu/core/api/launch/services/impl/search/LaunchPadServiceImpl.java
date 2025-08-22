@@ -1,5 +1,6 @@
-package com.moonkeyeu.core.api.launch.services.impl;
+package com.moonkeyeu.core.api.launch.services.impl.search;
 
+import com.moonkeyeu.core.api.configuration.utils.CacheNames;
 import com.moonkeyeu.core.api.launch.dto.pad.LaunchPadDTO;
 import com.moonkeyeu.core.api.launch.dto.pad.LaunchPadDetailedDTO;
 import com.moonkeyeu.core.api.launch.model.pad.LaunchPad;
@@ -24,8 +25,8 @@ public class LaunchPadServiceImpl implements LaunchPadService {
         this.launchPadRepository = launchPadRepository;
     }
 
-    @Cacheable(value = "pad-cache",  key = "'pad'", sync = true)
     @Override
+    @Cacheable(value = CacheNames.PAD_CACHE,  key = "'pads'", sync = true)
     public Map<String, Object> getAllLaunchPads() {
         List<LaunchPad> launchPads = launchPadRepository.findAll();
         Map<Boolean, Long> counts = launchPads.stream()
@@ -42,8 +43,8 @@ public class LaunchPadServiceImpl implements LaunchPadService {
         map.put("pads", pads);
         return map;
     }
-    @Cacheable(value = "pad-cache",  key = "'pad-' + #launchPadId", sync = true)
     @Override
+    @Cacheable(value = CacheNames.PAD_CACHE,  key = "'pad-' + #launchPadId", sync = true)
     public Optional<DTOEntity> getLaunchPadById(Integer launchPadId) {
         Optional<LaunchPad> launchPad = launchPadRepository.findLaunchPadWithPadId(launchPadId);
         return launchPad.map(lp -> dtoConverter.convertToDto(lp, LaunchPadDetailedDTO.class));

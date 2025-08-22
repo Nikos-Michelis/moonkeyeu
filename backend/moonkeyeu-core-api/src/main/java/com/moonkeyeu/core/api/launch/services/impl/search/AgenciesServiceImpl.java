@@ -1,5 +1,6 @@
-package com.moonkeyeu.core.api.launch.services.impl;
+package com.moonkeyeu.core.api.launch.services.impl.search;
 
+import com.moonkeyeu.core.api.configuration.utils.CacheNames;
 import com.moonkeyeu.core.api.launch.dto.DTOEntity;
 import com.moonkeyeu.core.api.launch.dto.agency.AgencyDetailedDTO;
 import com.moonkeyeu.core.api.launch.dto.agency.AgencySummarizedDTO;
@@ -30,15 +31,15 @@ public class AgenciesServiceImpl implements AgenciesService {
         this.launchRepository = launchRepository;
     }
 
-    @Cacheable(value = "agencies-cache", sync = true)
     @Override
+    @Cacheable(value = CacheNames.AGENCIES_CACHE, sync = true)
     public List<DTOEntity> getAllAgencies() {
         List<Agencies> agencies = agenciesRepository.findAll();
         return agencies.stream().map(agency -> dtoConverter.convertToDto(agency, AgencySummarizedDTO.class)).collect(Collectors.toList());
     }
 
-    @Cacheable(value = "agencies-cache", key = "'agency-' + #agencyId", sync = true)
     @Override
+    @Cacheable(value = CacheNames.AGENCIES_CACHE, key = "'agency-' + #agencyId", sync = true)
     public Optional<DTOEntity> getAgencyById(Integer agencyId) {
         Optional<Agencies> agency = agenciesRepository.findAgenciesById(agencyId);
         Optional<Launch> launch = launchRepository.findUpcomingLaunchesByAgencyId(agencyId);

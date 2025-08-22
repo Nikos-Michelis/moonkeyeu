@@ -1,5 +1,6 @@
-package com.moonkeyeu.core.api.launch.services.impl;
+package com.moonkeyeu.core.api.launch.services.impl.search;
 
+import com.moonkeyeu.core.api.configuration.utils.CacheNames;
 import com.moonkeyeu.core.api.launch.dto.paging.PageSortingDTO;
 import com.moonkeyeu.core.api.launch.dto.rocket.RocketConfigSummarizedDTO;
 import com.moonkeyeu.core.api.launch.dto.rocket.RocketNormalDTO;
@@ -30,8 +31,8 @@ public class RocketServiceImpl implements RocketService {
         this.dtoConverter = dtoConverter;
     }
 
-    @Cacheable(value = "rocket-cache",  key = "'rocket-pagination' + #requestParams + #pageSortingDTO", sync = true)
     @Override
+    @Cacheable(value = CacheNames.ROCKET_CACHE,  key = "'rocket-pagination-' + #requestParams + '-' + #pageSortingDTO", sync = true)
     public Page<DTOEntity> searchRocket(Map<String, String> requestParams, PageSortingDTO pageSortingDTO) {
         Specification<RocketConfiguration> spec = Specification.where(null);
         if (requestParams != null && !requestParams.isEmpty()) {
@@ -65,8 +66,8 @@ public class RocketServiceImpl implements RocketService {
         return rockets.map(rocket -> dtoConverter.convertToDto(rocket, RocketConfigSummarizedDTO.class));
 
     }
-    @Cacheable(value = "rocket-cache",  key = "'rocket-' + #rocketId", sync = true)
     @Override
+    @Cacheable(value = CacheNames.ROCKET_CACHE,  key = "'rocket-' + #rocketId", sync = true)
     public Optional<RocketNormalDTO> getRocketById(Integer rocketId) {
         Optional<Rocket> rocket = rocketsRepository.findRocketWithRocketId(rocketId);
         return rocket.map(r -> dtoConverter.convertToDto(r, RocketNormalDTO.class));

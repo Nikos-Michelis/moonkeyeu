@@ -1,5 +1,6 @@
-package com.moonkeyeu.core.api.launch.services.impl;
+package com.moonkeyeu.core.api.launch.services.impl.search;
 
+import com.moonkeyeu.core.api.configuration.utils.CacheNames;
 import com.moonkeyeu.core.api.launch.dto.launch.LaunchNormalDTO;
 import com.moonkeyeu.core.api.launch.dto.paging.PageSortingDTO;
 import com.moonkeyeu.core.api.launch.dto.program.ProgramDetailedDTO;
@@ -37,8 +38,8 @@ public class ProgramsServiceImpl implements ProgramsService {
         this.launchRepository = launchRepository;
     }
 
-    @Cacheable(value = "program-cache",  key = "'program-pagination' + #requestParams + #pageSortingDTO", sync = true)
     @Override
+    @Cacheable(value = CacheNames.PROGRAM_CACHE, key = "'program-pagination-' + #requestParams + '-' + #pageSortingDTO", sync = true)
     public Page<DTOEntity> searchProgram(Map<String, String> requestParams, PageSortingDTO pageSortingDTO) {
         Specification<Programs> spec = Specification.where(null);
         if (requestParams != null && !requestParams.isEmpty()) {
@@ -55,8 +56,8 @@ public class ProgramsServiceImpl implements ProgramsService {
         Page<Programs> programs = programsRepository.findAll(spec, pageable);
         return programs.map(program -> dtoConverter.convertToDto(program, ProgramSummarizedDTO.class));
     }
-    @Cacheable(value = "program-cache",  key = "'program-' + #programId", sync = true)
     @Override
+    @Cacheable(value = CacheNames.PROGRAM_CACHE, key = "'program-' + #programId", sync = true)
     public Optional<DTOEntity> getProgramById(Integer programId) {
         Optional<Programs> programs = programsRepository.findProgramById(programId);
         Optional<Launch> launch = launchRepository.findUpcomingLaunchesByProgramId(programId);

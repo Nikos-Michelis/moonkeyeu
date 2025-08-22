@@ -1,5 +1,6 @@
 package com.moonkeyeu.core.api.user.services.impl;
 
+import com.moonkeyeu.core.api.configuration.utils.CacheNames;
 import com.moonkeyeu.core.api.launch.dto.DTOEntity;
 import com.moonkeyeu.core.api.launch.dto.paging.PageSortingDTO;
 import com.moonkeyeu.core.api.user.dto.BatchJobExecDTO;
@@ -14,6 +15,8 @@ import com.moonkeyeu.core.api.user.services.BatchService;
 import com.moonkeyeu.core.api.user.services.DashboardService;
 import com.moonkeyeu.core.api.configuration.utils.DtoConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -45,8 +48,8 @@ public class DashboardServiceImpl implements DashboardService, BatchService {
         this.userRepository = userRepository;
         this.dtoConverter = dtoConverter;
     }
-
     @Override
+    @Cacheable(value = CacheNames.CONTACT_MESSAGES_CACHE, key = "'messages-pagination-' + #requestParams + '-' + #pageSortingDTO", sync = true)
     public Page<DTOEntity> searchMessages(Map<String, String> requestParams, PageSortingDTO pageSortingDTO) {
         Specification<Contact> spec = Specification.where(null);
         if (requestParams != null && !requestParams.isEmpty()) {
@@ -66,8 +69,9 @@ public class DashboardServiceImpl implements DashboardService, BatchService {
         return messages.map(message -> dtoConverter.convertToDto(message, ContactDTO.class));
     }
 
-    @Transactional
     @Override
+    @Transactional
+    @CacheEvict(value = CacheNames.CONTACT_MESSAGES_CACHE, allEntries = true)
     public ContactDTO deleteMessage(Long messageId) {
         Contact contact = contactRepository.findByContactId(messageId)
                 .orElseThrow(() -> new ResourceNotFoundException("Message Not Found."));
@@ -76,6 +80,7 @@ public class DashboardServiceImpl implements DashboardService, BatchService {
     }
 
     @Override
+    @Cacheable(value = CacheNames.MEMBERS_CACHE, key = "'members'", sync = true)
     public List<UserDTO> getAllMembers() {
         List<User> users = userRepository.findAll();
         return users
@@ -93,6 +98,7 @@ public class DashboardServiceImpl implements DashboardService, BatchService {
     }
 
     @Override
+    @Deprecated
     public List<BatchJobExecDTO> getAllBatchJobs() {
         List<BatchJobExecution> batchJobExecutions = batchRepository.findAll();
         return batchJobExecutions
@@ -100,5 +106,4 @@ public class DashboardServiceImpl implements DashboardService, BatchService {
                 .map(batchJob -> dtoConverter.convertToDto(batchJob, BatchJobExecDTO.class))
                 .collect(Collectors.toList());
     }
-
 }

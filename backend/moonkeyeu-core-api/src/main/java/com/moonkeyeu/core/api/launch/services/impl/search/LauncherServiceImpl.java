@@ -1,5 +1,6 @@
-package com.moonkeyeu.core.api.launch.services.impl;
+package com.moonkeyeu.core.api.launch.services.impl.search;
 
+import com.moonkeyeu.core.api.configuration.utils.CacheNames;
 import com.moonkeyeu.core.api.launch.dto.launcher.LauncherDTO;
 import com.moonkeyeu.core.api.launch.dto.paging.PageSortingDTO;
 import com.moonkeyeu.core.api.launch.model.launcher.Launcher;
@@ -31,8 +32,8 @@ public class LauncherServiceImpl implements LauncherService {
     }
 
 
-    @Cacheable(value = "launcher-cache",  key = "'launcher-pagination' + #requestParams + #pageSortingDTO", sync = true)
     @Override
+    @Cacheable(value = CacheNames.LAUNCHER_CACHE,  key = "'launcher-pagination-' + #requestParams + '-' + #pageSortingDTO", sync = true)
     public Page<DTOEntity> searchLauncher(Map<String, String> requestParams, PageSortingDTO pageSortingDTO) {
         Specification<Launcher> spec = Specification.where(null);
         if (requestParams != null && !requestParams.isEmpty()) {
