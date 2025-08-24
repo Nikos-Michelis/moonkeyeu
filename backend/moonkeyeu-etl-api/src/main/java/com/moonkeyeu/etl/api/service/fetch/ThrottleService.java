@@ -2,8 +2,7 @@ package com.moonkeyeu.etl.api.service.fetch;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -13,14 +12,22 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class ThrottleService {
     private final WebClient webClient;
-
-    public ThrottleService(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("https://ll.thespacedevs.com/2.3.0").build();
+    @Value("${application.api.the-space-devs.version}")
+    private String version;
+    public ThrottleService(
+            WebClient.Builder webClientBuilder,
+            @Value("${application.api.the-space-devs.url}") String baseUrl
+    ) {
+        this.webClient = webClientBuilder.baseUrl(baseUrl).build();
     }
 
     public Mono<Long> getThrottleDelay() {
         return webClient.get()
-                .uri("/api-throttle/?format=json")
+                .uri(uriBuilder -> uriBuilder
+                        .pathSegment(version, "api-throttle")
+                        .path("/")
+                        .queryParam("format", "json")
+                        .build())
                 .retrieve()
                 .bodyToMono(JsonNode.class)
                 .map(response -> {

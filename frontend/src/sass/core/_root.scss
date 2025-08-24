@@ -9,6 +9,10 @@
     }
   }
 
+  @each $name, $value in $constant-colors {
+    --clr-#{$name}: #{$value};
+  }
+
   @each $screen-size, $property in $font-sizes {
     @if $screen-size == small {
       @each $prop, $value in $property {

@@ -99,7 +99,6 @@ public class DataManagerServiceImpl implements DataManagerService {
     private final CsvRawData csvRawData;
     private final ExtractImages extractImages;
 
-
     @Autowired
     public DataManagerServiceImpl(
             CsvService csvService,

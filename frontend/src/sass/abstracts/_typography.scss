@@ -1,7 +1,10 @@
-$-ff-sans: 'Roboto', sans-serif;
 $-ff-sans-serif: sans-serif;
-$font-family-base: $-ff-sans;
+$-ff-roboto: 'Roboto', sans-serif;
+$-ff-orbitron: 'Orbitron', sans-serif;
+
+$font-family-base: $-ff-roboto;
 $font-family-accent: $-ff-sans-serif;
+$font-family-orbitron: $-ff-orbitron;
 
 $font-sizes: (
         small:( // Minor third

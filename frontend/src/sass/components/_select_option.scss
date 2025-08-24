@@ -1,36 +1,60 @@
+@use "../abstracts/index" as abs;
+
 .select {
   &__btn {
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: 1rem;
     border-radius: 0.2rem;
     justify-content: space-between;
     background-color: var(--clr-star-300);
     font-size: 0.8rem;
     font-weight: 700;
-    max-width: 15rem;
     min-width: 15rem;
     height: 3.3125rem;
-    margin: 0.2rem;
+    color: var(--clr-dark-cosmos-300);
+
+    &:not(.select__btn--yt-video){
+      max-width: 15rem;
+      margin: 0.2rem;
+      padding: 1rem;
+    }
+
     &--small {
       max-width: 7rem;
       min-width: 7rem;
       height: 2.7rem;
     }
+
+    &--yt-video {
+      width: 100%;
+      color: var(--clr-star-300);
+      background-color: var(--clr-yt-red);
+      padding: 2rem 1rem;
+    }
   }
 
   &__content {
-    position: absolute;
     display: block;
-    padding: 15px;
-    margin-top: 15px;
+    padding: 0.9375rem;
+    margin-top: 0.9375rem;
     background: var(--clr-star-200);
     border-radius: 7px;
     box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
     width: 15rem;
+    color: var(--clr-dark-cosmos-300);
+    z-index: 1;
+
+    &:not(.select__content--full-width){
+      position: absolute;
+    }
+
     &--medium {
       width: 8rem;
+    }
+
+    &--full-width{
+      width: 100%;
     }
   }
   &__search {
@@ -72,14 +96,20 @@
     overflow-y: auto;
     padding: 0;
 
-    & li {
+    & a {
+      width: 100%;
+      color: var(--clr-dark-cosmos-300);
+    }
+
+    & li, a {
       display: flex;
       align-items: center;
       cursor: pointer;
       height: 50px;
-      padding: 0 13px;
-      font-size: 13px;
+      padding: 0 0.8125rem;
+      font-size: 0.8125rem;
       font-weight: 600;
+      color: var(--clr-dark-cosmos-300);
 
       &:hover {
         border-radius: 5px;

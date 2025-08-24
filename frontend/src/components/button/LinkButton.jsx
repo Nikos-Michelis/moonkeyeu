@@ -9,7 +9,8 @@ export function LinkButton(
         isExternal = false,
         target = "_blank",
         rel = "noopener noreferrer",
-        className = "btn btn--primary"
+        className = "btn btn--primary",
+        onClick
     }) {
     return isExternal ? (
         <a
@@ -17,7 +18,7 @@ export function LinkButton(
             className={`${className}${disabled ? " btn--disabled" : ""}`}
             target={target}
             rel={rel}
-            onClick={disabled ? (e) => e.preventDefault() : undefined}
+            onClick={disabled ? (e) => e.preventDefault() : onClick}
         >
             {children}
         </a>

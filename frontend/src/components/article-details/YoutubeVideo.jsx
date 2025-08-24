@@ -1,17 +1,20 @@
 import {YouTubeEmbed} from "@/components/api/youtube-window/YouTubeEmbed.jsx";
-import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faYoutube } from '@fortawesome/free-brands-svg-icons';
+import React, { useState } from "react";
+import VideoSelector from "@/components/utils/VideoSelector.jsx";
 
-const YoutubeVideo = ({videoUrl}) =>{
+const YoutubeVideo = ({recommendedVideo, videos}) =>{
+    const [video, setVideo] = useState(recommendedVideo);
     return(
         <section className="video-section">
-            <div className="article__heading-box">
-                <FontAwesomeIcon icon={faYoutube} />
-                <h2>Launch Video</h2>
+            <div className="flex flex-column margin-block-4">
+                <VideoSelector
+                    options={videos || []}
+                    setVideo={setVideo}
+                    placeholder="Watch Livestream"
+                    defaultValue={video?.priority}
+                />
             </div>
-            <hr className="hr-100-sm bg-hr-600" />
-            <YouTubeEmbed videoUrl={videoUrl}></YouTubeEmbed>
+            <YouTubeEmbed videoUrl={video ? video?.videoUrl : recommendedVideo?.videoUrl}></YouTubeEmbed>
         </section>
     )
 }

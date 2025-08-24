@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWikipediaW } from '@fortawesome/free-brands-svg-icons';
 import {faChevronLeft, faCircleInfo, faShareFromSquare} from "@fortawesome/free-solid-svg-icons";
 import {useStatePagination} from "@/hooks/paging-filtering/useStatePagination.jsx";
+import UpcomingLaunch from "@/components/article-details/UpcomingLaunch.jsx";
 
 const LIMIT = 4;
 function LaunchPad(){
@@ -192,6 +193,7 @@ function LaunchPad(){
                                         </div>
                                     </section>
                                 }
+                                {data?.upcoming_launch && <UpcomingLaunch launch={data?.upcoming_launch}/>}
                                 <Agencies agencies={data?.agencies}/>
                                 {launches.length > 0 && <Launch launches={launches} navUrl={'/launches/'} pagination={pagination} hasPagination={true}/>}
                                 <div className="padding-block-end-4">

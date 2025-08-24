@@ -17,7 +17,7 @@ import ScrollToTop from "@/components/utils/ScrollToTop.jsx";
 import {Button} from "@/components/button/Button.jsx";
 import useComparator from "@/hooks/util/useComparator.jsx";
 import Img from "@/components/utils/Img.jsx";
-import React from "react";
+import React, {useEffect} from "react";
 import {useParameterizedQuery} from "@/services/queries.jsx";
 import Head from "@/components/seo/Head.jsx";
 import Tooltip from "@/components/tooltip/Tooltip.jsx";
@@ -32,7 +32,6 @@ import {
     faLocationDot,
     faCalendarDays,
 } from '@fortawesome/free-solid-svg-icons';
-import WeatherConcerns from "@/components/article-details/WeatherConcerns.jsx";
 
 function Launch(){
     const baseUrl = `${import.meta.env.VITE_BACKEND_BASE_URL}/public/launch`;
@@ -56,7 +55,7 @@ function Launch(){
     const zonedDateTime = DateTime.fromISO(data.net).setZone(DateTime.local().zoneName);
     const formattedZonedDateTime = zonedDateTime.invalid === null? zonedDateTime.toFormat('MMMM dd, yyyy - hh:mm a ZZZZ') : null;
     const { copied, copyToClipboard } = useClipboard();
-    const orderedVideo = useComparator(
+    const recommendedVideo = useComparator(
         data?.video_urls?.filter(video =>
             video.videoUrl.includes("youtube.com") || video.videoUrl.includes("youtu.be")
         ), (a, b) => a.priority > b.priority);
@@ -67,6 +66,7 @@ function Launch(){
     const handleShare = () => {
         copyToClipboard(window.location.href)
     };
+
     return(
         <>
             <Head
@@ -115,7 +115,7 @@ function Launch(){
                                         defaultSrc={`${import.meta.env.VITE_CLOUDFRONT_URL}/assets/logo/moonkeyeu-logo.svg`}
                                     />
                                 </div>
-                                <div className="container flex flex-column justify-center padding-2" data-type="full-bleed">
+                                <div className="article__detail-container container flex flex-column justify-center" data-type="full-bleed">
                                     <div className="article__title-box">
                                         <h3 className="article__title">{data?.fullname}</h3>
                                         <h5 className="article__subtitle">{data.launch_provider?.name}</h5>
@@ -144,7 +144,8 @@ function Launch(){
                                 </div>
                             </div>
                             <div className="article__info-container container flex flex-column" data-type="full-bleed">
-                                {orderedVideo?.videoUrl && <YoutubeVideo videoUrl={orderedVideo?.videoUrl} />}
+                                { (recommendedVideo || data?.video_urls?.length > 0) &&
+                                    <YoutubeVideo recommendedVideo={recommendedVideo} videos={data?.video_urls} /> }
                                 <Trajectory flightclub_url={data.flightclub_url}/>
                                 <Agency launchProvider={data.launch_provider}/>
                                 {data?.mission &&

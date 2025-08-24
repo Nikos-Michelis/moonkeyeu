@@ -48,6 +48,10 @@ application:
     root:
       data:
         folder: ${INPUT_RAW_DIR}
+  api:
+    the-space-devs:
+      url: https://ll.thespacedevs.com
+      version: 2.3.0
 
 management:
   endpoints:
