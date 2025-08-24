@@ -18,10 +18,13 @@ import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 
@@ -42,9 +45,10 @@ public class TasksConfig {
     private final CsvService csvService;
     private final RootConfig rootConfig;
     private final CsvRawData csvRawData;
-    private final String agenciesUrl = "https://ll.thespacedevs.com/2.3.0/agencies/?mode=detailed&limit=100";
-    private final String launchesUlr = "https://ll.thespacedevs.com/2.3.0/launches/?mode=detailed&limit=100";
-    private final String baseUrl = "https://ll.thespacedevs.com/2.3.0/launches/";
+    @Value("${application.api.the-space-devs.url}")
+    private String baseUrl;
+    @Value("${application.api.the-space-devs.version}")
+    private String version;
 
     @Bean
     public Step cleanFolders() {
@@ -67,9 +71,18 @@ public class TasksConfig {
                     ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);
                     String windowsStart = now.toLocalDate().minusMonths(1).toString();
                     String windowEnd = now.plusMonths(7).toLocalDate().toString();
-                    String url = String.format("%s?mode=detailed&limit=100&ordering=-last_updated&net__gte=%s&net__lte=%s",
-                            baseUrl, windowsStart, windowEnd);
-                    fetchDataService.fetchData(url, csvRawData.JSON_SOURCE_FILE).block();
+                    URI uri = UriComponentsBuilder
+                            .fromHttpUrl(baseUrl)
+                            .pathSegment(version, "launches")
+                            .path("/")
+                            .queryParam("mode", "detailed")
+                            .queryParam("limit", 100)
+                            .queryParam("ordering", "-last_updated")
+                            .queryParam("net__gte", windowsStart)
+                            .queryParam("net__lte", windowEnd)
+                            .build()
+                            .toUri();
+                    fetchDataService.fetchData(uri, csvRawData.JSON_SOURCE_FILE).block();
                     log.info("Successfully fetched latest data. Between " + windowsStart + " and " + windowEnd );
                     return RepeatStatus.FINISHED;
                 }, platformTransactionManager)
@@ -82,9 +95,17 @@ public class TasksConfig {
                 .tasklet((contribution, chunkContext) -> {
                     ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);
                     String windowsStart = now.toLocalDate().minusMonths(1).toString();
-                    String url = String.format("%s?mode=detailed&limit=100&ordering=-last_updated&net__gte=%s",
-                            baseUrl, windowsStart);
-                    fetchDataService.fetchData(url, csvRawData.JSON_SOURCE_FILE).block();
+                    URI uri = UriComponentsBuilder
+                            .fromHttpUrl(baseUrl)
+                            .pathSegment(version, "launches")
+                            .path("/")
+                            .queryParam("mode", "detailed")
+                            .queryParam("limit", 100)
+                            .queryParam("ordering", "-last_updated")
+                            .queryParam("net__gte", windowsStart)
+                            .build()
+                            .toUri();
+                    fetchDataService.fetchData(uri, csvRawData.JSON_SOURCE_FILE).block();
                     log.info("Successfully fetched all latest data. window start: " + windowsStart );
                     return RepeatStatus.FINISHED;
                 }, platformTransactionManager)
@@ -96,7 +117,15 @@ public class TasksConfig {
     public Step fetchAgenciesDataStep() {
         return new StepBuilder("fetchAgenciesStep", jobRepository)
                 .tasklet((contribution, chunkContext) -> {
-                    fetchDataService.fetchData(agenciesUrl, csvRawData.JSON_AGENCIES_SOURCE_FILE).block();
+                    URI uri = UriComponentsBuilder
+                            .fromHttpUrl(baseUrl)
+                            .pathSegment(version, "agencies")
+                            .path("/")
+                            .queryParam("mode", "detailed")
+                            .queryParam("limit", 100)
+                            .build()
+                            .toUri();
+                    fetchDataService.fetchData(uri, csvRawData.JSON_AGENCIES_SOURCE_FILE).block();
                     log.info("Successfully fetched JSON data.");
                     return RepeatStatus.FINISHED;
                 }, platformTransactionManager)
@@ -107,7 +136,15 @@ public class TasksConfig {
     public Step fetchLaunchesDataStep() {
         return new StepBuilder("fetchLaunchesStep", jobRepository)
                 .tasklet((contribution, chunkContext) -> {
-                    fetchDataService.fetchData(launchesUlr, csvRawData.JSON_SOURCE_FILE).block();
+                    URI uri = UriComponentsBuilder
+                            .fromHttpUrl(baseUrl)
+                            .pathSegment(version, "launches")
+                            .path("/")
+                            .queryParam("mode", "detailed")
+                            .queryParam("limit", 100)
+                            .build()
+                            .toUri();
+                    fetchDataService.fetchData(uri, csvRawData.JSON_SOURCE_FILE).block();
                     log.info("Successfully fetched JSON data.");
                     return RepeatStatus.FINISHED;
                 }, platformTransactionManager)

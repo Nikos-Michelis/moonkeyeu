@@ -23,6 +23,7 @@ function News() {
                 enabled: !!searchParams.toString().length > 0,
             }
         });
+
     useEffect(() => {
         if (queryData.data) {
             pagination.setPagination(queryData.data);

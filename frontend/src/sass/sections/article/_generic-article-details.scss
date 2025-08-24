@@ -49,6 +49,10 @@
     margin-block: 0.25rem;
   }
 
+  &__detail-container{
+    padding: 2rem 0.5rem 0.5rem 0.5rem;
+  }
+
   &__detail-row {
     display: flex;
     flex-flow: wrap;
@@ -149,6 +153,9 @@
 
 @include abs.mq(medium) {
   .article {
+    &__detail-container{
+      padding: 0.5rem;
+    }
     &__overview {
       flex-direction: row;
     }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.moonkeyeu.core.api.launch.dto.DTOEntity;
 import com.moonkeyeu.core.api.launch.dto.LocationDTO;
 import com.moonkeyeu.core.api.launch.dto.agency.AgencyNormalDTO;
+import com.moonkeyeu.core.api.launch.dto.launch.LaunchNormalDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,6 +49,8 @@ public class LaunchPadDetailedDTO implements DTOEntity {
     private LocationDTO location;
     @JsonProperty("agencies")
     private Set<AgencyNormalDTO> agencies;
+    @JsonProperty("upcoming_launch")
+    private LaunchNormalDTO upcomingLaunches;
 
     @Override
     public boolean equals(Object object) {

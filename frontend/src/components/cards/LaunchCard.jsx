@@ -22,28 +22,32 @@ import {
     faTrash,
     faCalendarDays,
     faLocationDot,
-    faSpinner, faXmark
 } from '@fortawesome/free-solid-svg-icons';
 import {faBookmark} from '@fortawesome/free-regular-svg-icons';
-import { faYoutube } from '@fortawesome/free-brands-svg-icons';
+import {faXTwitter, faYoutube} from '@fortawesome/free-brands-svg-icons';
 
 const LaunchCard = ({navUrl, id, agency, fullname, net, location, image, status:launchStatus, video_urls, isBookmarked = false, cardStyles}) => {
     const zonedDateTime = DateTime.fromISO(net).setZone(DateTime.local().zoneName);
     const formattedZonedDateTime = zonedDateTime.toFormat('MMMM dd, yyyy - hh:mm a ZZZZ');
-    const now = DateTime.local();
     const baseUrl = import.meta.env.VITE_BACKEND_BASE_URL;
     const {name} = useParams();
     const { openModal } = useModal();
     const { user, status } = useAuth();
     const triggerRef = useRef(null);
+    const youtubeVideos = video_urls?.filter(
+        video => video.videoUrl.includes("youtube.com") || video.videoUrl.includes("youtu.be")
+    );
+    const xVideos = video_urls?.filter(
+        video => video.videoUrl.includes("x.com")
+    );
     const item = useComparator(
-        video_urls?.filter(video =>
-            video.videoUrl.includes("youtube.com") || video.videoUrl.includes("youtu.be")
-        ), (a, b) => a.priority > b.priority);
+        youtubeVideos?.length > 0 ? youtubeVideos : xVideos,
+        (a, b) => a.priority > b.priority
+    );
     const { copied, copyToClipboard } = useClipboard();
     const tooltipVideoMessage = item?.videoUrl ? "" : "No Video Available";
     const tooltipInfoMessage = id ? "" : "No Info Available";
-
+    const xTwitterUrl = "x.com";
     const handleShare = () => {
         const url = `${window.location.origin}${navUrl || window.location.pathname}/${id}`;
         copyToClipboard(url);
@@ -140,7 +144,7 @@ const LaunchCard = ({navUrl, id, agency, fullname, net, location, image, status:
                             </div>
                         }
                         { zonedDateTime > Date.now() && (
-                            <CountdownTimer net={zonedDateTime} />
+                            <CountdownTimer net={zonedDateTime} timerStyle="margin-block-start-3" />
                         ) }
                     </div>
                     <hr className="hr-100-sm bg-hr-600"/>
@@ -161,16 +165,29 @@ const LaunchCard = ({navUrl, id, agency, fullname, net, location, image, status:
                             </Tooltip>
                         )}
 
-                        {item?.videoUrl ? (
-                            <div className="launch-card__video">
-                                <Button className="btn btn--primary" onClick={() => openModal("videoPlayerModal", item.videoUrl, "video")}>
-                                    <FontAwesomeIcon icon={faYoutube} /> WATCH
-                                </Button>
-                            </div>
+                        {item ? (
+                            item?.source?.includes(xTwitterUrl) ? (
+                                <div className="launch-card__video">
+                                    <LinkButton
+                                        to={item.videoUrl}
+                                        isExternal={true}
+                                        className="btn btn--Xtwitter"
+                                    >
+                                        <FontAwesomeIcon icon={faXTwitter}/> WATCH
+                                    </LinkButton>
+                                </div>
+                            ) : (
+                                <div className="launch-card__video">
+                                    <Button className="btn btn--yt"
+                                            onClick={() => openModal("videoPlayerModal", item.videoUrl, "video")}>
+                                        <FontAwesomeIcon icon={faYoutube}/> WATCH
+                                    </Button>
+                                </div>
+                            )
                         ) : (
                             <Tooltip message={tooltipVideoMessage}>
                                 <div className="launch-card__video">
-                                    <Button className="btn btn--primary" disabled={true}>
+                                    <Button className="btn btn--yt" disabled={true}>
                                         <FontAwesomeIcon icon={faYoutube} /> WATCH
                                     </Button>
                                 </div>

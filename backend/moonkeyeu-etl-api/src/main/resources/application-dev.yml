@@ -50,6 +50,10 @@ application:
         folder: ${user.home}/Desktop/MoonkeyEU-Github/backend/etl-data/raw-dataset
       images:
         folder: ${user.home}/Desktop/moonkeyeu_db_images
+  api:
+    the-space-devs:
+      url: https://ll.thespacedevs.com
+      version: 2.3.0
 
 management:
   endpoints:

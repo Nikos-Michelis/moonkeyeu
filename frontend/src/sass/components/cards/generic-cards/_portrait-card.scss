@@ -58,7 +58,7 @@
   }
 
   &__info {
-    height: 7rem;
+    //height: 7rem;
   }
 
   &__text {
@@ -100,7 +100,7 @@
   }
 
   @include abs.mq(xxl) {
-    &__container:not(.portrait-card__container--small):not(.portrait-card--vehicle__container) {
+    &__container:not(.portrait-card__container--small):not(.portrait-card__container--medium):not(.portrait-card--vehicle__container) {
       max-width: 250px;
       min-width: 250px;
     }

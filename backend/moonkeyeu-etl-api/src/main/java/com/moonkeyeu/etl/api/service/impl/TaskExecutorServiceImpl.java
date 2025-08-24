@@ -89,11 +89,12 @@ public class TaskExecutorServiceImpl implements TaskExecutorService {
         }
     }
 
-    //@Scheduled(cron="0 0 * * * *")
     @Override
     public void fetchLatestAgenciesData() {
+        boolean skipNonCsv = false;
+        boolean skipUpload = false;
         try {
-            taskBuilderService.jobLauncher("updateAgenciesJob", false, false, updateAgenciesJob);
+            taskBuilderService.jobLauncher("updateAgenciesJob", skipNonCsv, skipUpload, updateAgenciesJob);
         } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException e) {
             log.error("Unexpected error during fetchLatestAgenciesData: {}", e.getMessage(), e);
         }
@@ -101,12 +102,13 @@ public class TaskExecutorServiceImpl implements TaskExecutorService {
     /**
      * disable the s3 bucket to upload the actual images and create only the links for the images (skipUpload = true)
      **/
-   //@Scheduled(cron = "0 * * * * *")
-   //@Scheduled(fixedRate = 7000)
-   @Override
+
+    @Override
     public void bulkProcessing() {
+       boolean skipNonCsv = true;
+       boolean skipUpload = true;
         try {
-            taskBuilderService.jobLauncher("bulkInsertJob", true, true, runBulkInsertJob);
+            taskBuilderService.jobLauncher("bulkInsertJob", skipNonCsv, skipUpload, runBulkInsertJob);
         } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException e) {
             log.error("Unexpected error during fetchLatestAgenciesData: {}", e.getMessage(), e);
         }

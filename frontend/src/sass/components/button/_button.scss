@@ -19,6 +19,41 @@
     }
   }
 
+  &--yt {
+    @include abs.button-color-variation($color: var(--clr-star-300), $background-color: var(--clr-yt-red-300), $border-color: var(--clr-dark-cosmos-300));
+    @include abs.button-size($padding-y: 5px, $padding-x: 10px, $font-size: var(--fs-100));
+    @include abs.button-hover($color: var(--clr-star-300), $background-color: var(--clr-yt-red-400), $border-color: var(--clr-dark-cosmos-300));
+    box-shadow: 0 0.2rem 0 var(--clr-dark-cosmos-300);
+    padding: 5px 10px;
+
+    &:not([class*="margin-"]) {
+      margin: 0.2rem;
+    }
+
+    &:active {
+      transform: translateY(2px);
+      box-shadow: 0 0 0;
+    }
+  }
+   &--Xtwitter {
+    @include abs.button-color-variation($color: var(--clr-star-300), $background-color: var(--clr-twitter-black-200), $border-color: var(--clr-dark-cosmos-300));
+    @include abs.button-size($padding-y: 5px, $padding-x: 10px, $font-size: var(--fs-100));
+    @include abs.button-hover($color: var(--clr-star-300), $background-color: var(--clr-twitter-black-500), $border-color: var(--clr-dark-cosmos-300));
+    box-shadow: 0 0.2rem 0 var(--clr-dark-cosmos-300);
+    padding: 5px 10px;
+
+    &:not([class*="margin-"]) {
+      margin: 0.2rem;
+    }
+
+    &:active {
+      transform: translateY(2px);
+      box-shadow: 0 0 0;
+    }
+  }
+
+
+
   &--overlay {
     @include abs.button-color-variation($color: var(--clr-dark-cosmos-300));
     @include abs.button-hover($color: var(--clr-main-300), $background-color: transparent, $border-color: var(--clr-main-300));
@@ -70,15 +105,16 @@
     text-overflow: unset;
   }
 
-  &--disabled:is([class*="btn--primary"]) {
+  &--disabled {
     pointer-events: none;
     cursor: not-allowed;
-    @include abs.button-color-variation(
-            $color: var(--clr-dark-cosmos-300),
-            $background-color: var(--clr-btn-hover-200),
-            $border-color: var(--clr-dark-cosmos-300)
-    );
-
+    &:is([class*="btn--primary"], [class*="btn--yt"]) {
+      @include abs.button-color-variation(
+              $color: var(--clr-dark-cosmos-300),
+              $background-color: var(--clr-btn-hover-200),
+              $border-color: var(--clr-dark-cosmos-300)
+      );
+    }
   }
 
   &--dark-cosmos {

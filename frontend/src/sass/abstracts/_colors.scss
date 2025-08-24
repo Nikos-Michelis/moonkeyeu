@@ -12,6 +12,7 @@ $color-border: #ccc;
 $color-promo-box: #e1e1e1;
 $color-input: #717171;
 $color-silver-white: #DADBDD;
+$color-yt-red: #d50501;
 
 
 $color-secondary: hsl(265, 38%, 89%);
@@ -20,6 +21,7 @@ $star-color: hsl(272, 57%, 95%);
 $color-warning: #bd4646;
 $color-success: #5fdb9b;
 $color-btn-hover: #93a1b0;
+
 
 $clr-dark-cosmos-100: var(--crl-dark-cosmos-100);
 $clr-dark-cosmos-200: var(--crl-dark-cosmos-200);
@@ -98,5 +100,23 @@ $colors: (
                 400: hsl(196, 100%, 60%),
                 500: hsl(196, 100%, 50%)
         ),
+        yt-red: (
+                100: hsl(1, 100%, 70%),
+                200: hsl(1, 100%, 60%),
+                300: hsl(1, 99%, 42%), // base color
+                400: hsl(1, 104%, 34%),
+                500: hsl(1, 109%, 27%),
+                600: hsl(1, 114%, 20%),
+        ),
+        twitter-black: (
+                100: hsl(210, 10%, 35%),
+                200: hsl(210, 10%, 25%),
+                500: hsl(210, 11%, 9%), // base color
+                600: hsl(210, 11%, 7%),
+                700: hsl(210, 11%, 5%)
+        )
+);
 
+$constant-colors: (
+        yt-red: #d50501
 );

@@ -14,6 +14,7 @@ import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -37,7 +38,7 @@ public class FetchDataService {
         this.objectMapper = objectMapper;
     }
 
-    public Mono<Void> fetchData(String url, String fileName) {
+    public Mono<Void> fetchData(URI url, String fileName) {
         List<JsonNode> allResults = new ArrayList<>();
         return throttleService.getThrottleDelay()
                 .flatMap(delay -> {
@@ -64,7 +65,7 @@ public class FetchDataService {
                 });
     }
 
-    private Mono<JsonNode> fetchThrottle(String url, List<JsonNode> allResults) {
+    private Mono<JsonNode> fetchThrottle(URI url, List<JsonNode> allResults) {
         return throttleService.getThrottleDelay()
                 .flatMap(delay -> {
                     if (delay > 0) {
@@ -76,7 +77,7 @@ public class FetchDataService {
                 });
     }
 
-    private Mono<JsonNode> fetchNextPage(String url, List<JsonNode> allResults) {
+    private Mono<JsonNode> fetchNextPage(URI url, List<JsonNode> allResults) {
         return webClient.get()
                 .uri(url)
                 .retrieve()
@@ -129,8 +130,8 @@ public class FetchDataService {
         log.info("next --> " + nextPage);
         return nextPage != null && !nextPage.isNull();
     }
-    private String getNextPageUrl(JsonNode response) {
-        return response.get("next").asText();
+    private URI getNextPageUrl(JsonNode response) {
+        return URI.create(response.get("next").asText());
     }
 
 }

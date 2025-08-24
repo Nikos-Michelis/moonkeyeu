@@ -43,6 +43,7 @@ import GoTop from "@/components/button/GoTop.jsx";
 import PageLayout from "@/layout/PageLayout.jsx";
 import { ModalPortal } from "@/portals/ModalPortal.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import SolarSystem from "@/pages/SolarSystem.jsx";
 
 function App() {
     const[cookies] = useCookies(["cookieConsent"])
@@ -102,6 +103,7 @@ function App() {
                                                 <Route index element={<Locations />} />
                                                 <Route path=":id" element={<LaunchPad />} />
                                             </Route>
+                                            <Route path="/solar" element={<SolarSystem />} />
                                             <Route path="/news" element={<News />} />
                                             <Route path="/nasa-apod" element={<NasaApodArticle/>}></Route>
                                             <Route path='/account/reset-password/:token' exact={true} element={<ResetPassword />} />

@@ -57,7 +57,7 @@
       width: 50%;
     }
 
-    &__container {
+    &__container:not(.panel__container--col) {
       flex-direction: row;
     }
   }

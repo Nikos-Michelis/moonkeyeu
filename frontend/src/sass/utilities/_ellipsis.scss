@@ -1,6 +1,9 @@
 @use "../abstracts/index" as abs;
 
 /* Multiline ellipsis */
+.ellipsis-1-lines {
+  @include abs.multiline-ellipsis(1);
+}
 .ellipsis-2-lines {
   @include abs.multiline-ellipsis(2);
 }

@@ -57,6 +57,9 @@ const Header = () => {
                         <li className="navbar__nav-item">
                             <NavLink className="navbar__nav-link" to="vehicles">Vehicles</NavLink>
                         </li>
+                         <li className="navbar__nav-item">
+                            <NavLink className="navbar__nav-link" to="solar">solar</NavLink>
+                        </li>
                         <li className="navbar__nav-item">
                             <NavLink className="navbar__nav-link" to="news">News</NavLink>
                         </li>

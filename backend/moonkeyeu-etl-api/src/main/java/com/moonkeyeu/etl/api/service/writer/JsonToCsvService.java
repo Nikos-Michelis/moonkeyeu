@@ -34,7 +34,6 @@ public class JsonToCsvService {
             e.printStackTrace();
         }
     }
-
     private <T> String[] getHeaders(List<T> dataList) {
         Set<String> headerSet = new LinkedHashSet<>();
         for (T obj : dataList) {
@@ -44,14 +43,12 @@ public class JsonToCsvService {
         }
         return headerSet.toArray(new String[0]);
     }
-
     private void writeHeaders(CSVWriter csvWriter, File file, String[] header) throws IOException {
         boolean isFileEmpty = !file.exists() || file.length() == 0;
         if (isFileEmpty) {
             csvWriter.writeNext(header);
         }
     }
-
     private <T> void writeBatchDataToCSV(List<T> dataList, CSVWriter csvWriter, int batchSize, String[] header) {
         CustomBatchIterator.batchStreamOf(dataList.stream(), batchSize)
                 .forEach(batch -> {
@@ -59,8 +56,6 @@ public class JsonToCsvService {
                     csvWriter.writeAll(batchData);
                 });
     }
-
-
     private <T> String[] getObjectData(T obj, String[] header) {
         Map<String, String> fieldMap = getObjectFields(obj);
         String[] data = new String[header.length];
@@ -69,7 +64,6 @@ public class JsonToCsvService {
         }
         return data;
     }
-
     private Map<String, String> getObjectFields(Object obj) {
         Map<String, String> fieldMap = new LinkedHashMap<>();
         if (obj == null) {

@@ -134,7 +134,7 @@ function LaunchFiltering({filters, searchPlaceHolder, isPending, isFetching, isE
                                 options={sheduled || []}
                                 field="upcoming"
                                 setFilters={setFilters}
-                                padding-block-end-8         placeholder="Upcoming/Past"
+                                placeholder="Upcoming/Past"
                                 searchValue={searchValue}
                                 setSearchValue={setSearchValue}
                                 selectedOption={selectedOption}

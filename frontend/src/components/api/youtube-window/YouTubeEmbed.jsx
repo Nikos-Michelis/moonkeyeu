@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 export function YouTubeEmbed({ videoUrl, width = "560", height = "315" }) {
     const videoId = videoUrl?.split("v=")[1]?.split("&")[0];
 
-    if (!videoId) {
-        return <div>Invalid video URL</div>;
-    }
-
     return (
         <div className="youtube-embed">
             <iframe

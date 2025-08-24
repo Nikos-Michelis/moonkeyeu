@@ -11,3 +11,12 @@
     }
   }
 }
+
+@each $name in $constant-colors {
+  .clr-#{$name} {
+    color: var(--clr-#{$name});
+  }
+  .bg-#{$name} {
+    background-color: var(--clr-#{$name});
+  }
+}

@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Optional;
 
 public interface LaunchService {
-
     Page<DTOEntity> searchLaunch(Map<String, String> requestParams, PageSortingDTO pageSortingDTO);
     Optional<DTOEntity> getLaunchById(String launchId);
 }
