@@ -43,7 +43,7 @@ export default class SceneInit {
     }
 
     render() {
-        this.updateScene();
+        //this.updateScene();
         this.renderer.render(this.scene, this.camera);
     }
 

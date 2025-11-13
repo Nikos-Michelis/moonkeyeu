@@ -14,7 +14,7 @@ export default class Planet {
     getMesh() {
         if (this.mesh === undefined || this.mesh === null) {
             const geometry = new THREE.SphereGeometry(this.radius);
-            let material = this.handleLoadTextures();
+            let material = this.loadTextures();
             this.mesh = new THREE.Mesh(geometry, material);
             this.mesh.position.x = this.positionX;
             this.mesh.rotation.z = this.tilt * Math.PI / 180;
@@ -55,15 +55,18 @@ export default class Planet {
             });
             const ring = new THREE.Mesh(RingGeo, RingMat);
             ring.position.x = this.positionX;
-            ring.rotation.x = -0.5 *Math.PI;
-            ring.rotation.y = -this.tilt * Math.PI / 180;
+            ring.rotation.x = -0.5 * Math.PI;
+
+            ring.rotation.y = -this.tilt;
+            ring.userData.isRing = true;
             this.mesh.add(ring);
         }
     }
 
-    handleLoadTextures(){
+    loadTextures(){
         const dayTex = new THREE.TextureLoader().load(this.textures?.day);
         const nightTex = new THREE.TextureLoader().load(this.textures?.night);
+
         if (!this.isStar) {
             return  new THREE.ShaderMaterial({
                 uniforms: {
@@ -96,7 +99,7 @@ export default class Planet {
     
                     void main() {
                         // dot = amount of light (1 = full day, 0 = full night)
-                        float light = max(dot(normalize(vNormal), lightDirection), 0.0);
+                        float light = max(dot(normalize(vNormal), lightDirection), 0.1);
     
                         vec3 dayColor   = texture2D(dayMap, vUv).rgb;
                         vec3 nightColor = texture2D(nightMap, vUv).rgb;
@@ -108,10 +111,9 @@ export default class Planet {
                     }
                 `
             });
-        } else {
-            return new THREE.MeshBasicMaterial({
-                map: dayTex,
-            });
         }
+        return new THREE.MeshBasicMaterial({
+            map: dayTex,
+        });
     }
 }

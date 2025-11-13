@@ -22,22 +22,22 @@ const PlanetsSection = ({planets, isFetching, isPending, isError}) => {
                 <div className="grid-layout--col container container--light-overlay flex justify-center rounded-md" data-layout="grid-wrapper" data-spacing="none">
                     <div className="container">
                         <div className={`${items.length > 0 || (isFetching || isPending) ? "grid-layout__portrait" : ""}`}>
-                            <SkeletonLoader
-                                isFetching={isFetching}
-                                isLoading={isPending}
-                                isError={isError}
-                                contentConfig={contentConfig}>
-                                 {items.length > 0 ? (
-                                     items.map(planet => (
-                                        <PlanetCard key={planet?.id} {...planet} />
-                                     ))
-                                 ) : (
-                                     <div className="padding-8 text-center">
-                                         <h2>{emptyList.heading}</h2>
-                                         <p>{emptyList.message} <FontAwesomeIcon icon={emptyList.icon}/></p>
-                                     </div>
-                                 )}
-                            </SkeletonLoader>
+                                <SkeletonLoader
+                                    isFetching={isFetching}
+                                    isLoading={isPending}
+                                    isError={isError}
+                                    contentConfig={contentConfig}>
+                                     {items.length > 0 ? (
+                                         items.map(planet => (
+                                             <PlanetCard key={planet?.id} {...planet} />
+                                         ))
+                                     ) : (
+                                         <div className="padding-8 text-center">
+                                             <h2>{emptyList.heading}</h2>
+                                             <p>{emptyList.message} <FontAwesomeIcon icon={emptyList.icon}/></p>
+                                         </div>
+                                     )}
+                                </SkeletonLoader>
                           </div>
                     </div>
                     <aside>

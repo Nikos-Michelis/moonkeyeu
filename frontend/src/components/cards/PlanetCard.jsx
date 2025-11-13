@@ -9,6 +9,7 @@ import {LinkButton} from "@/components/button/LinkButton.jsx";
 import SceneInit from "@/components/utils/solar-system/SceneInit.js";
 import * as THREE from "three";
 import Planet from "@/components/utils/solar-system/Planet.js";
+import {Planet as Planet2} from "@/components/utils/solar-system/Planet2.js";
 
 const PlanetCard = ({id ,name ,radius ,tilt ,rotation ,orbit ,distance ,moons, ring_in_radius,
                         ring_out_radius ,info , img_atmosphere, img_day, img_night, img_ring ,isStar ,hasRing }) => {
@@ -20,6 +21,24 @@ const PlanetCard = ({id ,name ,radius ,tilt ,rotation ,orbit ,distance ,moons, r
         const url = window.location.origin + window.location.pathname + "/" + id;
         copyToClipboard(url);
     };
+    const rotationSpeeds = {
+        mercury: 0.001,
+        venus: 0.0005,
+        earth: 0.01,
+        mars: 0.01,
+        jupiter: 0.005,
+        saturn: 0.01,
+        uranus: 0.005,
+        neptune: 0.005,
+        pluto: 0.001,
+        moon: 0.01,
+        sun: 0.001
+    };
+    const ringDistance = {
+        saturn: { ring_in_radius: 18, ring_out_radius: 29,},
+        uranus: { ring_in_radius: 8, ring_out_radius: 10 },
+    };
+
     useEffect( () => {
         if (!canvasRef.current) return;
 
@@ -36,22 +55,29 @@ const PlanetCard = ({id ,name ,radius ,tilt ,rotation ,orbit ,distance ,moons, r
 
         let ambient = new THREE.AmbientLight(0x222222, 6);
         sceneInit.scene.add(ambient);
-        const sunGeometry =
+       /* const planetGeo =
             new Planet(8, 0, tilt,
                 {day: img_day, night: img_night}, img_atmosphere,
-                {innerRadius: ring_in_radius, outerRadius: ring_out_radius, texture: img_ring}, isStar);
-        const sunMesh = sunGeometry.getMesh();
-        const solarSystem = new THREE.Group();
-        solarSystem.add(sunMesh);
+                {innerRadius: ring_in_radius, outerRadius: ring_out_radius, texture: img_ring}, isStar);*/
+        const planetGeo = new Planet2({
+            orbitRotationDirection: "clockwise",
+            planetSize: 8,
+            planetRotationSpeed: rotationSpeeds[name.toLowerCase()] || 0.01,
+            planetRotationDirection: "counterclockwise",
+            planetAngle: tilt,
+            planetTexture: img_day,
+            rimHex: 0xffb347,
+            facingHex: 0xff6a00,
+            atmosphere: img_atmosphere,
+            isStar: isStar,
+            ring: {innerRadius: ring_in_radius, outerRadius: ring_out_radius, texture: img_ring}
 
+        });
+        const planetMesh = planetGeo.getPlanet();
+        const solarSystem = new THREE.Group();
+        solarSystem.add(planetMesh);
         sceneInit.scene.add(solarSystem);
 
-        const EARTH_YEAR = 2 * Math.PI * (1 / 60) * (1 / 60);
-        const animate = () => {
-            sunMesh.rotation.y += EARTH_YEAR;
-            requestAnimationFrame(animate);
-        };
-        animate();
         return () => {
             sceneInit.dispose();
         };
