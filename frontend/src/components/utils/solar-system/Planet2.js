@@ -53,7 +53,6 @@ export class Planet {
         this.isStar = isStar;
         this.ring = ring;
 
-
         this.group = new Group();
         this.planetGroup = new Group();
         this.loader = new TextureLoader();
@@ -62,21 +61,73 @@ export class Planet {
         this.addRing();
         this.addAtmosphere();
         this.createPlanet();
-        //this.createGlow(rimHex, facingHex);
+        this.createGlow(rimHex, facingHex);
 
         this.animate = this.createAnimateFunction();
-        this.animate();
+         this.animate();
     }
 
     createPlanet() {
-        const map = this.loader.load(this.planetTexture);
-        const planetMaterial = new MeshPhongMaterial({ map });
-        planetMaterial.map.colorSpace = SRGBColorSpace;
+        const planetMaterial = this.loadTextures();
+        planetMaterial.colorSpace = SRGBColorSpace;
         const planetMesh = new Mesh(this.planetGeometry, planetMaterial);
         this.planetGroup.add(planetMesh);
-        this.planetGroup.position.x = this.orbitRadius - this.planetSize / 9;
-        this.planetGroup.rotation.z = (this.planetAngle * Math.PI) / 180;
+        this.planetGroup.rotation.z = (-this.planetAngle * Math.PI) / 180;
         this.group.add(this.planetGroup);
+    }
+
+    loadTextures(){
+        const dayTex = this.loader.load(this.planetTexture?.day);
+        const nightTex = this.loader.load(this.planetTexture?.night);
+        if (!dayTex && !nightTex) console.error("Failed to load planet textures.");
+        if (!this.isStar) {
+            return  new THREE.ShaderMaterial({
+                uniforms: {
+                    dayMap: {value: dayTex},
+                    nightMap: {value: nightTex},
+                    lightDirection: {value: new THREE.Vector3(1, 0, 1).normalize()}
+                },
+                vertexShader: `
+                    varying vec3 vNormal;
+                    varying vec2 vUv;
+                    varying vec3 vSunDirection;
+                
+                    uniform vec3 sunPosition;
+                
+                    void main() {
+                      vUv = uv;
+                      vec4 worldPosition = modelMatrix * vec4(position, 1.0);
+                      vNormal = normalize(modelMatrix * vec4(normal, 0.0)).xyz;
+                      vSunDirection = normalize(sunPosition - worldPosition.xyz);
+                      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                    }
+                  `,
+                fragmentShader: `
+                    uniform sampler2D dayMap;
+                    uniform sampler2D nightMap;
+                    uniform vec3 lightDirection;
+    
+                    varying vec2 vUv;
+                    varying vec3 vNormal;
+    
+                    void main() {
+                        // dot = amount of light (1 = full day, 0 = full night)
+                        float light = max(dot(normalize(vNormal), lightDirection), 0.1);
+    
+                        vec3 dayColor   = texture2D(dayMap, vUv).rgb;
+                        vec3 nightColor = texture2D(nightMap, vUv).rgb;
+    
+                        // mix: if light=1 → day, if light=0 → night
+                        vec3 color = mix(nightColor, dayColor, light);
+    
+                        gl_FragColor = vec4(color, 1.0);
+                    }
+                `
+            });
+        }
+        return new THREE.MeshBasicMaterial({
+            map: dayTex,
+        });
     }
 
     createGlow(rimHex, facingHex) {
@@ -135,7 +186,6 @@ export class Planet {
         this.planetGroup.add(planetGlowMesh);
     }
 
-
     addAtmosphere(){
         if(this.atmosphere){
             const atmosphereGeo = new THREE.SphereGeometry(this.planetSize + 0.1, 32, 20);
@@ -150,20 +200,14 @@ export class Planet {
 
             this.atmosphereMesh = new THREE.Mesh(atmosphereGeo, atmosphereMaterial);
             this.atmosphereMesh.rotation.z = 0.41;
-
             this.planetGroup.add(this.atmosphereMesh);
         }
     }
 
-
     addRing() {
         if (!this.ring) return;
 
-        const innerRadius = this.planetSize + 0.1;
-        const outerRadius = innerRadius + this.ring.ringsSize;
-
         const ringsGeometry = new RingGeometry(this.ring.innerRadius, this.ring.outerRadius, 32);
-
         const ringsMaterial = new MeshBasicMaterial({
             side: DoubleSide,
             transparent: true,
@@ -172,34 +216,15 @@ export class Planet {
 
         const ring = new Mesh(ringsGeometry, ringsMaterial);
         ring.rotation.x = -0.5 * Math.PI;
-
-        ring.userData.isRing = true;
-        this.planetGroup.add(ring);
+        ring.rotation.y = (this.planetAngle * Math.PI) / 180;
+        this.group.add(ring);
     }
-
-    /*addRing() {
-        if (!this.ring) return;
-
-        const RingGeo = new THREE.RingGeometry(this.ring.innerRadius, this.ring.outerRadius,30);
-        const texture = new THREE.TextureLoader().load(this.ring.texture);
-
-        const RingMat = new THREE.MeshStandardMaterial({
-            map: texture,
-            transparent: true,
-            side: THREE.DoubleSide
-        });
-
-        const ringMeshs = new Mesh(RingGeo, RingMat);
-        ringMeshs.rotation.x = Math.PI / 2;
-        this.planetGroup.add(ringMeshs);
-    }*/
 
     createAnimateFunction() {
         return () => {
             requestAnimationFrame(this.animate);
-
             this.updatePlanetRotation();
-            this.updateAtmosphereRotation(); // ← FIX
+            this.updateAtmosphereRotation();
         };
     }
 
@@ -213,7 +238,6 @@ export class Planet {
     }
 
     updatePlanetRotation() {
-
         if (this.planetRotationDirection === "clockwise") {
             this.planetGroup.rotation.y -= this.planetRotationSpeed;
         } else if (this.planetRotationDirection === "counterclockwise") {
@@ -226,7 +250,6 @@ export class Planet {
             this.atmosphereMesh.rotation.y += 0.0008;
         }
     }
-
 
     getPlanet() {
         return this.group;

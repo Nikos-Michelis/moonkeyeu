@@ -1,38 +1,50 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Stats from "three/examples/jsm/libs/stats.module";
+import {TextureLoader} from "three";
 
 export default class SceneInit {
-    constructor(canvas, fov = 36, camera, scene, stats, controls, renderer) {
+    constructor({ canvas, fov = 36 } = {}) {
         this.canvas = canvas;
         this.fov = fov;
-        this.scene = scene;
-        this.stats = stats;
-        this.camera = camera;
-        this.controls = controls;
-        this.renderer = renderer;
+        this.loader = new TextureLoader();
     }
 
     initScene() {
         this.camera = new THREE.PerspectiveCamera(
             this.fov,
-            1,
-            1,
+            this.canvas.innerWidth,
+            this.canvas.innerHeight,
             1000
         );
-        this.camera.position.z = 70;
+
+        this.camera.position.set(
+            70 * Math.cos(Math.PI / 6),
+            30 * Math.sin(Math.PI / 6),
+            40
+        );
+
         this.scene = new THREE.Scene();
         const container = this.canvas.parentElement;
+
         this.renderer = new THREE.WebGLRenderer({
             canvas: this.canvas,
-            antialias: false,
+            antialias: false
         });
+
         this.renderer.setSize(container.clientWidth, container.clientHeight);
+
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.controls.minDistance = 10;
         this.controls.maxDistance = 100;
+
         this.stats = Stats();
         container.appendChild(this.stats.dom);
+
+        this.addStarField();
+        this.addSunLight();
+        this.addAmbient();
+
         window.addEventListener("resize", () => this.onWindowResize(), false);
     }
 
@@ -42,17 +54,24 @@ export default class SceneInit {
         this.stats.update();
     }
 
-    render() {
-        //this.updateScene();
-        this.renderer.render(this.scene, this.camera);
+    addStarField() {
+        this.scene.background = this.loader.load("stars.jpg");
     }
 
-    updateScene() {
-        this.scene.traverse((obj) => {
-            if (obj.userData.isAtmosphere) {
-                obj.rotation.y += 0.0008;
-            }
-        });
+    addSunLight() {
+        const sunLight = new THREE.PointLight(0xffff99, 1000);
+        sunLight.position.set(50, 0, 50);
+        sunLight.castShadow = true;
+        this.scene.add(sunLight);
+    }
+
+    addAmbient() {
+        let ambient = new THREE.AmbientLight(0x222222, 6);
+        this.scene.add(ambient);
+    }
+
+    render() {
+        this.renderer.render(this.scene, this.camera);
     }
 
     onWindowResize() {
@@ -63,16 +82,12 @@ export default class SceneInit {
     }
 
     dispose() {
-        if (this.controls) {
-            this.controls.dispose();
-        }
-
-        if (this.renderer) {
-            this.renderer.dispose();
-        }
+        if (this.controls) this.controls.dispose();
+        if (this.renderer) this.renderer.dispose();
 
         this.scene.traverse((obj) => {
             if (obj.geometry) obj.geometry.dispose();
+
             if (obj.material) {
                 if (Array.isArray(obj.material)) {
                     obj.material.forEach((m) => m.dispose());
@@ -84,5 +99,4 @@ export default class SceneInit {
 
         window.removeEventListener("resize", this.onWindowResize);
     }
-
 }

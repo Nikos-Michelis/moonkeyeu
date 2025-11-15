@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import LatestNews from "../sidebars/LatestNews.jsx";
 import {SkeletonLoader} from "@/components/loader/SkeletonLoader.jsx";
 import SkeletonPortraitLoader from "@/components/skeleton/SkeletonPortraitLoader.jsx";
@@ -16,6 +16,7 @@ const PlanetsSection = ({planets, isFetching, isPending, isError}) => {
         message: "Check your filtering settings using the above",
         icon: faFilter
     }
+
     return (
         <section className="astronauts-section">
             <div className="flex justify-center margin-block-end-15">

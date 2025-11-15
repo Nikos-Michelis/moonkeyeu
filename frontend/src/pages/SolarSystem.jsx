@@ -1,10 +1,5 @@
-import React, {useEffect} from "react";
+import React from "react";
 import Heading from "../components/utils/Heading.jsx";
-import Pagination from "../components/pagination/Pagination.jsx";
-import AstronautsSection from "../components/sections/AstronautsSection.jsx";
-import {useSearchParams} from "react-router-dom";
-import usePagination from "@/hooks/paging-filtering/usePagination.jsx";
-import AstronautsFiltering from "@/components/filtering/AstronautsFiltering.jsx";
 import {useParameterizedQuery, useSimpleQuery} from "@/services/queries.jsx";
 import Head from "@/components/seo/Head.jsx";
 import JsonLdGeneric from "@/components/seo/jsonld/JsonLdGeneric.jsx";
@@ -236,9 +231,9 @@ function SolarSystem() {
                  title="Solar System"
                  description="Discover the characteristics of every planet in our Solar System."
              />
-             <PlanetsSection
-                 planets={planetData || {}}
-             />
+            <PlanetsSection
+                planets={planetData || {}}
+            />
         </>
     );
 }

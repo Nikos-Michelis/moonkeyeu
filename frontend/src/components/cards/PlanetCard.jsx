@@ -7,8 +7,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleInfo, faShareFromSquare} from "@fortawesome/free-solid-svg-icons";
 import {LinkButton} from "@/components/button/LinkButton.jsx";
 import SceneInit from "@/components/utils/solar-system/SceneInit.js";
-import * as THREE from "three";
-import Planet from "@/components/utils/solar-system/Planet.js";
 import {Planet as Planet2} from "@/components/utils/solar-system/Planet2.js";
 
 const PlanetCard = ({id ,name ,radius ,tilt ,rotation ,orbit ,distance ,moons, ring_in_radius,
@@ -21,7 +19,7 @@ const PlanetCard = ({id ,name ,radius ,tilt ,rotation ,orbit ,distance ,moons, r
         const url = window.location.origin + window.location.pathname + "/" + id;
         copyToClipboard(url);
     };
-    const rotationSpeeds = {
+    const ROTATION_SPEEDS = {
         mercury: 0.001,
         venus: 0.0005,
         earth: 0.01,
@@ -38,51 +36,38 @@ const PlanetCard = ({id ,name ,radius ,tilt ,rotation ,orbit ,distance ,moons, r
         saturn: { ring_in_radius: 18, ring_out_radius: 29,},
         uranus: { ring_in_radius: 8, ring_out_radius: 10 },
     };
+    let sceneInit;
+
+    useEffect(() => {
+        if (!canvasRef.current) return;
+        sceneInit = new SceneInit({canvas: canvasRef.current});
+        sceneInit.initScene();
+        sceneInit.animate()
+    }, []);
 
     useEffect( () => {
-        if (!canvasRef.current) return;
-
-        let sceneInit = new SceneInit(canvasRef?.current);
-        sceneInit.initScene();
-        sceneInit.animate();
-
-        sceneInit.scene.background = new THREE.TextureLoader().load("stars.jpg");
-
-        const sunLight = new THREE.DirectionalLight(0xFDFFD3, 1);
-        sunLight.position.set(50, 0, 50);
-        sunLight.castShadow = true;
-        sceneInit.scene.add(sunLight);
-
-        let ambient = new THREE.AmbientLight(0x222222, 6);
-        sceneInit.scene.add(ambient);
-       /* const planetGeo =
-            new Planet(8, 0, tilt,
-                {day: img_day, night: img_night}, img_atmosphere,
-                {innerRadius: ring_in_radius, outerRadius: ring_out_radius, texture: img_ring}, isStar);*/
-        const planetGeo = new Planet2({
+        const planetMesh = new Planet2({
             orbitRotationDirection: "clockwise",
             planetSize: 8,
-            planetRotationSpeed: rotationSpeeds[name.toLowerCase()] || 0.01,
+            planetRotationSpeed: ROTATION_SPEEDS[name.toLowerCase()] || 0.01,
             planetRotationDirection: "counterclockwise",
             planetAngle: tilt,
-            planetTexture: img_day,
-            rimHex: 0xffb347,
-            facingHex: 0xff6a00,
+            planetTexture: {day: img_day, night: img_night},
+            rimHex: 0xffff99,
+            facingHex: 0xffff99,
             atmosphere: img_atmosphere,
             isStar: isStar,
             ring: {innerRadius: ring_in_radius, outerRadius: ring_out_radius, texture: img_ring}
+        }).getPlanet();
 
-        });
-        const planetMesh = planetGeo.getPlanet();
-        const solarSystem = new THREE.Group();
-        solarSystem.add(planetMesh);
-        sceneInit.scene.add(solarSystem);
+        sceneInit.scene.add(planetMesh);
 
         return () => {
             sceneInit.dispose();
         };
 
-    }, []);
+    }, [sceneInit]);
+
     return (
         <article className="portrait-card portrait-card__container portrait-card__container--medium">
             <div className="portrait-card__media">
