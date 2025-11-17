@@ -12,8 +12,8 @@ function SkeletonArticleLoader(){
                             </div>
                             <div className="container article__overview flex flex-column justify-center align-center bg-dark-cosmos-300" data-type="full-bleed">
                                 <div className="article__image-box skeleton bg-dark-cosmos-300 opacity-6">
-                                    <div className="skeleton--container skeleton--container--article">
-                                        <div className="skeleton--container__icon skeleton-launch">
+                                    <div className="skeleton__container skeleton__container--article">
+                                        <div className="skeleton__container--icon skeleton-launch">
                                             <FontAwesomeIcon icon={faImage} />
                                         </div>
                                     </div>
@@ -37,7 +37,7 @@ function SkeletonArticleLoader(){
                                     <div className="skeleton skeleton--heading bg-star-300"></div>
                                 </div>
                             </div>
-                            <div className="article__info-container container skeleton--skeleton--container flex flex-column" data-type="full-bleed">
+                            <div className="article__info-container container skeleton__info flex flex-column" data-type="full-bleed">
                                 <section>
                                     <div className="article__heading-box skeleton skeleton--heading bg-dark-cosmos-300 opacity-6"></div>
                                     <hr className="hr-100-sm bg-hr-600" />

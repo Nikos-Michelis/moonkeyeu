@@ -7,13 +7,12 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleInfo, faShareFromSquare} from "@fortawesome/free-solid-svg-icons";
 import {LinkButton} from "@/components/button/LinkButton.jsx";
 import SceneInit from "@/components/utils/solar-system/SceneInit.js";
-import {Planet as Planet2} from "@/components/utils/solar-system/Planet2.js";
+import {Planet} from "@/components/utils/solar-system/Planet.js";
 
-const PlanetCard = ({id ,name ,radius ,tilt ,rotation ,orbit ,distance ,moons, ring_in_radius,
-                        ring_out_radius ,info , img_atmosphere, img_day, img_night, img_ring ,isStar ,hasRing }) => {
+const PlanetCard = ({id ,name, type ,mass ,diameter ,gravity ,tilt , rotation, atmosphere, img_day, img_night, img_atmosphere, img_ring}) => {
     const tooltipInfoMessage = id ? "" : "No Info Available";
     const canvasRef = React.useRef(null);
-
+    const isStar = type.toLowerCase().includes("star");
     const { copied, copyToClipboard } = useClipboard();
     const handleShare = () => {
         const url = window.location.origin + window.location.pathname + "/" + id;
@@ -32,7 +31,7 @@ const PlanetCard = ({id ,name ,radius ,tilt ,rotation ,orbit ,distance ,moons, r
         moon: 0.01,
         sun: 0.001
     };
-    const ringDistance = {
+    const RING_DISTANCE = {
         saturn: { ring_in_radius: 18, ring_out_radius: 29,},
         uranus: { ring_in_radius: 8, ring_out_radius: 10 },
     };
@@ -46,7 +45,7 @@ const PlanetCard = ({id ,name ,radius ,tilt ,rotation ,orbit ,distance ,moons, r
     }, []);
 
     useEffect( () => {
-        const planetMesh = new Planet2({
+        const planetMesh = new Planet({
             orbitRotationDirection: "clockwise",
             planetSize: 8,
             planetRotationSpeed: ROTATION_SPEEDS[name.toLowerCase()] || 0.01,
@@ -57,7 +56,7 @@ const PlanetCard = ({id ,name ,radius ,tilt ,rotation ,orbit ,distance ,moons, r
             facingHex: 0xffff99,
             atmosphere: img_atmosphere,
             isStar: isStar,
-            ring: {innerRadius: ring_in_radius, outerRadius: ring_out_radius, texture: img_ring}
+            ring: {...RING_DISTANCE[name.toLowerCase()] || [], texture: img_ring}
         }).getPlanet();
 
         sceneInit.scene.add(planetMesh);
@@ -81,31 +80,31 @@ const PlanetCard = ({id ,name ,radius ,tilt ,rotation ,orbit ,distance ,moons, r
                         <div className="panel__container panel__container--col">
                             <div className="panel__detail-box fs-small-100 padding-1">
                                 <p className="panel__text">Type</p>
-                                <p className="panel__text">Planet</p>
+                                <p className="panel__text">{type}</p>
                             </div>
                             <div className="panel__detail-box fs-small-100 padding-1">
-                                <p className="panel__text">Radius</p>
-                                <p className="panel__text">12.742 km</p>
+                                <p className="panel__text">Diameter</p>
+                                <p className="panel__text">{diameter?.readable}</p>
                             </div>
                         </div>
                         <div className="panel__container panel__container--col">
                             <div className="panel__detail-box fs-small-100 padding-1">
                                 <p className="panel__text">Mass</p>
-                                <p className="panel__text">5.97 × 10²⁴ kg</p>
+                                <p className="panel__text">{mass?.readable}</p>
                             </div>
                             <div className="panel__detail-box fs-small-100 padding-1">
                                 <p className="panel__text">Gravity</p>
-                                <p className="panel__text">9.81 m/s²</p>
+                                <p className="panel__text">{gravity?.readable}</p>
                             </div>
                         </div>
                         <div className="panel__container panel__container--col">
                             <div className="panel__detail-box fs-small-100 padding-1">
                                 <p className="panel__text">Rotation</p>
-                                <p className="panel__text">24 hours</p>
+                                <p className="panel__text">{rotation?.readable}</p>
                             </div>
                             <div className="panel__detail-box fs-small-100 padding-1">
                                 <p className="panel__text">Atmosphere</p>
-                                <p className="panel__text">Yes</p>
+                                <p className="panel__text">{atmosphere}</p>
                             </div>
                         </div>
                     </div>
@@ -123,6 +122,7 @@ const PlanetCard = ({id ,name ,radius ,tilt ,rotation ,orbit ,distance ,moons, r
                         <Button
                             className="btn btn--primary"
                             disabled={copied}
+                            onClick={handleShare}
                         >
                             <FontAwesomeIcon icon={faShareFromSquare} /> SHARE
                         </Button>

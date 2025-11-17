@@ -1,7 +1,7 @@
 @use "../../abstracts/index" as abs;
 
 .skeleton {
-  &--container {
+  &__container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,7 +11,8 @@
     pointer-events: none;
     -webkit-user-drag: none;
     user-select: none;
-    &__icon {
+
+    &--icon {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -21,11 +22,13 @@
       font-size: var(--fs-1000);
       opacity: .15;
     }
-    &--article{
+
+    &--article {
       min-height: 26.25rem;
     }
   }
-  &--media{
+
+  &__media {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,7 +37,7 @@
     outline: 0.2rem solid var(--clr-dark-cosmos-300);
   }
 
-  &--skeleton-container {
+  &__info {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -43,7 +46,8 @@
     height: 11.65rem;
     padding: 1rem 1rem 1rem 1rem;
     margin: 0;
-    &--landscape{
+
+    &--landscape {
       height: 100%;
     }
 
@@ -54,6 +58,12 @@
     & > .skeleton--text {
       margin: 0.2rem;
       border-radius: 0.2rem;
+    }
+  }
+
+  @include abs.mq(medium) {
+    &__media--medium {
+        width: 18.75rem;
     }
   }
 }

@@ -13,8 +13,8 @@ export default class SceneInit {
     initScene() {
         this.camera = new THREE.PerspectiveCamera(
             this.fov,
-            this.canvas.innerWidth,
-            this.canvas.innerHeight,
+            1,
+            1,
             1000
         );
 

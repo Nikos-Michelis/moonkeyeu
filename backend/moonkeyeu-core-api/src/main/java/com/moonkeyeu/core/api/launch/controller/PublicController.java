@@ -35,6 +35,7 @@ public class PublicController {
     private final LauncherService launcherService;
     private final FiltersService filtersService;
     private final NasaApodService nasaApodService;
+    private final CelestialBodiesService celestialBodiesService;
     private final int MAX_ITEMS = 50;
 
     @GetMapping("/nasa/apod")
@@ -42,6 +43,13 @@ public class PublicController {
     public ResponseEntity<?> getNasaPictureOfTheDay() {
         return ResponseEntity.ok(nasaApodService.getNasaApodFromCache());
     }
+
+    @GetMapping("/celestial-bodies")
+    @RateLimited(requests = 20, durationSeconds = 60)
+    public ResponseEntity<?> getCelestialBodies() {
+        return ResponseEntity.ok(celestialBodiesService.getAllCelestialBodies());
+    }
+
     @GetMapping("/launch/{launchId}")
     @RateLimited(requests = 100, durationSeconds = 60)
     public ResponseEntity<DTOEntity> getLaunchById(@PathVariable String launchId) {

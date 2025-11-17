@@ -1,18 +1,23 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import LatestNews from "../sidebars/LatestNews.jsx";
-import {SkeletonLoader} from "@/components/loader/SkeletonLoader.jsx";
+import { SkeletonLoader } from "@/components/loader/SkeletonLoader.jsx";
 import SkeletonPortraitLoader from "@/components/skeleton/SkeletonPortraitLoader.jsx";
 import BuyMeACoffee from "@/components/button/BuyMeACoffee.jsx";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faFilter} from "@fortawesome/free-solid-svg-icons";
 import PlanetCard from "@/components/cards/PlanetCard.jsx";
+
 const PlanetsSection = ({planets, isFetching, isPending, isError}) => {
     const contentConfig = {
         component: SkeletonPortraitLoader,
+        styles: {
+            container: "portrait-card__container--medium",
+            media: "skeleton__media--medium"
+        }
     };
     const items = planets || [];
     const emptyList= {
-        heading: "No Results Match Current Settings!",
+        heading: "No Results Found!",
         message: "Check your filtering settings using the above",
         icon: faFilter
     }
@@ -23,22 +28,22 @@ const PlanetsSection = ({planets, isFetching, isPending, isError}) => {
                 <div className="grid-layout--col container container--light-overlay flex justify-center rounded-md" data-layout="grid-wrapper" data-spacing="none">
                     <div className="container">
                         <div className={`${items.length > 0 || (isFetching || isPending) ? "grid-layout__portrait" : ""}`}>
-                                <SkeletonLoader
-                                    isFetching={isFetching}
-                                    isLoading={isPending}
-                                    isError={isError}
-                                    contentConfig={contentConfig}>
-                                     {items.length > 0 ? (
-                                         items.map(planet => (
-                                             <PlanetCard key={planet?.id} {...planet} />
-                                         ))
-                                     ) : (
-                                         <div className="padding-8 text-center">
-                                             <h2>{emptyList.heading}</h2>
-                                             <p>{emptyList.message} <FontAwesomeIcon icon={emptyList.icon}/></p>
-                                         </div>
-                                     )}
-                                </SkeletonLoader>
+                            <SkeletonLoader
+                                isFetching={isFetching}
+                                isLoading={isPending}
+                                isError={isError}
+                                contentConfig={contentConfig}>
+                                 {items.length > 0 ? (
+                                     items.map(planet => (
+                                         <PlanetCard key={planet?.id} {...planet} />
+                                     ))
+                                 ) : (
+                                     <div className="padding-8 text-center">
+                                         <h2>{emptyList.heading}</h2>
+                                         <p>{emptyList.message} <FontAwesomeIcon icon={emptyList.icon}/></p>
+                                     </div>
+                                 )}
+                            </SkeletonLoader>
                           </div>
                     </div>
                     <aside>

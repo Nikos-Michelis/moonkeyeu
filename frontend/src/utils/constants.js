@@ -1,4 +1,4 @@
-const ROTATION_SPEEDS = {
+const ROTATION_SPEED = {
     mercury: 0.001,
     venus: 0.0005,
     earth: 0.01,
@@ -11,7 +11,7 @@ const ROTATION_SPEEDS = {
     moon: 0.01,
     sun: 0.001
 };
-const ringDistance = {
+const RING_DISTANCE = {
     saturn: { ring_in_radius: 18, ring_out_radius: 29,},
     uranus: { ring_in_radius: 8, ring_out_radius: 10 },
 };
