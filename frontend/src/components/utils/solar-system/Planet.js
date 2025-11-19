@@ -62,7 +62,6 @@ export class Planet {
         this.addAtmosphere();
         this.createPlanet();
         this.createGlow(rimHex, facingHex);
-
         this.animate = this.createAnimateFunction();
         this.animate();
     }
@@ -80,20 +79,17 @@ export class Planet {
     loadTextures(){
         const dayTex = this.loader.load(
             this.planetTexture?.day,
-            () => console.log("Day texture loaded:", this.planetTexture?.day),
             undefined,
-            () => console.error("Failed to load DAY texture:", this.planetTexture?.day)
+            () => console.error("Failed to load NIGHT texture:", this.planetTexture?.day)
         );
-
         const nightTex = this.loader.load(
             this.planetTexture?.night,
-            () => console.log("Night texture loaded:", this.planetTexture?.night),
             undefined,
             () => console.error("Failed to load NIGHT texture:", this.planetTexture?.night)
         );
 
         if (!this.isStar) {
-            return  new THREE.ShaderMaterial({
+            return new THREE.ShaderMaterial({
                 uniforms: {
                     dayMap: {value: dayTex},
                     nightMap: {value: nightTex},

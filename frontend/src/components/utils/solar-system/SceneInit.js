@@ -55,7 +55,7 @@ export default class SceneInit {
     }
 
     addStarField() {
-        this.scene.background = this.loader.load("stars.jpg");
+        this.scene.background = this.loader.load("/stars.jpg");
     }
 
     addSunLight() {

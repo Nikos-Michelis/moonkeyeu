@@ -21,6 +21,11 @@
     }
   }
 
+  &__canvas {
+    max-height: 500px;
+    min-height: 500px;
+  }
+
   &__image {
     display: block;
     width: 100%;

@@ -1,13 +1,14 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Tooltip from "@/components/tooltip/Tooltip.jsx";
 import {Button} from "@/components/button/Button.jsx";
 import useClipboard from "@/hooks/util/useClipboard.jsx";
-import Img from "@/components/utils/Img.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleInfo, faShareFromSquare} from "@fortawesome/free-solid-svg-icons";
-import {LinkButton} from "@/components/button/LinkButton.jsx";
 import SceneInit from "@/components/utils/solar-system/SceneInit.js";
 import {Planet} from "@/components/utils/solar-system/Planet.js";
+import * as THREE from "three";
+import {LinkButton} from "@/components/button/LinkButton.jsx";
+import {Link} from "react-router-dom";
 
 const PlanetCard = ({id ,name, type ,mass ,diameter ,gravity ,tilt , rotation, atmosphere, img_day, img_night, img_atmosphere, img_ring}) => {
     const tooltipInfoMessage = id ? "" : "No Info Available";
@@ -50,7 +51,7 @@ const PlanetCard = ({id ,name, type ,mass ,diameter ,gravity ,tilt , rotation, a
             planetSize: 8,
             planetRotationSpeed: ROTATION_SPEEDS[name.toLowerCase()] || 0.01,
             planetRotationDirection: "counterclockwise",
-            planetAngle: tilt,
+            planetAngle: tilt?.value,
             planetTexture: {day: img_day, night: img_night},
             rimHex: 0xffff99,
             facingHex: 0xffff99,
@@ -113,9 +114,21 @@ const PlanetCard = ({id ,name, type ,mass ,diameter ,gravity ,tilt , rotation, a
             </div>
             <div className="portrait-card__actions flex flex-wrap justify-center margin-block-4">
                 <div className="portrait-card__action">
-                    <Button className="portrait-card__button btn btn--primary" to={id}>
-                        <FontAwesomeIcon icon={faCircleInfo} /> INFO
-                    </Button>
+                    {id ? (
+                        <div className="landscape-card__info-box">
+                            <Link className="btn btn--primary" to={`${id}`} >
+                                <FontAwesomeIcon icon={faCircleInfo} /> INFO
+                            </Link>
+                        </div>
+                    ) : (
+                        <Tooltip message={tooltipInfoMessage}>
+                            <div className="landscape-card__info">
+                                <Link className="btn btn--primary" to="#" >
+                                    <FontAwesomeIcon icon={faCircleInfo} /> INFO
+                                </Link>
+                            </div>
+                        </Tooltip>
+                    )}
                 </div>
                 <div className="portrait-card__action">
                     <Tooltip copied={copied} message={copied ? "Copied!" :"Copied to clipboard!"}>
