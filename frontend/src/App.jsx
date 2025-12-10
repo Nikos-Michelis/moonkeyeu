@@ -43,87 +43,85 @@ import GoTop from "@/components/button/GoTop.jsx";
 import PageLayout from "@/layout/PageLayout.jsx";
 import { ModalPortal } from "@/portals/ModalPortal.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import BuildProviderTree from "@/context/BuildProviderTree.jsx";
 
 function App() {
     const[cookies] = useCookies(["cookieConsent"])
-
+    const ProvidersTree = BuildProviderTree([
+        [SpaceFlightNewsProvider],
+        [NasaApodProvider],
+        [ModalProvider],
+        [GoogleOAuthProvider, { clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID}],
+        [AuthProvider],
+    ]);
     return (
-
-            <SpaceFlightNewsProvider>
-                <NasaApodProvider>
-                    <BrowserRouter>
-                        <ModalProvider>
-                            <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-                            <AuthProvider>
-                                <Header />
-                                    <Routes>
-                                        <Route element={<PageLayout />}>
-                                            <Route path="/" element={<Navigate to="/launches" />} />
-                                            <Route path="/launches" element={<Layout />}>
-                                                <Route index element={<Home />} />
-                                                <Route path=":id" element={<Launch/>} />
-                                            </Route>
-                                            <Route path="/programs" element={<Layout />}>
-                                                <Route index element={<Programs />} />
-                                                <Route path=":id" element={<Program />} />
-                                            </Route>
-                                            <Route path="/astronauts" element={<Layout />}>
-                                                <Route index element={<Astronauts />} />
-                                                <Route path=":id" element={<Astronaut />} />
-                                            </Route>
-                                            {<Route path="/agencies" element={<Layout />}>
-                                                <Route index element={<Agencies />} />
-                                                <Route path=":id" element={<Agency />}/>
-                                            </Route>}
-                                            <Route path="/vehicles" element={<Layout />}>
-                                                <Route index element={<Vehicles />} />
-                                                <Route path="spacecraft" element={<Layout />}>
-                                                    <Route index element={<Spacecraft />} />
-                                                    <Route path=":id" element={<SpacecraftConfig />} />
-                                                </Route>
-                                                <Route path="rockets" element={<Rockets />}/>
-                                                <Route path="launchers" element={<Boosters />}/>
-                                            </Route>
-                                            <Route path="/profile" element={<ProtectedRoutes><Layout /></ProtectedRoutes>}>
-                                                <Route index element={<Profile />} />
-                                                <Route path="change-password" element={<ChangePassword />} />
-                                            </Route>
-                                            <Route path="/dashboard" element={<ProtectedRoutes><Layout /></ProtectedRoutes>}>
-                                                <Route index element={<Dashboard />} />
-                                                <Route path="messages" element={<Messages />}/>
-                                                <Route path="etl-report" element={<EtlReport />}/>
-                                                <Route path="members" element={<MembersReport />}/>
-                                            </Route>
-                                            <Route path="/bookmarks" element={<ProtectedRoutes><Layout /></ProtectedRoutes>} >
-                                                <Route index element={<Bookmarks />} />
-                                                <Route path=":name" element={<MyLaunches />} />
-                                            </Route>
-                                            <Route path="/locations" element={<Layout />}>
-                                                <Route index element={<Locations />} />
-                                                <Route path=":id" element={<LaunchPad />} />
-                                            </Route>
-                                            <Route path="/news" element={<News />} />
-                                            <Route path="/nasa-apod" element={<NasaApodArticle/>}></Route>
-                                            <Route path='/account/reset-password/:token' exact={true} element={<ResetPassword />} />
-                                            <Route path='/contact' element={<Contact />} />
-                                            <Route path='/privacy' element={<PrivacyPolicy />} />
-                                            <Route
-                                                path='*'
-                                                exact={true}
-                                                element={<FallbackComponent code={404} message="Oops! Somthing went wrong, try again later." error="404 Page Not Found"/>} />
-                                        </Route>
-                                    </Routes>
-                                <ModalPortal>
-                                    <ModalLayout/>
-                                </ModalPortal>
-                            </AuthProvider>
-                            </GoogleOAuthProvider>
-                            {!cookies.cookieConsent && <CookieConsent/>}
-                            <GoTop />
-                        </ModalProvider>
-                    </BrowserRouter>
-                </NasaApodProvider>
-            </SpaceFlightNewsProvider>
-)
+        <ProvidersTree>
+            <BrowserRouter>
+                <Header />
+                    <Routes>
+                        <Route element={<PageLayout />}>
+                            <Route path="/" element={<Navigate to="/launches" />} />
+                            <Route path="/launches" element={<Layout />}>
+                                <Route index element={<Home />} />
+                                <Route path=":id" element={<Launch/>} />
+                            </Route>
+                            <Route path="/programs" element={<Layout />}>
+                                <Route index element={<Programs />} />
+                                <Route path=":id" element={<Program />} />
+                            </Route>
+                            <Route path="/astronauts" element={<Layout />}>
+                                <Route index element={<Astronauts />} />
+                                <Route path=":id" element={<Astronaut />} />
+                            </Route>
+                            {<Route path="/agencies" element={<Layout />}>
+                                <Route index element={<Agencies />} />
+                                <Route path=":id" element={<Agency />}/>
+                            </Route>}
+                            <Route path="/vehicles" element={<Layout />}>
+                                <Route index element={<Vehicles />} />
+                                <Route path="spacecraft" element={<Layout />}>
+                                    <Route index element={<Spacecraft />} />
+                                    <Route path=":id" element={<SpacecraftConfig />} />
+                                </Route>
+                                <Route path="rockets" element={<Rockets />}/>
+                                <Route path="launchers" element={<Boosters />}/>
+                            </Route>
+                            <Route path="/profile" element={<ProtectedRoutes><Layout /></ProtectedRoutes>}>
+                                <Route index element={<Profile />} />
+                                <Route path="change-password" element={<ChangePassword />} />
+                            </Route>
+                            <Route path="/dashboard" element={<ProtectedRoutes><Layout /></ProtectedRoutes>}>
+                                <Route index element={<Dashboard />} />
+                                <Route path="messages" element={<Messages />}/>
+                                <Route path="etl-report" element={<EtlReport />}/>
+                                <Route path="members" element={<MembersReport />}/>
+                            </Route>
+                            <Route path="/bookmarks" element={<ProtectedRoutes><Layout /></ProtectedRoutes>} >
+                                <Route index element={<Bookmarks />} />
+                                <Route path=":name" element={<MyLaunches />} />
+                            </Route>
+                            <Route path="/locations" element={<Layout />}>
+                                <Route index element={<Locations />} />
+                                <Route path=":id" element={<LaunchPad />} />
+                            </Route>
+                            <Route path="/news" element={<News />} />
+                            <Route path="/nasa-apod" element={<NasaApodArticle/>}></Route>
+                            <Route path='/account/reset-password/:token' exact={true} element={<ResetPassword />} />
+                            <Route path='/contact' element={<Contact />} />
+                            <Route path='/privacy' element={<PrivacyPolicy />} />
+                            <Route
+                                path='*'
+                                exact={true}
+                                element={<FallbackComponent code={404} message="Oops! Somthing went wrong, try again later." error="404 Page Not Found"/>} />
+                        </Route>
+                    </Routes>
+                    <ModalPortal>
+                        <ModalLayout/>
+                    </ModalPortal>
+                {!cookies.cookieConsent && <CookieConsent/>}
+                <GoTop />
+            </BrowserRouter>
+        </ProvidersTree>
+    )
 }
 export default App

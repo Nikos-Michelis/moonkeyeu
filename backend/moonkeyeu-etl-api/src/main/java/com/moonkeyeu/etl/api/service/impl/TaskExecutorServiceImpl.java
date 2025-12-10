@@ -22,7 +22,6 @@ public class TaskExecutorServiceImpl implements TaskExecutorService {
     private final Job updateAgenciesJob;
     @Qualifier("runBulkInsertJob")
     private final Job runBulkInsertJob;
-
     private final TaskBuilderService taskBuilderService;
 
     @Autowired

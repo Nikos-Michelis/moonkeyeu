@@ -10,5 +10,5 @@ import org.springframework.context.annotation.Configuration;
 @Data
 public class S3Buckets {
     @Value("db-images")
-    private String dbImages;
+    private String bucketPath;
 }

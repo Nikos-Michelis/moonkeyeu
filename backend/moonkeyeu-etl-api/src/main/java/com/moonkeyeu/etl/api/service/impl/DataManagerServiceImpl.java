@@ -21,7 +21,6 @@ import com.moonkeyeu.etl.api.model.landing.LandingEntity;
 import com.moonkeyeu.etl.api.model.landing.LandingTypeEntity;
 import com.moonkeyeu.etl.api.model.landing.LandingZoneEntity;
 import com.moonkeyeu.etl.api.model.launch.LaunchEntity;
-import com.moonkeyeu.etl.api.model.launch.LaunchImagesEntity;
 import com.moonkeyeu.etl.api.model.launch.LaunchStatusEntity;
 import com.moonkeyeu.etl.api.model.launcher.LauncherEntity;
 import com.moonkeyeu.etl.api.model.launcher.LauncherImagesEntity;
@@ -132,7 +131,7 @@ public class DataManagerServiceImpl implements DataManagerService {
             localStorageService.saveMediaLocal(uniqueEntities, outputFile, headers, type);
         }
         if(isS3Enable) {
-            s3StorageService.saveMediaToS3(uniqueEntities, s3Buckets.getDbImages(), outputFile, headers, type, skipUpload);
+            s3StorageService.saveMediaToS3(uniqueEntities, s3Buckets.getBucketPath(), outputFile, headers, type, skipUpload);
         }
         csvEntities.clear();
     }
