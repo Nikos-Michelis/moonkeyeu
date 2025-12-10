@@ -32,5 +32,4 @@ export const ModalPortal = ({ children }) => {
         </div>,
         modalRoot
     );
-
 };

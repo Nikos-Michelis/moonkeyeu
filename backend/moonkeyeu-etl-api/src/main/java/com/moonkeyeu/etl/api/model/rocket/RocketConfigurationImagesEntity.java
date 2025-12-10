@@ -23,7 +23,6 @@ public class RocketConfigurationImagesEntity {
     @Basic
     @Column(name = "thumbnail_url")
     private String thumbnail_url;
-    @Getter
     @Basic
     @Column(name = "credit")
     private String credit;

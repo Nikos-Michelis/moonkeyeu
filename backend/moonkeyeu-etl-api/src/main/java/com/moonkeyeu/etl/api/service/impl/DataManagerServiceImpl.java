@@ -132,7 +132,7 @@ public class DataManagerServiceImpl implements DataManagerService {
             localStorageService.saveMediaLocal(uniqueEntities, outputFile, headers, type);
         }
         if(isS3Enable) {
-            s3StorageService.saveMediaToS3(uniqueEntities, s3Buckets.getDbImages(), outputFile, headers, type, skipUpload);
+            s3StorageService.saveMediaToS3(uniqueEntities, s3Buckets.getBucketPath(), outputFile, headers, type, skipUpload);
         }
         csvEntities.clear();
     }
