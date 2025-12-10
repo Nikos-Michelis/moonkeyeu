@@ -41,15 +41,15 @@ application:
   clean:
     root:
       data:
-        folder: ${user.home}/Documents/MoonkeyEU-Github/backend/etl-data/clean-dataset
+        folder: ${user.home}/Desktop/MoonkeyEU-Github/backend/etl-data/clean-dataset
       images:
-        folder: ${user.home}/Documents/moonkeyeu_db_images
+        folder: ${user.home}/Desktop/moonkeyeu_db_images
   raw:
     root:
       data:
-        folder: ${user.home}/Documents/MoonkeyEU-Github/backend/etl-data/raw-dataset
+        folder: ${user.home}/Desktop/MoonkeyEU-Github/backend/etl-data/raw-dataset
       images:
-        folder: ${user.home}/Documents/moonkeyeu_db_images
+        folder: ${user.home}/Desktop/moonkeyeu_db_images
   api:
     the-space-devs:
       url: https://ll.thespacedevs.com

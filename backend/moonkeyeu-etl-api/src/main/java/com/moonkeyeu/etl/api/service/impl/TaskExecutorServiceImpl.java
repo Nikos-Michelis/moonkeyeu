@@ -41,7 +41,7 @@ public class TaskExecutorServiceImpl implements TaskExecutorService {
     /**
      * enable the s3 bucket to upload the actual images. (skipUpload = false)
      **/
-    //@Scheduled(cron = "0 0/110 1-22 * * *")
+    @Scheduled(cron = "0 0/110 1-22 * * *")
     @Override
     public void fetchLatestData() {
         try {
@@ -64,7 +64,7 @@ public class TaskExecutorServiceImpl implements TaskExecutorService {
             log.error("Unexpected error during fetchLatestData: {}", e.getMessage(), e);
         }
     }
-    //@Scheduled(cron = "0 0 0 * * *")
+    @Scheduled(cron = "0 0 0 * * *")
     @Override
     public void fetchAllLatestData() {
         try {
@@ -101,7 +101,7 @@ public class TaskExecutorServiceImpl implements TaskExecutorService {
     /**
      * disable the s3 bucket to upload the actual images and create only the links for the images (skipUpload = true)
      **/
-    @Scheduled(fixedRate = 7000)
+
     @Override
     public void bulkProcessing() {
        boolean skipNonCsv = true;

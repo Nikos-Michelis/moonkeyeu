@@ -21,7 +21,6 @@ import com.moonkeyeu.etl.api.model.landing.LandingEntity;
 import com.moonkeyeu.etl.api.model.landing.LandingTypeEntity;
 import com.moonkeyeu.etl.api.model.landing.LandingZoneEntity;
 import com.moonkeyeu.etl.api.model.launch.LaunchEntity;
-import com.moonkeyeu.etl.api.model.launch.LaunchImagesEntity;
 import com.moonkeyeu.etl.api.model.launch.LaunchStatusEntity;
 import com.moonkeyeu.etl.api.model.launcher.LauncherEntity;
 import com.moonkeyeu.etl.api.model.launcher.LauncherImagesEntity;
